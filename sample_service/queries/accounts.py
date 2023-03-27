@@ -2,6 +2,9 @@ from pydantic import BaseModel
 from queries.client import Queries
 
 
+class DuplicateAccountError(ValueError):
+    pass
+
 class AccountIn(BaseModel):
     email: str
     password: str
@@ -20,5 +23,3 @@ class AccountQueries(Queries):
     def get(self, email: str) -> AccountOutWithPassword:
 
     def create(self, info: AccountIn, hashed_passowrd: str) -> AccountOutWithPassword:
-
-
