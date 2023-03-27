@@ -1,4 +1,6 @@
 volumes:
+  jwtdown-db-data:
+    external: true
   mongo-data:
     external: true
 services:
@@ -10,6 +12,7 @@ services:
       - 8000:8000
     volumes:
       - ./sample_service:/app
+
     environment:
       MONGO_URL: mongodb://admin:password@mongo
   mongo:
