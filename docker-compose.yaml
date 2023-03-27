@@ -6,12 +6,12 @@ volumes:
 services:
   fastapi:
     build:
-      context: sample_service
+      context: api
       dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
-      - ./sample_service:/app
+      - ./api:/app
 
     environment:
       MONGO_URL: mongodb://admin:password@mongo
