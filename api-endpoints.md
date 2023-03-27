@@ -1,4 +1,3 @@
-
 # Landing page
 
     * Endpoint path: /
@@ -7,14 +6,8 @@
     * Headers:
     * Authorization: Bearer token
 
-    * Request shape (JSON): None
-    * Response shape (JSON): A list of images for the carousel?
-
-    ```json
-    {
-    “images”: []
-    }
-    ```
+    * Request shape (JSON):  None
+    * Response shape (JSON): data from map API?
 
 # List of munros
 
@@ -29,20 +22,15 @@
 
     ```json
     {
-    "munros": [{munro1}, {munro2},...]
+    "munros": [
+        {
+            "name": "str",
+            "region": "str",
+            "altitude": float
+        }
+    ]
     }
     ```
-
-# Map of munros
-
-    * Endpoint path: /map/
-    * Endpoint method: GET
-    * Query parameters: None
-    * Headers:
-    * Authorization: Bearer token
-
-    * Request shape (JSON):  None
-    * Response shape (JSON): data from map API?
 
 # Detail of a munro
 
@@ -55,12 +43,20 @@
     * Response shape (JSON): A single Munro
 
     ```json
-    {“id”: 0
-    “hillname”: "string"
-    “region”: "string"
-    “meters”: 0
-        “latitude”: "string"
-        “longitude”: "string"
+    {
+        "id": str,
+        "hillname": str,
+        "region": str,
+        "weather": float,
+        "description": str,
+        "image": {
+            "url": str
+        },
+        "meters": {
+            "latitude": str,
+            "longitude": str
+        },
+        // "reviews": str
     }
     ```
 
@@ -76,14 +72,21 @@
 
     ```json
     {
-    {“munro_id”: [review1, review2,...]}
+        "munro": [
+            {
+                "user": str,
+                "title": str,
+                "rating": float,
+                "comment": str
+            }
+        ]
     }
     ```
 
 # Review form
 
     * Endpoint path: /munros/{munro_id}/reviews/
-    * Endpoint method: POST
+    * Endpoint method: PUT
     * Query parameters: None
     * Headers:
     * Authorization: Bearer token
@@ -91,15 +94,15 @@
 
     ```json
     {
-    “comment”: "string",
-    “rating”: 0,
+        "comment": str,
+        "rating": float
     }
     ```
     * Response shape (JSON): None
 
 # User dashboard
 
-    * Endpoint path: /users/{user_id}/dashboard/
+    * Endpoint path: /dashboard
     * Endpoint method: GET
     * Query parameters: None
     * Headers:
@@ -109,16 +112,20 @@
 
     ```json
     {
-    “user_id”: 0
-    “user_name”: “string”
-    “completed”: true
-    “Stats”: ???
+        "username": str,
+        // "map": ??,
+        // "completed": bool,
+        "rank": str,
+        "Stats": {
+            "climbed": int,
+            "miles": float
+        }
     }
     ```
 
 # User munro list
 
-    * Endpoint path: /users/{user_id}/munros/
+    * Endpoint path: /dashboard/munros/
     * Endpoint method: GET
     * Query parameters: None
     * Headers:
@@ -128,11 +135,18 @@
 
         ```json
         {
-        "munros_completed": [munro1, munro2,...]
-        “rank”: 0
+            "completed": [
+                {
+                    "name": str,
+                    "altitude": float,
+                    "distance": float
+                }
+            ],
+
         }
         ```
 
+<!--
 # Journal entries list
 
     * Endpoint path: /users/{user_id}/journal/
@@ -167,7 +181,6 @@
     ```
     *Response shape (JSON): None
 
-
 # Journal entry detail
 
     * Endpoint path: /users/{user_id}/journal/{entry_id}/
@@ -184,7 +197,7 @@
             “date”: "string",
             “body”: "string",
         }
-        ```
+        ``` -->
 
 # Signup modal
 
@@ -197,28 +210,29 @@
 
         ```json
         {
-            “username”: "string",
-            “email”: "string",
-            “password”: "string",
+            "name": str,
+            "username": str,
+            "email": str,
+            "password": str,
+            "retype": str
         }
         ```
     * Response shape (JSON): A new user
 
-
 # Login modal
 
-* Endpoint path: /login
-* Endpoint method: POST
-* Query parameters: None
-* Headers:
-* Authorization: Bearer token
-* Request shape (JSON):
+- Endpoint path: /login
+- Endpoint method: POST
+- Query parameters: None
+- Headers:
+- Authorization: Bearer token
+- Request shape (JSON):
 
-    ```json
-    {
-    “Username”: “string”,
-    “password”: “string”:
-    }
-    ```
+  ```json
+  {
+    "username": str,
+    "password": str
+  }
+  ```
 
-*Response shape (JSON): None
+\*Response shape (JSON): None
