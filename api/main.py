@@ -7,8 +7,10 @@ from routers import accounts
 from routers import munros
 
 app = FastAPI()
+
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
+app.include_router(munros.router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -17,5 +19,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-app.include_router(munros.router)
