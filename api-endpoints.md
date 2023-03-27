@@ -110,7 +110,7 @@
     ```json
     {
     “user_id”: 0
-    “user_name”: “string”
+    “user_name”: "string"
     “completed”: true
     “Stats”: ???
     }
@@ -167,7 +167,6 @@
     ```
     *Response shape (JSON): None
 
-
 # Journal entry detail
 
     * Endpoint path: /users/{user_id}/journal/{entry_id}/
@@ -204,8 +203,7 @@
         ```
     * Response shape (JSON): A new user
 
-
-# Login modal
+# Login
 
 * Endpoint path: /login
 * Endpoint method: POST
@@ -216,9 +214,19 @@
 
     ```json
     {
-    “Username”: “string”,
-    “password”: “string”:
+    “username”: "string",
+    “password”: "string",
     }
     ```
 
+*Response shape (JSON): None
+
+# Logout
+
+* Endpoint path: /token
+* Endpoint method: DELETE
+* Query parameters: None
+* Headers:
+* Authorization: Bearer token
+* Request shape (JSON):
 *Response shape (JSON): None
