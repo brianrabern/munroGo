@@ -201,7 +201,7 @@
 
 # Signup modal
 
-    * Endpoint path: /signup
+    * Endpoint path: /token
     * Endpoint method: POST
     * Query parameters: None
     * Headers:
@@ -213,15 +213,14 @@
             "name": str,
             "username": str,
             "email": str,
-            "password": str,
-            "retype": str
+            "password": str
         }
         ```
     * Response shape (JSON): A new user
 
 # Login modal
 
-- Endpoint path: /login
+- Endpoint path: /token
 - Endpoint method: POST
 - Query parameters: None
 - Headers:
@@ -234,5 +233,16 @@
     "password": str
   }
   ```
+
+\*Response shape (JSON): None
+
+# Logout modal
+
+- Endpoint path: /token
+- Endpoint method: DELETE
+- Query parameters: None
+- Headers:
+- Authorization: Bearer token
+- Request shape (JSON): None
 
 \*Response shape (JSON): None
