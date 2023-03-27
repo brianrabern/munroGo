@@ -1,15 +1,24 @@
 from pydantic import BaseModel
+from queries.client import Queries
 
 
 class AccountIn(BaseModel):
-    name: str
     email: str
     password: str
+    full_name: str
 
 
 class AccountOut(BaseModel):
     id: str
-    name: str
     email: str
+    full_name: str
+
+class AccountOutWithPassword(AccountOut):
+    hashed_password: str
+
+class AccountQueries(Queries):
+    def get(self, email: str) -> AccountOutWithPassword:
+
+    def create(self, info: AccountIn, hashed_passowrd: str) -> AccountOutWithPassword:
 
 
