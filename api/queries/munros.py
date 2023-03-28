@@ -1,10 +1,7 @@
 from queries.client import Queries
-
-# import csv
-from models import Munro, MunroParams
+import csv
+from models import Munro
 from bson import ObjectId
-
-# from bson.objectid import ObjectId
 from typing import List
 
 
@@ -23,29 +20,23 @@ class MunrosQueries(Queries):
         munro["id"] = str(munro["_id"])
         return Munro(**munro)
 
-    # def get(self, username: str):
-    #     result = self.collection.find_one({"username": username})
-    #     if result is None:
-    #         return None
-    #     result["id"] = str(result["_id"])
-    #     return AccountOutWithPassword(**result)
+    def seed_database(self):
+        csvFile = open("munroData.csv", "r")
+        munro_reader = csv.DictReader(csvFile)
 
-    # def seed_database(self, params_list: List[MunroParams]) -> List[Munro]:
+        munro_list = []
 
-    #     csvFile = open("munroData.csv", "r")
-    #     munro_reader = csv.DictReader(csvFile)
+        for dct in map(dict, munro_reader):
+            clean_dct = {k.strip(): v.strip() for k, v in dct.items()}
+            clean_dct["reviews"] = []
+            munro_list.append(clean_dct)
 
-    #     munro_list = []
+        result = self.collection.insert_many(munro_list)
+        inserted_ids = [str(id_) for id_ in result.inserted_ids]
 
-    #     for dct in map(dict, munro_reader):
-    #         clean_dct = {k.strip(): v.strip() for k, v in dct.items()}
-    #         clean_dct["reviews"] = []
-    #         munro_list.append(clean_dct)
+        x = len(result.inserted_ids)
 
-    #     result = self.collection.insert_many(munro_list)
-    #     inserted_ids = [str(id_) for id_ in result.inserted_ids]
-
-    #     x = len(result.inserted_ids)
-    #     print(f"Guid yin! Ye've addit {x} munros tae yer croun!")
-
-    #     return inserted_ids
+        return {
+            "message": f"Guid yin! Ye've addit {x} munros tae yer croun!",
+            "added_ids": inserted_ids,
+        }

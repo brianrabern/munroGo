@@ -1,9 +1,6 @@
 from fastapi import APIRouter, Depends
 from models import MunrosList
 from queries.munros import Munro, MunrosQueries
-
-# from typing import List
-# from models import MunroParams
 from authenticator import authenticator
 
 router = APIRouter()
@@ -26,6 +23,8 @@ def get_one_munro(
     return munros.get_one(munro_id=munro_id)
 
 
-# @router.post("/api/seed", response_model=MunroParams)
-# def seed_it(params_list: List[MunroParams]):
-#     return {"params": params_list}
+@router.post("/api/seed")
+def seed_it():
+    munros = MunrosQueries()
+    result = munros.seed_database()
+    return result
