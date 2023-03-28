@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
 import os
 from routers import accounts
-
 from routers import munros
 
 app = FastAPI()

@@ -37,10 +37,20 @@ class HttpError(BaseModel):
 
 
 class AccountQueries(Queries):
-    def get(self, username: str) -> AccountOutWithPassword:
-        pass
+    COLLECTION = "accounts"
 
-    def create(
-        self, info: AccountIn, hashed_passowrd: str
-    ) -> AccountOutWithPassword:
-        pass
+    def create(self, info: AccountIn, hashed_password: str):
+        account = info.dict()
+        account["hashed_password"] = hashed_password
+        if self.get(account["username"]):
+            raise DuplicateAccountError
+        self.collection.insert_one(account)
+        account["id"] = str(account["_id"])
+        return AccountOutWithPassword(**account)
+
+    def get(self, username: str):
+        result = self.collection.find_one({"username": username})
+        if result is None:
+            return None
+        result["id"] = str(result["_id"])
+        return AccountOutWithPassword(**result)

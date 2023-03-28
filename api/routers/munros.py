@@ -6,5 +6,5 @@ router = APIRouter()
 
 
 @router.get("/api/munros", response_model=MunrosList)
-def get_all_things(repo: MunrosQueries = Depends()):
-    return {"munros": repo.get_all()}
+def get_all_munros(munros: MunrosQueries = Depends()):
+    return {"munros": munros.get_all()}
