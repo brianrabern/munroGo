@@ -3,6 +3,13 @@ from typing import List
 from datetime import datetime
 
 
+class Review(BaseModel):
+    id: str
+    comment: str
+    rating: int
+    date: datetime
+
+
 class MunroParams(BaseModel):
     hillnumber: str
     hillname: str
@@ -96,10 +103,3 @@ class Munro(MunroParams):
 
 class MunrosList(BaseModel):
     munros: List[Munro]
-
-
-class Review(BaseModel):
-    id: str
-    comment: str
-    rating: int
-    date: datetime
