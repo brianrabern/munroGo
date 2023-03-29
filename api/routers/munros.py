@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends
 from models import MunrosList
 from queries.munros import Munro, MunrosQueries
+from queries.accounts import User, AccountQueries
 from authenticator import authenticator
+from typing import List
 
 router = APIRouter()
 
@@ -35,6 +37,17 @@ def add_review(
         'rating': rating,
     }
     return munros.create_review(munro_id=munro_id, review=review)
+
+
+@router.get("/api/dashboard/{account_id}", response_model=User)
+def get_user_data(
+    account_id: str,
+    users: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return users.get_user(account_id=account_id)
+
+
 # @router.get("/api/munros/name/{hillname}", response_model=Munro)
 # def get_one_by_name(
 #     hillname: str,

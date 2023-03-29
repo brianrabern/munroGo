@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from queries.client import Queries
 from jwtdown_fastapi.authentication import Token
+from typing import List, Optional
+from bson import ObjectId
 
 
 class DuplicateAccountError(ValueError):
@@ -17,6 +19,12 @@ class AccountOut(BaseModel):
     id: str
     username: str
     full_name: str
+
+class User(AccountIn):
+    completed: Optional[List]
+    rank: Optional[str]
+    climbed: Optional[int]
+    miles: Optional[int]
 
 
 class AccountOutWithPassword(AccountOut):
@@ -54,3 +62,15 @@ class AccountQueries(Queries):
             return None
         result["id"] = str(result["_id"])
         return AccountOutWithPassword(**result)
+    
+    def get_dashboard(self, username: str):
+        result = self.collection.find_one({"username": username})
+        if result is None:
+            return None
+        result["id"] = str(result["_id"])
+        return User(**result)
+    
+    def get_user(self, account_id: str) -> User:
+        user = self.collection.find_one({"_id": ObjectId(account_id)})
+        user["id"] = str(user["_id"])
+        return User(**user)
