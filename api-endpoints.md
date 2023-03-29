@@ -1,14 +1,3 @@
-# Landing page
-
-    * Endpoint path: /
-    * Endpoint method: GET
-    * Query parameters: None
-    * Headers:
-    * Authorization: Bearer token
-
-    * Request shape (JSON):  None
-    * Response shape (JSON): data from map API?
-
 # List of munros
 
     * Endpoint path: /munros/
