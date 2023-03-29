@@ -22,7 +22,19 @@ def get_one_munro(
 ):
     return munros.get_one(munro_id=munro_id)
 
-
+@router.put("/api/munros/{munro_id}", response_model=Munro)
+def add_review(
+    munro_id: str,
+    comment: str,
+    rating: int,
+    munros: MunrosQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    review = {
+        'comment': comment,
+        'rating': rating,
+    }
+    return munros.create_review(munro_id=munro_id, review=review)
 # @router.get("/api/munros/name/{hillname}", response_model=Munro)
 # def get_one_by_name(
 #     hillname: str,

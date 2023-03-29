@@ -4,10 +4,10 @@ from datetime import datetime
 
 
 class Review(BaseModel):
-    id: str
+    # id: str
     comment: str
     rating: int
-    date: datetime
+    date: datetime=datetime.now()
 
 
 class MunroParams(BaseModel):
