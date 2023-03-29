@@ -20,15 +20,12 @@ class MunrosQueries(Queries):
         munro["id"] = str(munro["_id"])
         return Munro(**munro)
 
-    # this is broken!
-    def get_one_munro(self, hillnumber: str) -> Munro:
-        munro = self.collection.find_one({"hillnumber": hillnumber})
-        # munro["id"] = str(munro["_id"])
-        print("blah was called")
+    def get_one_munro_name(self, hillname: str) -> Munro:
+        munro = self.collection.find_one({"hillname": hillname})
+        munro["id"] = str(munro["_id"])
         return Munro(**munro)
 
     def create_one(self, munro: dict) -> Munro:
-        # munro = params.dict()
         self.collection.insert_one(munro)
         munro["id"] = str(munro["_id"])
         return Munro(**munro)
