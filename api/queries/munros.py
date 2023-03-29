@@ -1,5 +1,5 @@
 from queries.client import Queries
-import csv
+
 from models import Munro
 from bson import ObjectId
 from typing import List
@@ -20,23 +20,15 @@ class MunrosQueries(Queries):
         munro["id"] = str(munro["_id"])
         return Munro(**munro)
 
-    def seed_database(self):
-        csvFile = open("munroData.csv", "r")
-        munro_reader = csv.DictReader(csvFile)
+    # this is broken!
+    def get_one_munro(self, hillnumber: str) -> Munro:
+        munro = self.collection.find_one({"hillnumber": hillnumber})
+        # munro["id"] = str(munro["_id"])
+        print("blah was called")
+        return Munro(**munro)
 
-        munro_list = []
-
-        for dct in map(dict, munro_reader):
-            clean_dct = {k.strip(): v.strip() for k, v in dct.items()}
-            clean_dct["reviews"] = []
-            munro_list.append(clean_dct)
-
-        result = self.collection.insert_many(munro_list)
-        inserted_ids = [str(id_) for id_ in result.inserted_ids]
-
-        x = len(result.inserted_ids)
-
-        return {
-            "message": f"Guid yin! Ye've addit {x} munros tae yer croun!",
-            "added_ids": inserted_ids,
-        }
+    def create_one(self, munro: dict) -> Munro:
+        # munro = params.dict()
+        self.collection.insert_one(munro)
+        munro["id"] = str(munro["_id"])
+        return Munro(**munro)

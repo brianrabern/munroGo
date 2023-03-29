@@ -23,8 +23,19 @@ def get_one_munro(
     return munros.get_one(munro_id=munro_id)
 
 
+# this is broken!
+@router.get("/api/munros/hill/{hillnumber}", response_model=Munro)
+def get_one_by_name(
+    hillnumber: str,
+    munros: MunrosQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return munros.get_one_munro(hillnumber=hillnumber)
+
+
 @router.post("/api/seed")
 def seed_it():
     munros = MunrosQueries()
     result = munros.seed_database()
     return result
+    # make into script
