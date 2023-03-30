@@ -8,6 +8,7 @@ class Review(BaseModel):
     comment: str
     rating: int
     date: datetime = datetime.now()
+    user: str
 
 
 class MunroParams(BaseModel):

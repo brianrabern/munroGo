@@ -3,7 +3,7 @@ from models import MunrosList
 from queries.munros import Munro, MunrosQueries
 from queries.accounts import AccountQueries
 from authenticator import authenticator
-
+import wikipedia
 
 router = APIRouter()
 
@@ -36,65 +36,23 @@ def add_review(
     review = {
         "comment": comment,
         "rating": rating,
+        "user": account_data["full_name"],
     }
     return munros.create_review(munro_id=munro_id, review=review)
 
 
 @router.get("/api/dashboard/")
-def get_user_data(
+def get_user_dashboard(
     users: AccountQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return users.get_user(account_id=account_data["id"])
 
 
-# @router.get("/api/dashboard/{account_id}")
-# def check_user(
-#     account_id: str,
-#     current_user = authenticator.get_account_data,
-
-# ):
-#     return current_user
-
-# def get_user_data1(
-#     account_id: str,
-#     current_user: User = Depends(authenticator.get_current_user),
-#     # if token.account.id == current_user
-#     users: AccountQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     return users.get_user(account_id=account_id)
-
-
-# @router.get("/api/dashboards/{account_id}", response_model=User)
-# def get_user_data1(
-#     account_id: str,
-#     current_user: User = Depends(authenticator.get_current_user),
-#     users: AccountQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     return users.get_user(account_id=account_id)
-
-
-# @app.get("/dashboards/{dashboard_id}", response_model=Dashboard)
-# def get_dashboard(
-#     dashboard_id: str,
-#     current_user: User = Depends(get_current_user),
-#     db: MongoClient = Depends(get_database),
-# ):
-#     dashboard = db.dashboards.find_one({"_id": ObjectId(dashboard_id)})
-#     if dashboard["user_id"] != str(current_user.id):
-#         raise HTTPException(
-#             status_code=status.HTTP_403_FORBIDDEN,
-#             detail="You are not authorized to access this dashboard",
-#         )
-#     return Dashboard(**dashboard)
-
-
-# @router.get("/api/munros/name/{hillname}", response_model=Munro)
-# def get_one_by_name(
-#     hillname: str,
-#     munros: MunrosQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     return munros.get_one_munro_name(hillname=hillname)
+@router.put("/api/munros/{munro_id}/wiki")
+def get_munro_wiki(munro_id: str, munros: MunrosQueries = Depends()):
+    munro = munros.get_one(munro_id=munro_id)
+    hillname = munro.hillname
+    summary = wikipedia.summary(hillname)
+    images = wikipedia.page(hillname).images
+    return {hillname: {"summary": summary, "images": images}}

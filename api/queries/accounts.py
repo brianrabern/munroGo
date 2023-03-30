@@ -4,9 +4,6 @@ from jwtdown_fastapi.authentication import Token
 from typing import List
 from bson import ObjectId
 
-# from bson import ObjectId
-# from fastapi import HTTPException
-
 
 class DuplicateAccountError(ValueError):
     pass
@@ -68,25 +65,3 @@ class AccountQueries(Queries):
             return None
         user["id"] = str(user["_id"])
         return AccountOut(**user)
-
-    # def get_dashboard(self, username: str):
-    #     result = self.collection.find_one({"username": username})
-    #     if result is None:
-    #         return None
-    #     result["id"] = str(result["_id"])
-    #     return User(**result)
-
-    # def get_user(self, account_id: str) -> User:
-    #     user = self.collection.find_one({"_id": ObjectId(account_id)})
-    #     user["id"] = str(user["_id"])
-    #     return User(**user)
-
-    # def get_user_dashboard(self, account_id: str):
-    #     user = self.collection.find_one({"_id": ObjectId(account_id)})
-    #     if user["user_id"] != str(current_user.id):
-    #         raise HTTPException()
-    #         #     status_code=status.HTTP_403_FORBIDDEN,
-    #         #     detail="You are not authorized to access this dashboard",
-    #         # )
-    #     user["user_id"] = str(user["_id"])
-    #     return User(**user)
