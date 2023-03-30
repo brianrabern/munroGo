@@ -1,6 +1,6 @@
 from queries.client import Queries
 
-from models import Munro
+from models.munros import Munro
 from bson import ObjectId
 from typing import List
 

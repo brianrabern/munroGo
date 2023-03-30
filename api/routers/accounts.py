@@ -8,10 +8,10 @@ from fastapi import (
 )
 
 from authenticator import authenticator
-from queries.accounts import (
+from queries.accounts import AccountQueries
+from models.accounts import (
     AccountIn,
     AccountOut,
-    AccountQueries,
     DuplicateAccountError,
     AccountToken,
     AccountForm,

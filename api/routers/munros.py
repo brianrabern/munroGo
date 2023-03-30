@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from models import MunrosList
+from models.munros import MunrosList
 from queries.munros import Munro, MunrosQueries
 from queries.accounts import AccountQueries
 from authenticator import authenticator
