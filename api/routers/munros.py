@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from models.munros import MunrosList
 from queries.munros import Munro, MunrosQueries
 from queries.accounts import AccountQueries
 from authenticator import authenticator
 import wikipedia
+
 
 router = APIRouter()
 
@@ -48,8 +49,9 @@ def get_user_dashboard(
 ):
     return users.get_user(account_id=account_data["id"])
 
+
 @router.put("/api/dashboard/")
-def get_user_dashboard(
+def update_user_dashboard(
     munro_id: str,
     users: AccountQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -65,3 +67,17 @@ def get_munro_wiki(munro_id: str, munros: MunrosQueries = Depends()):
     summary = wikipedia.summary(hillname)
     images = wikipedia.page(hillname).images
     return {hillname: {"summary": summary, "images": images}}
+
+
+@router.get("/api/munros/{munro_id}/weather")
+def get_munro_weather(munro_id: str, munros: MunrosQueries = Depends()):
+    weather = munros.get_weather(munro_id)
+
+    return weather
+
+
+# @router.get("/api/munros/{munro_id}/weather")
+# def get_munro_weather(munro_id: str, munros: MunrosQueries = Depends()):
+#     url = munros.get_weather(munro_id)
+#     weather_data = requests.get(url)
+#     return weather_data
