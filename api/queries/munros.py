@@ -39,3 +39,5 @@ class MunrosQueries(Queries):
         )
         munro["id"] = str(munro["_id"])
         return Munro(**munro)
+
+
