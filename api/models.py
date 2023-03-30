@@ -1,13 +1,13 @@
 from pydantic import BaseModel
 from typing import List
 from datetime import datetime
-from queries.accounts import AccountIn
+
 
 class Review(BaseModel):
     # id: str
     comment: str
     rating: int
-    date: datetime=datetime.now()
+    date: datetime = datetime.now()
 
 
 class MunroParams(BaseModel):
@@ -103,4 +103,3 @@ class Munro(MunroParams):
 
 class MunrosList(BaseModel):
     munros: List[Munro]
-

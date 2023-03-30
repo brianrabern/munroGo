@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from models import MunrosList
 from queries.munros import Munro, MunrosQueries
-from queries.accounts import  AccountQueries
+from queries.accounts import AccountQueries
 from authenticator import authenticator
-from typing import List
+
 
 router = APIRouter()
 
@@ -39,18 +39,13 @@ def add_review(
     }
     return munros.create_review(munro_id=munro_id, review=review)
 
-# @router.get("/api/dashboard/{account_id}")
-# def get_user_data(
-#     account_id: str,
-#     account_data: dict = Depends(authenticator.get_current_account_data)
-# ):
-#     return account_data["id"]
 
 @router.get("/api/dashboard/")
-def get_user_data2(
-    account_data: dict = Depends(authenticator.get_current_account_data)
+def get_user_data(
+    users: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return account_data["id"]
+    return users.get_user(account_id=account_data["id"])
 
 
 # @router.get("/api/dashboard/{account_id}")
@@ -71,14 +66,14 @@ def get_user_data2(
 #     return users.get_user(account_id=account_id)
 
 
-@router.get("/api/dashboards/{account_id}", response_model=User)
-def get_user_data1(
-    account_id: str,
-    current_user: User = Depends(authenticator.get_current_user),
-    users: AccountQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    return users.get_user(account_id=account_id)
+# @router.get("/api/dashboards/{account_id}", response_model=User)
+# def get_user_data1(
+#     account_id: str,
+#     current_user: User = Depends(authenticator.get_current_user),
+#     users: AccountQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     return users.get_user(account_id=account_id)
 
 
 # @app.get("/dashboards/{dashboard_id}", response_model=Dashboard)
