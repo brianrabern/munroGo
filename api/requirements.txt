@@ -2,4 +2,5 @@ fastapi[all]>=0.81.0
 uvicorn[standard]==0.17.6
 pymongo[srv]==4.2.0
 jwtdown-fastapi>=0.2.0
+wikipedia>=1.4.0
 pytest

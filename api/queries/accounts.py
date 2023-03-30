@@ -1,39 +1,6 @@
-from pydantic import BaseModel
 from queries.client import Queries
-from jwtdown_fastapi.authentication import Token
-
-
-class DuplicateAccountError(ValueError):
-    pass
-
-
-class AccountIn(BaseModel):
-    username: str
-    password: str
-    full_name: str
-
-
-class AccountOut(BaseModel):
-    id: str
-    username: str
-    full_name: str
-
-
-class AccountOutWithPassword(AccountOut):
-    hashed_password: str
-
-
-class AccountForm(BaseModel):
-    username: str
-    password: str
-
-
-class AccountToken(Token):
-    account: AccountOut
-
-
-class HttpError(BaseModel):
-    detail: str
+from bson import ObjectId
+from models.accounts import AccountIn, AccountOut, AccountOutWithPassword, DuplicateAccountError
 
 
 class AccountQueries(Queries):
@@ -54,3 +21,10 @@ class AccountQueries(Queries):
             return None
         result["id"] = str(result["_id"])
         return AccountOutWithPassword(**result)
+
+    def get_user(self, account_id: str) -> AccountOut:
+        user = self.collection.find_one({"_id": ObjectId(account_id)})
+        if user is None:
+            return None
+        user["id"] = str(user["_id"])
+        return AccountOut(**user)
