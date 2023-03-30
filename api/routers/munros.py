@@ -48,6 +48,15 @@ def get_user_dashboard(
 ):
     return users.get_user(account_id=account_data["id"])
 
+@router.put("/api/dashboard/")
+def get_user_dashboard(
+    munro_id: str,
+    users: AccountQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    account_id = str(account_data["id"])
+    return users.completed_munro(account_id=account_id, munro_id=munro_id)
+
 
 @router.put("/api/munros/{munro_id}/wiki")
 def get_munro_wiki(munro_id: str, munros: MunrosQueries = Depends()):
