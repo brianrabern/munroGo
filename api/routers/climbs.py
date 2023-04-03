@@ -17,10 +17,12 @@ def get_all_climbs(
     return climbs.get_all_by_account(account_id)
 
 
-@router.get("/api/munros/{munro_id}", response_model=Climb)
+@router.get("/api/climbs/{climb_id}", response_model=Climb)
 def get_one_climb(
     climb_id: str,
     climbs: ClimbsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return climbs.get_one(climb_id=climb_id)
+
+@router.post("/api/climbs", response_model=Climb)

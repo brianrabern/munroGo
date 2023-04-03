@@ -14,5 +14,5 @@ class Climb(BaseModel):
 
 
 class ClimbsList(BaseModel):
-    climbs: List[Climb]
+    climbs: Optional[List[Climb]]
 

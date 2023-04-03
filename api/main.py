@@ -4,6 +4,7 @@ from authenticator import authenticator
 import os
 from routers import accounts
 from routers import munros
+from routers import climbs
 
 app = FastAPI()
 
@@ -19,3 +20,4 @@ app.add_middleware(
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(munros.router)
+app.include_router(climbs.router)
