@@ -1,6 +1,6 @@
 from queries.client import Queries
 
-from models.munros import Munro
+from models.munros import Munro, MunrosList
 from bson import ObjectId
 from typing import List
 
@@ -8,7 +8,7 @@ from typing import List
 class MunrosQueries(Queries):
     COLLECTION = "munros"
 
-    def get_all(self) -> List[Munro]:
+    def get_all(self) -> MunrosList:
         munros = []
         for munro in self.collection.find():
             munro["id"] = str(munro["_id"])

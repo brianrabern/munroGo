@@ -11,10 +11,9 @@ class AccountIn(BaseModel):
     username: str
     password: str
     full_name: str
-    completed: List = []
     rank: str = "Beginner"
-    climbed: int = 0
-    miles: float = 0
+    # climbed: int = 0
+    # miles: float = 0
 
 
 class AccountOut(AccountIn):
