@@ -1,6 +1,11 @@
 from queries.client import Queries
 from bson import ObjectId
-from models.accounts import AccountIn, AccountOut, AccountOutWithPassword, DuplicateAccountError
+from models.accounts import (
+    AccountIn,
+    AccountOut,
+    AccountOutWithPassword,
+    DuplicateAccountError,
+)
 
 
 class AccountQueries(Queries):
@@ -36,4 +41,3 @@ class AccountQueries(Queries):
         )
         user["id"] = str(user["_id"])
         return AccountOut(**user)
-

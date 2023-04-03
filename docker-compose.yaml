@@ -15,6 +15,7 @@ services:
     environment:
       MONGO_URL: mongodb://admin:password@mongo
       SIGNING_KEY: ${SIGNING_KEY}
+      OPEN_WEATHER_API_KEY: ${OPEN_WEATHER_API_KEY}
   mongo:
     image: mongo:6
     volumes:

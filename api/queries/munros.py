@@ -3,6 +3,7 @@ from models.munros import Munro
 from bson import ObjectId
 from typing import List
 import requests
+import os
 
 
 class MunrosQueries(Queries):
@@ -43,7 +44,8 @@ class MunrosQueries(Queries):
         munro = self.get_one(munro_id)
         lat = munro.latitude
         lon = munro.longitude
-        key = "74a28f89443c989f6b03c52fea23cb18"  # os.environ["OPEN_WEATHER_API_KEY"]
+        key = os.enviorn["OPEN_WEATHER_API_KEY"]
+        # "74a28f89443c989f6b03c52fea23cb18"  #
         url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={key}"
         data = requests.get(url)
         weather_data = data.json()
