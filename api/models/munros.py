@@ -102,5 +102,11 @@ class Munro(MunroParams):
     id: str
 
 
+class MunroWithData(Munro):
+    summary: str
+    images: List[str]
+    weather: dict
+
+
 class MunrosList(BaseModel):
     munros: List[Munro]
