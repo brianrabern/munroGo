@@ -26,7 +26,7 @@ def get_one_munro(
     munro = munros.get_one(munro_id=munro_id)
     hillname = munro.hillname
     summary = wikipedia.summary(hillname)
-    images = wikipedia.page(hillname).images 
+    images = wikipedia.page(hillname).images
     weather = munros.get_weather(munro_id)
     munro_data = munro.dict()
     munro_data["summary"] = summary
