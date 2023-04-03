@@ -3,6 +3,13 @@ from typing import List
 from datetime import datetime
 
 
+class Review(BaseModel):
+    comment: str
+    rating: int
+    date: datetime = datetime.now()
+    user: str
+
+
 class MunroParams(BaseModel):
     hillnumber: str
     hillname: str
@@ -92,6 +99,12 @@ class MunroParams(BaseModel):
 
 class Munro(MunroParams):
     id: str
+
+
+class MunroWithData(Munro):
+    summary: str
+    images: List[str]
+    weather: dict
 
 
 class MunrosList(BaseModel):
