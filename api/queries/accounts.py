@@ -31,8 +31,6 @@ class AccountQueries(Queries):
 
     def completed_munro(self, account_id: str, munro_id: str) -> AccountOut:
         user = self.collection.find_one({"_id": ObjectId(account_id)})
-        print(user)
-        # user["completed"].append(munro_id)
         self.collection.update_one(
             {"_id": ObjectId(account_id)}, {"$push": {"completed": munro_id}}
         )
