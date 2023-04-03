@@ -17,4 +17,4 @@
 
     * refactored munro detail endpoint
     * thought about rechart API
-    thought about map API
+    * thought about map API
