@@ -10,7 +10,6 @@ def seed():
     inserted_ids = []
     for dct in map(dict, munro_reader):
         clean_dct = {k.strip(): v.strip() for k, v in dct.items()}
-        clean_dct["reviews"] = []
         added = mqueries.create_one(clean_dct)
         inserted_ids.append(added.id)
     croun = len(inserted_ids)

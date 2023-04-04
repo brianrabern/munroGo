@@ -1,13 +1,5 @@
 from pydantic import BaseModel
 from typing import List
-from datetime import datetime
-
-
-class Review(BaseModel):
-    comment: str
-    rating: int
-    date: datetime = datetime.now()
-    user: str
 
 
 class MunroParams(BaseModel):
@@ -94,7 +86,6 @@ class MunroParams(BaseModel):
     Un: str
     P600: str
     P500: str
-    # reviews: List[Review]
 
 
 class Munro(MunroParams):

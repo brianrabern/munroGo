@@ -1,6 +1,5 @@
 from pydantic import BaseModel
 from jwtdown_fastapi.authentication import Token
-from typing import List
 
 
 class DuplicateAccountError(ValueError):
@@ -12,8 +11,6 @@ class AccountIn(BaseModel):
     password: str
     full_name: str
     rank: str = "Beginner"
-    # climbed: int = 0
-    # miles: float = 0
 
 
 class AccountOut(AccountIn):
