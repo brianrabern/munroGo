@@ -4,13 +4,14 @@ from queries.reviews import ReviewsQueries
 from authenticator import authenticator
 
 
-
 router = APIRouter()
 
 
-@router.get("/api/{munro_id}/reviews", response_model=ReviewsList)
+@router.get(
+    "/api/{munro_id}/reviews", response_model=ReviewsList, tags=["reviews"]
+)
 def get_all_reviews_by_munro(
-    munro_id : str,
+    munro_id: str,
     reviews: ReviewsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
