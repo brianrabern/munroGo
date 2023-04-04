@@ -9,7 +9,7 @@ import wikipedia
 router = APIRouter()
 
 
-@router.get("/api/munros", response_model=MunrosList)
+@router.get("/api/munros", response_model=MunrosList, tags = ["munros"])
 def get_all_munros(
     munros: MunrosQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -17,7 +17,7 @@ def get_all_munros(
     return {"munros": munros.get_all()}
 
 
-@router.get("/api/munros/{munro_id}", response_model=MunroWithData)
+@router.get("/api/munros/{munro_id}", response_model=MunroWithData, tags = ["munros"])
 def get_one_munro(
     munro_id: str,
     munros: MunrosQueries = Depends(),
@@ -51,12 +51,12 @@ def get_one_munro(
 #     return munros.create_review(munro_id=munro_id, review=review)
 
 
-@router.get("/api/dashboard/")
-def get_user_dashboard(
-    users: AccountQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    return users.get_user(account_id=account_data["id"])
+# @router.get("/api/dashboard/", tags = ["munros"])
+# def get_user_dashboard(
+#     users: AccountQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     return users.get_user(account_id=account_data["id"])
 
 
 # @router.put("/api/dashboard/")
