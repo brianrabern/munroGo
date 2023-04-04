@@ -7,7 +7,7 @@ from authenticator import authenticator
 router = APIRouter()
 
 
-@router.get("/api/munros/account/climbs/", response_model=ClimbsList, tags=["climbs"])
+@router.get("/api/munros/account/climbs/", response_model=ClimbsList, tags=["Climbs"])
 def get_climbs_for_account(
     climbs: ClimbsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -17,7 +17,7 @@ def get_climbs_for_account(
     return {"climbs": climbs}
 
 
-@router.get("/api/munros/{munro_id}/climbs/", response_model=ClimbsList, tags=["climbs"])
+@router.get("/api/munros/{munro_id}/climbs/", response_model=ClimbsList, tags=["Climbs"])
 def get_all_climbs_for_munro(
     munro_id: str,
     climbs: ClimbsQueries = Depends(),
@@ -28,7 +28,7 @@ def get_all_climbs_for_munro(
     return {"climbs": climbs}
 
 
-@router.post("/api/munros/{munro_id}/climbs/", response_model=Climb, tags=["climbs"])
+@router.post("/api/munros/{munro_id}/climbs/", response_model=Climb, tags=["Climbs"])
 def create_climb(
     munro_id: str,
     climbs: ClimbsQueries = Depends(),
@@ -37,11 +37,10 @@ def create_climb(
     params = {"munro_id": munro_id, "account_id": str(account_data["id"])}
     return climbs.create_one(params)
 
-
-# @router.get("/api/munros/{munro_id}", response_model=Climb)
-# def get_one_climb(
-#     climb_id: str,
-#     climbs: ClimbsQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     return climbs.get_one(climb_id=climb_id)
+@router.delete("/api/munros/climbs/{climb_id}/", response_model=bool, tags=["Climbs"])
+def delete_one_climb(
+    climb_id: str,
+    climbs: ClimbsQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return climbs.delete_one(climb_id)
