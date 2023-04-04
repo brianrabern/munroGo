@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from models.munros import MunrosList, MunroWithData
-from queries.munros import Munro, MunrosQueries
+from queries.munros import MunrosQueries
 from queries.accounts import AccountQueries
 from authenticator import authenticator
 import wikipedia
@@ -35,20 +35,20 @@ def get_one_munro(
     return munro_data
 
 
-@router.put("/api/munros/{munro_id}", response_model=Munro)
-def add_review(
-    munro_id: str,
-    comment: str,
-    rating: int,
-    munros: MunrosQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    review = {
-        "comment": comment,
-        "rating": rating,
-        "user": account_data["full_name"],
-    }
-    return munros.create_review(munro_id=munro_id, review=review)
+# @router.put("/api/munros/{munro_id}", response_model=Munro)
+# def add_review(
+#     munro_id: str,
+#     comment: str,
+#     rating: int,
+#     munros: MunrosQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     review = {
+#         "comment": comment,
+#         "rating": rating,
+#         "user": account_data["full_name"],
+#     }
+#     return munros.create_review(munro_id=munro_id, review=review)
 
 
 @router.get("/api/dashboard/")
@@ -59,11 +59,11 @@ def get_user_dashboard(
     return users.get_user(account_id=account_data["id"])
 
 
-@router.put("/api/dashboard/")
-def update_user_dashboard(
-    munro_id: str,
-    users: AccountQueries = Depends(),
-    account_data: dict = Depends(authenticator.get_current_account_data),
-):
-    account_id = str(account_data["id"])
-    return users.completed_munro(account_id=account_id, munro_id=munro_id)
+# @router.put("/api/dashboard/")
+# def update_user_dashboard(
+#     munro_id: str,
+#     users: AccountQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+#     account_id = str(account_data["id"])
+#     return users.completed_munro(account_id=account_id, munro_id=munro_id)

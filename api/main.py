@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from authenticator import authenticator
 import os
-from routers import accounts
-from routers import munros
+from routers import accounts, munros, climbs
+
 
 app = FastAPI()
 
@@ -19,3 +19,5 @@ app.add_middleware(
 app.include_router(authenticator.router)
 app.include_router(accounts.router)
 app.include_router(munros.router)
+app.include_router(climbs.router)
+# app.include_router(reviews.router)

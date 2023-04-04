@@ -1,13 +1,9 @@
 from queries.client import Queries
-from models.munros import Munro
+from models.munros import Munro, MunrosList
 from bson import ObjectId
-from typing import List
 import requests
 import os
 from dotenv import load_dotenv
-
-
-load_dotenv()
 
 load_dotenv()
 
@@ -15,7 +11,7 @@ load_dotenv()
 class MunrosQueries(Queries):
     COLLECTION = "munros"
 
-    def get_all(self) -> List[Munro]:
+    def get_all(self) -> MunrosList:
         munros = []
         for munro in self.collection.find():
             munro["id"] = str(munro["_id"])
@@ -37,15 +33,6 @@ class MunrosQueries(Queries):
         munro["id"] = str(munro["_id"])
         return Munro(**munro)
 
-    def create_review(self, munro_id: str, review: dict) -> Munro:
-        munro = self.collection.find_one({"_id": ObjectId(munro_id)})
-        # munro["reviews"].append(review)
-        self.collection.update_one(
-            {"_id": ObjectId(munro_id)}, {"$push": {"reviews": review}}
-        )
-        munro["id"] = str(munro["_id"])
-        return Munro(**munro)
-
     def get_weather(self, munro_id: str) -> dict:
         munro = self.get_one(munro_id)
         lat = munro.latitude
@@ -56,3 +43,12 @@ class MunrosQueries(Queries):
         weather_data = data.json()
 
         return weather_data
+
+    # def create_review(self, munro_id: str, review: dict) -> Munro:
+    #     munro = self.collection.find_one({"_id": ObjectId(munro_id)})
+    #     # munro["reviews"].append(review)
+    #     self.collection.update_one(
+    #         {"_id": ObjectId(munro_id)}, {"$push": {"reviews": review}}
+    #     )
+    #     munro["id"] = str(munro["_id"])
+    #     return Munro(**munro)
