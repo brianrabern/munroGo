@@ -17,6 +17,12 @@ class ReviewsQueries(Queries):
         return reviews
 
 
+    def get_all_by_account(self, account_id: str) -> List[Review]:
+            reviews = []
+            for review in self.collection.find({"munro_id": account_id}):
+                review["id"] = str(review["_id"])
+                reviews.append(Review(**review))
+            return reviews
 
 #     def get_one(self, climb_id: str) -> Review:
 #         review = self.collection.find_one({"_id": ObjectId(climb_id)})

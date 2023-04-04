@@ -27,6 +27,7 @@ def get_climbs_for_account(
 def get_all_climbs_for_munro(
     munro_id: str,
     climbs: ClimbsQueries = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
     climbs = climbs.get_all_by_munro(munro_id=munro_id)
 
