@@ -28,10 +28,10 @@ class ClimbsQueries(Queries):
         climb["id"] = str(climb["_id"])
         return Climb(**climb)
 
-    # def get_one(self, climb_id: str) -> Climb:
-    #     climb = self.collection.find_one({"_id": ObjectId(climb_id)})
-    #     climb["id"] = str(climb["_id"])
-    #     return Climb(**climb)
+    def get_one(self, climb_id: str) -> Climb:
+        climb = self.collection.find_one({"_id": ObjectId(climb_id)})
+        climb["id"] = str(climb["_id"])
+        return Climb(**climb)
 
     def delete_one(self, climb_id: str) -> bool:
         result = self.collection.delete_one({"_id": ObjectId(climb_id)})
