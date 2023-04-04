@@ -1,4 +1,6 @@
-Week 1
+# Daily journal
+
+#         Week 1
 Monday, March 20th, 2023
 - completed code of conduct
 - brainstormed ideas for projects, chose idea
@@ -20,7 +22,7 @@ Friday, March 24th, 2023
 - consolidated project scope
 
 
-Week 2
+#          Week 2
 Monday, March 27th, 2023
 - clarified modal/endpoint questions
 - updated endpoints
@@ -43,7 +45,11 @@ Thursday, March 30th, 2023
 - finished weather API
 
 
-Week 3
+#          Week 3
 Monday, April 3rd, 2023
--
+- refactor Munro detail view w Wiki + weather API
+- got feedback on endpoints
+- created models for climbs  + modified reviews models
+- started climb endpoints
+
 

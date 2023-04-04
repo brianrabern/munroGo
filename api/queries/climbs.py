@@ -1,6 +1,7 @@
 from queries.client import Queries
 from models.climbs import ClimbParams, Climb
 from typing import List
+from bson import ObjectId
 
 
 class ClimbsQueries(Queries):
@@ -32,6 +33,6 @@ class ClimbsQueries(Queries):
     #     climb["id"] = str(climb["_id"])
     #     return Climb(**climb)
 
-    # def delete(self, id: str) -> bool:
-    #     result = self.collection.delete_one({"_id": ObjectId(id)})
-    #     return result.deleted_count == 1
+    def delete_one(self, climb_id: str) -> bool:
+        result = self.collection.delete_one({"_id": ObjectId(climb_id)})
+        return result.deleted_count == 1

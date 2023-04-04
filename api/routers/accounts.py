@@ -22,7 +22,7 @@ from models.accounts import (
 router = APIRouter()
 
 
-@router.get("/token", response_model=AccountToken | None, tags=["accounts"])
+@router.get("/token", response_model=AccountToken | None, tags=["Account"])
 async def get_token(
     request: Request,
     account: AccountOut = Depends(authenticator.try_get_current_account_data),
@@ -36,7 +36,7 @@ async def get_token(
 
 
 @router.post(
-    "/api/accounts", response_model=AccountToken | HttpError, tags=["accounts"]
+    "/api/accounts", response_model=AccountToken | HttpError, tags=["Account"]
 )
 async def create_account(
     info: AccountIn,

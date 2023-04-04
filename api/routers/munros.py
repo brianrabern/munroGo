@@ -9,8 +9,7 @@ import wikipedia
 router = APIRouter()
 
 
-@router.get("/api/munros", response_model=MunrosList, tags=["munros"])
-@router.get("/api/munros", response_model=MunrosList, tags=["munros"])
+@router.get("/api/munros", response_model=MunrosList, tags=["Munros"])
 def get_all_munros(
     munros: MunrosQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -19,10 +18,7 @@ def get_all_munros(
 
 
 @router.get(
-    "/api/munros/{munro_id}", response_model=MunroWithData, tags=["munros"]
-)
-@router.get(
-    "/api/munros/{munro_id}", response_model=MunroWithData, tags=["munros"]
+    "/api/munros/{munro_id}", response_model=MunroWithData, tags=["Munros"]
 )
 def get_one_munro(
     munro_id: str,
@@ -39,37 +35,3 @@ def get_one_munro(
     munro_data["images"] = images
     munro_data["weather"] = weather
     return munro_data
-
-
-# @router.put("/api/munros/{munro_id}", response_model=Munro)
-# def add_review(
-#     munro_id: str,
-#     comment: str,
-#     rating: int,
-#     munros: MunrosQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     review = {
-#         "comment": comment,
-#         "rating": rating,
-#         "user": account_data["full_name"],
-#     }
-#     return munros.create_review(munro_id=munro_id, review=review)
-
-
-# @router.get("/api/dashboard/", tags = ["munros"])
-# def get_user_dashboard(
-#     users: AccountQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     return users.get_user(account_id=account_data["id"])
-
-
-# @router.put("/api/dashboard/")
-# def update_user_dashboard(
-#     munro_id: str,
-#     users: AccountQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-#     account_id = str(account_data["id"])
-#     return users.completed_munro(account_id=account_id, munro_id=munro_id)
