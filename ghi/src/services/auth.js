@@ -14,14 +14,14 @@ export const authApi = createApi({
     }),
     login: builder.mutation({
       query: (info) => {
-        let formData = null;
-        if (info instanceof HTMLElement) {
-          formData = new FormData(info);
-        } else {
-          formData = new FormData();
-          formData.append("username", info.username);
-          formData.append("password", info.password);
-        }
+        // let formData = null;
+        // if (info instanceof HTMLElement) {
+        //   formData = new FormData(info);
+        // } else {
+        const formData = new FormData();
+        formData.append("username", info.username);
+        formData.append("password", info.password);
+        // }
         return {
           url: "/token",
           method: "post",
@@ -40,6 +40,13 @@ export const authApi = createApi({
         credentials: "include",
       }),
       providesTags: ["Token"],
+    }),
+    logout: builder.mutation({
+      query: () => ({
+        url: "/token",
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Account", { type: "Things", id: "LIST" }],
     }),
   }),
 });

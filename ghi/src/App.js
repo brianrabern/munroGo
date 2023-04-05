@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Construct from "./Construct.js";
 import Login from "./Login";
+import Logout from "./Logout";
 import ErrorNotification from "./ErrorNotification";
 import "./App.css";
 import { useGetAccountQuery } from "./services/auth";
@@ -9,6 +10,10 @@ function App() {
   const [launch_info, setLaunchInfo] = useState([]);
   const [error, setError] = useState(null);
   const [login, setLogin] = useState([]);
+  const [logout, setLogout] = useState([]);
+
+  const { data: account } = useGetAccountQuery();
+  console.log({ account });
 
   // useEffect(() => {
   //   async function getData() {
@@ -30,11 +35,13 @@ function App() {
   // }, []);
 
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launch_info} />
-      <Login login={login} />
-    </div>
+    <>
+      <div>
+        <Login login={login} />
+      </div>
+      <h1>{account?.account}</h1>
+      {/* <div>{account && <Logout />}</div> */}
+    </>
   );
 }
 
