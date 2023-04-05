@@ -9,3 +9,5 @@ March 29, 2023: refactored seeding, worked on completing user dashboard endpoint
 March 30, 2023: added wikipedia and weather api
 
 April 3, 2023: recreated, refactored, and added endpoints, refactored Munro wiki and weather detail views 
+
+April 4, 2023: finished RESTful endpoints, got feedback from riley
