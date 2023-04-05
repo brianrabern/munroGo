@@ -52,4 +52,8 @@ Monday, April 3rd, 2023
 - created models for climbs  + modified reviews models
 - started climb endpoints
 
+Tuesday, April 4th, 2023
+- finished RESTful endpoints
+- got feedback
+- add params for models
 
