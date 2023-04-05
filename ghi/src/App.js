@@ -13,35 +13,24 @@ function App() {
   const [logout, setLogout] = useState([]);
 
   const { data: account } = useGetAccountQuery();
-  console.log({ account });
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     let url = `http://localhost:3000/api/launch-details`; //`${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-  //     console.log("fastapi url: ", url);
-  //     let response = await fetch(url);
-  //     console.log("------- hello? -------");
-  //     let data = await response.json();
 
-  //     if (response.ok) {
-  //       console.log("got launch data!");
-  //       setLaunchInfo(data.launch_details);
-  //     } else {
-  //       console.log("drat! something happened");
-  //       setError(data.message);
-  //     }
-  //   }
-  //   getData();
-  // }, []);
+  const showAuthForms = () => (
+    <div className='row'>
+      <div className='col'><Login /></div>
+    </div>
+  )
 
   return (
-    <>
-      <div>
-        <Login login={login} />
-      </div>
-      <h1>{account?.account}</h1>
-      {/* <div>{account && <Logout />}</div> */}
-    </>
+      <div className='container'>
+        <h1>munroGo</h1>
+        <hr />
+          <h2>Hey {account?.username || 'stranger'}</h2>
+        <hr />
+
+        <div>{account ? <Logout /> : showAuthForms()}</div>
+    </div>
+
   );
 }
 

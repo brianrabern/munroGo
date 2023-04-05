@@ -5,6 +5,7 @@ export const authApi = createApi({
   tagTypes: ["Token"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}`,
+    credentials: "include" //this was missing!
   }),
   endpoints: (builder) => ({
     getAccount: builder.query({
@@ -29,14 +30,11 @@ export const authApi = createApi({
           credentials: "include",
         };
       },
-      invalidatesTags: (result) => {
-        return (result && ["Account"]) || [];
-      },
+      invalidatesTags: ["Account"]
     }),
     getToken: builder.query({
       query: () => ({
         url: "/token",
-
         credentials: "include",
       }),
       providesTags: ["Token"],
@@ -46,10 +44,14 @@ export const authApi = createApi({
         url: "/token",
         method: "DELETE",
       }),
-      invalidatesTags: ["Account", { type: "Things", id: "LIST" }],
+      invalidatesTags: ["Account"],
     }),
   }),
 });
 
-export const { useGetAccountQuery, useLogoutMutation, useLoginMutation } =
-  authApi;
+export const {
+  useGetAccountQuery,
+  useLogoutMutation,
+  useLoginMutation,
+  useGetTokenQuery
+} = authApi;
