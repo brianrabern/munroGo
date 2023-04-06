@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 function Main() {
@@ -6,10 +7,15 @@ function Main() {
 
 
   return (
-      <div className='container'>
-        <h1>munroGo</h1>
+    <div className="container">
+      <Link type="button" className="btn btn-success" to="/login">
+        Login
+      </Link>
+      <Link type="button" className="btn btn-success" to="/signup">
+        Signup
+      </Link>
+      
     </div>
-
   );
 }
 

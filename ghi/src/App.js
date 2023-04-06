@@ -1,45 +1,26 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from "./Login";
-import Logout from "./Logout";
-import Signup from "./Signup.jsx";
-import ErrorNotification from "./ErrorNotification";
+import Main from "./main";
 import "./App.css";
-import { useGetAccountQuery } from "./services/auth";
+import Login from "./Login";
+import TestModal from './test';
+import Signup from './Signup';
+import Munros from './munro'
+
 
 function App() {
 
-  const { data: account } = useGetAccountQuery();
-
-
-  const showAuthForms = () => (
-  <>
-    <div className='row'>
-      <div className='col'><Login /></div>
-    </div>
-    <div className='row'>
-      <div className='col'><Signup /></div>
-    </div>
-  </>
-  )
 
   return (
     <>
-     <BrowserRouter>
-     <Route path="/" element={<Main />} />
-
-     </BrowserRouter>
-
-      <div className='container'>
-        <h1>munroGo</h1>
-        <hr />
-          <h2>Hey {account?.username || 'stranger'}</h2>
-        <hr />
-
-        <div>{account ? <Logout /> : showAuthForms()}</div>
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/Munros" element={<Munros />} />
+        </Routes>
+      </BrowserRouter>
     </>
-
   );
 }
 
