@@ -55,3 +55,15 @@ Tuesday, April 4th, 2023
 -got feedback on endpoints
 -created models for climbs  + modified reviews models
 -started climb endpoints
+
+Wednesday, April 5th, 2023
+- Setup redux
+- login functionality
+
+Thursday, April 6th, 2023
+- sign up functionality
+- login page
+- sign up page
+- set up landing page
+- added link buttons for sign up and login screens
+- began munro list page
