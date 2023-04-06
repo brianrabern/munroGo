@@ -15,18 +15,24 @@ export const authApi = createApi({
     }),
     login: builder.mutation({
       query: (info) => {
-        // let formData = null;
-        // if (info instanceof HTMLElement) {
-        //   formData = new FormData(info);
-        // } else {
         const formData = new FormData();
         formData.append("username", info.username);
         formData.append("password", info.password);
-        // }
         return {
           url: "/token",
-          method: "post",
+          method: "POST",
           body: formData,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Account"]
+    }),
+    signup: builder.mutation({
+      query: (body) => {
+        return {
+          url: "/api/accounts",
+          method: 'POST',
+          body,
           credentials: "include",
         };
       },
@@ -39,6 +45,7 @@ export const authApi = createApi({
       }),
       providesTags: ["Token"],
     }),
+
     logout: builder.mutation({
       query: () => ({
         url: "/token",
@@ -52,6 +59,7 @@ export const authApi = createApi({
 export const {
   useGetAccountQuery,
   useLogoutMutation,
+  useSignupMutation,
   useLoginMutation,
   useGetTokenQuery
 } = authApi;
