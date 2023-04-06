@@ -1,37 +1,45 @@
-import { useEffect, useState } from 'react';
-import Construct from './Construct.js'
-import ErrorNotification from './ErrorNotification';
-import './App.css';
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Login from "./Login";
+import Logout from "./Logout";
+import Signup from "./Signup.jsx";
+import ErrorNotification from "./ErrorNotification";
+import "./App.css";
+import { useGetAccountQuery } from "./services/auth";
 
 function App() {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    async function getData() {
-      let url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/api/launch-details`;
-      console.log('fastapi url: ', url);
-      let response = await fetch(url);
-      console.log("------- hello? -------");
-      let data = await response.json();
+  const { data: account } = useGetAccountQuery();
 
-      if (response.ok) {
-        console.log("got launch data!");
-        setLaunchInfo(data.launch_details);
-      } else {
-        console.log("drat! something happened");
-        setError(data.message);
-      }
-    }
-    getData();
-  }, [])
 
+  const showAuthForms = () => (
+  <>
+    <div className='row'>
+      <div className='col'><Login /></div>
+    </div>
+    <div className='row'>
+      <div className='col'><Signup /></div>
+    </div>
+  </>
+  )
 
   return (
-    <div>
-      <ErrorNotification error={error} />
-      <Construct info={launch_info} />
+    <>
+     <BrowserRouter>
+     <Route path="/" element={<Main />} />
+
+     </BrowserRouter>
+
+      <div className='container'>
+        <h1>munroGo</h1>
+        <hr />
+          <h2>Hey {account?.username || 'stranger'}</h2>
+        <hr />
+
+        <div>{account ? <Logout /> : showAuthForms()}</div>
     </div>
+    </>
+
   );
 }
 
