@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from "./main";
 import "./App.css";
 import Login from "./Login";
-import TestModal from './test';
 import Signup from './Signup';
 import Munros from './munro'
 
