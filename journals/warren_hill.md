@@ -45,7 +45,10 @@ Thursday, March 30th, 2023
 
 Week 3
 Monday, April 3rd, 2023
--
+- refactor Munro detail view w Wiki + weather API
+- got feedback on endpoints
+- created models for climbs  + modified reviews models
+- started climb endpoints
 
 Tuesday, April 4th, 2023
 -refactor Munro detail view w Wiki + weather API
