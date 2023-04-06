@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Construct from "./Construct.js";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from "./Login";
 import Logout from "./Logout";
 import Signup from "./Signup.jsx";
@@ -8,11 +8,7 @@ import "./App.css";
 import { useGetAccountQuery } from "./services/auth";
 
 function App() {
-  const [launch_info, setLaunchInfo] = useState([]);
-  const [error, setError] = useState(null);
-  const [login, setLogin] = useState([]);
-  const [logout, setLogout] = useState([]);
-  const [signup, setSignup] = useState([]);
+
   const { data: account } = useGetAccountQuery();
 
 
@@ -28,6 +24,12 @@ function App() {
   )
 
   return (
+    <>
+     <BrowserRouter>
+     <Route path="/" element={<Main />} />
+
+     </BrowserRouter>
+
       <div className='container'>
         <h1>munroGo</h1>
         <hr />
@@ -36,6 +38,7 @@ function App() {
 
         <div>{account ? <Logout /> : showAuthForms()}</div>
     </div>
+    </>
 
   );
 }
