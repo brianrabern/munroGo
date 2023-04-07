@@ -4,8 +4,10 @@ import { useGetMunrosQuery } from "./services/munros";
 
 const Munros = () => {
   const { data, isLoading } = useGetMunrosQuery();
+
   if (isLoading) return <div>Loading...</div>;
-  if (data?.length === 0) return <div>No munros :(</div>;
+  if (data?.length === 0) return <div>No munros</div>;
+
 
 
 const region_names = {
@@ -29,8 +31,9 @@ const region_names = {
     '17': 'Skye and Mull',
 };
 
-  return (
-       <table className="table table-striped">
+
+
+  return (  <table className="table table-striped">
             <thead>
                 <tr>
                     <th key="hillname">Hillname</th>
@@ -56,12 +59,6 @@ const region_names = {
                 })}
             </tbody>
         </table>
-
-    // <ul>
-    //   {data.map((munro) => (
-    //     <li key={munro.id}>{munro.region}</li>
-    //   ))}
-    // </ul>
   );
 };
 

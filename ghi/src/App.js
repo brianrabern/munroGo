@@ -4,6 +4,7 @@ import "./App.css";
 import Login from "./Login";
 import Signup from './Signup';
 import Munros from './munro'
+import ClimbedMunros from './climbs';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/munros" element={<Munros />} />
+          <Route path="/climbs" element={<ClimbedMunros />} />
         </Routes>
       </BrowserRouter>
     </>
