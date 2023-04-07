@@ -6,6 +6,7 @@ import {
   handlePasswordConfirmationChange,
   handleNameChange,
   reset,
+  error
 } from "./features/auth/signupSlice";
 import { useSignupMutation } from "./services/auth";
 import ErrorNotification from "./ErrorNotification";
@@ -20,7 +21,7 @@ const Signup = () => {
     const handleSubmit = (e) => {
         e.preventDefault ()
         if (fields.password != fields.passwordConfirmation) {
-            dispatch(errorMessage('Password does not mathc confirmation'))
+            dispatch(error('Password does not match confirmation'))
             return;
         }
         const { username, password, full_name } = fields;
@@ -28,6 +29,7 @@ const Signup = () => {
             password,
             full_name,
         })
+
         dispatch(reset())
         console.log('handleSubmit');
     }

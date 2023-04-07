@@ -1,11 +1,11 @@
 function ErrorNotification(props) {
-    if (!props.error) {
-        return null;
-    }
+    // if (!props.error) {
+    //     return null;
+    // }
 
     return (
-        <div className="notification is-danger">
-            {props.error}
+        <div className="alert alert-danger">
+            {props.children}
         </div>
     );
 }
