@@ -21,14 +21,27 @@ export const munrosApi = createApi({
       query: () => `/api/account/climbs/`,
       transformResponse: (response) => response.climbs,
       providesTags: (result) => {
-         const tags = [{ type: "Climbs", id: "LIST" }];
-         if (!result) return tags;
-         return [...result.map(({ id }) => ({ type: "Climbs", id })), ...tags];
-       },
-     }),
+        const tags = [{ type: "Climbs", id: "LIST" }];
+        if (!result) return tags;
+        return [...result.map(({ id }) => ({ type: "Climbs", id })), ...tags];
+      },
+    }),
+
+    createClimb: builder.mutation({
+      query: (body) => {
+        console.log({ ...body, difficulty: Number(body.difficulty) });
+        return {
+          url: `/api/munros/${body.munro_id}/climbs`,
+          method: "POST",
+          body: { ...body, difficulty: Number(body.difficulty) },
+        };
+      },
+      invalidatesTags: [{ type: "Things", id: "LIST" }],
+    }),
   }),
 });
 
-export const {useGetMunrosQuery,useGetClimbsQuery} = munrosApi;
+export const { useGetMunrosQuery, useGetClimbsQuery, useCreateClimbMutation } =
+  munrosApi;
 
 // export const {useGetMunrosQuery, useGetClimbsQuery} = munrosApi;
