@@ -11,3 +11,7 @@ March 30, 2023: added wikipedia and weather api
 April 3, 2023: recreated, refactored, and added endpoints, refactored Munro wiki and weather detail views 
 
 April 4, 2023: finished RESTful endpoints, got feedback from riley
+
+April 5, 2023: login auth, set up redux, started logout func
+
+April 6, 2023: login, signup, list of munros pages created and working. began munro list page
