@@ -14,7 +14,7 @@ function Main() {
       <Link type="button" className="btn btn-success" to="/signup">
         Signup
       </Link>
-      
+
     </div>
   );
 }
