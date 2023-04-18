@@ -68,3 +68,13 @@ Thursday, April 6th, 2023
 - set up landing page
 - added link buttons for sign up and login screens
 - began munro list page
+
+Friday, April 7th, 2023
+- finish munro list
+- user munro list
+
+Monday, April 17th, 2023
+- munro detail pages
+- started adding a climb
+
+Tuesday, April 18th, 2023
