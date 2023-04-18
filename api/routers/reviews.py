@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from models.reviews import Review, ReviewParams, ReviewsList
+from models.reviews import Review, ReviewParams, ReviewsList, ReviewParamsWithAccountWithId
 from queries.reviews import ReviewsQueries
 from authenticator import authenticator
 
@@ -30,39 +30,30 @@ def get_reviews_for_account(
     "/api/munros/{munro_id}/reviews/", response_model=Review, tags=["Reviews"]
 )
 def create_review(
+    content: ReviewParams,
     munro_id: str,
-    comment: str,
-    rating: int,
     reviews: ReviewsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    params = {
-        "munro_id": munro_id,
-        "account_id": str(account_data["id"]),
-        "comment": comment,
-        "rating": rating,
-    }
-    return reviews.create_one(params)
+    account = account_data["id"]
+    munro = munro_id
+    return reviews.create_one(account, munro, content)
 
 
 @router.put(
     "/api/munros/{munro_id}/reviews/{review_id}/",
     response_model=Review,
-    tags=["Reviews"],
+    tags=["Reviews"]
 )
 def update_review(
-    comment: str,
-    rating: int,
+    content: ReviewParams,
+    munro_id: str,
     review_id: str,
     reviews: ReviewsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    params = {
-        "account_id": str(account_data["id"]),
-        "comment": comment,
-        "rating": rating,
-    }
-    return reviews.update_review(review_id, params)
+    # munro = munro_id
+    return reviews.update_review(review_id, content)
 
 
 @router.delete(

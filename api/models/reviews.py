@@ -4,15 +4,19 @@ from datetime import datetime
 
 
 class ReviewParams(BaseModel):
-    munro_id: str
     comment: str
     rating: int
-    date: datetime = datetime.now()
+    # date: datetime = datetime.now()
+
+class ReviewParamsWithAccount(ReviewParams):
     account_id: str
 
 
+class ReviewParamsWithAccountWithId(ReviewParamsWithAccount):
+    munro_id: str
 
-class Review(ReviewParams):
+
+class Review(ReviewParamsWithAccountWithId):
     id: str
 
 
