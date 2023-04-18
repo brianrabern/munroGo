@@ -29,11 +29,14 @@ export const munrosApi = createApi({
 
     createClimb: builder.mutation({
       query: (body) => {
-        console.log({ ...body, difficulty: Number(body.difficulty) });
+        Object.keys(body).forEach((key) =>
+          console.log(`${key}`, typeof body[key])
+        );
         return {
           url: `/api/munros/${body.munro_id}/climbs`,
           method: "POST",
-          body: { ...body, difficulty: Number(body.difficulty) },
+          body: body,
+          // body: { ...body, difficulty: Number(body.difficulty) },
         };
       },
       invalidatesTags: [{ type: "Things", id: "LIST" }],

@@ -3,6 +3,7 @@ from models.climbs import ClimbsList
 from queries.climbs import Climb, ClimbsQueries
 from authenticator import authenticator
 from datetime import datetime
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -27,30 +28,41 @@ def get_all_climbs_for_munro(
 
     return {"climbs": climbs}
 
+class testModel(BaseModel):
+
+    munro_id: str
+    datetime: str
+    duration: str
+    difficulty: int
+    weather: str
+    notes: str
 
 @router.post(
     "/api/munros/{munro_id}/climbs/", response_model=Climb, tags=["Climbs"]
 )
+# def create_climb(
+#     content: testModel
+# ):
+    # print("TESTING:", **content)
 def create_climb(
-    munro_id: str,
-    datetime: datetime,
-    duration: str,
-    difficulty: int,
-    weather: str,
-    notes: str,
+    content: testModel,
     climbs: ClimbsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
+   
+    print(content.munro_id)
     params = {
-        "munro_id": munro_id,
+        "munro_id": content.munro_id,
         "account_id": str(account_data["id"]),
-        "duration": duration,
-        "datetime": datetime,
-        "difficulty": difficulty,
-        "weather": weather,
-        "notes": notes,
+        "duration": content.duration,
+        "datetime": content.datetime,
+        "difficulty": content.difficulty,
+        "weather": content.weather,
+        "notes": content.notes,
     }
+    print("-----------:", params)
     return climbs.create_one(params)
+
 
 
 @router.get(

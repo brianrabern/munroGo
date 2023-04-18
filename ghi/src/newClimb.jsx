@@ -18,7 +18,7 @@ const NewClimb = () => {
   const fields = newClimb.fields;
   // console.log(createClimb);
   // console.log("---------:", newClimb);
-  // console.log("fields:", newClimb.fields);
+  console.log("fields:", newClimb.fields);
 
   return (
     <form
@@ -49,7 +49,7 @@ const NewClimb = () => {
           Date
         </label>
         <input
-          type="text"
+          type="datetime"
           className="form-control"
           id="datetime__field"
           placeholder="Date"

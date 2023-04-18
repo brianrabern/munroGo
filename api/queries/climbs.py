@@ -25,6 +25,7 @@ class ClimbsQueries(Queries):
 
     def create_one(self, climb: ClimbParams) -> Climb:
         self.collection.insert_one(climb)
+        print("***************************************************:", climb)
         climb["id"] = str(climb["_id"])
         return Climb(**climb)
 
