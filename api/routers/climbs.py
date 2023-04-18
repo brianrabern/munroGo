@@ -1,9 +1,8 @@
 from fastapi import APIRouter, Depends
-from models.climbs import ClimbsList
+from models.climbs import ClimbsList, ClimbParams
 from queries.climbs import Climb, ClimbsQueries
 from authenticator import authenticator
-from datetime import datetime
-from pydantic import BaseModel
+
 
 router = APIRouter()
 
@@ -18,7 +17,11 @@ def get_climbs_for_account(
     return {"climbs": climbs}
 
 
-@router.get("/api/munros/{munro_id}/climbs/", response_model=ClimbsList, tags=["Climbs"])
+@router.get(
+    "/api/munros/{munro_id}/climbs/",
+    response_model=ClimbsList,
+    tags=["Climbs"],
+)
 def get_all_climbs_for_munro(
     munro_id: str,
     climbs: ClimbsQueries = Depends(),
@@ -28,41 +31,46 @@ def get_all_climbs_for_munro(
 
     return {"climbs": climbs}
 
-class testModel(BaseModel):
-
-    munro_id: str
-    datetime: str
-    duration: str
-    difficulty: int
-    weather: str
-    notes: str
 
 @router.post(
     "/api/munros/{munro_id}/climbs/", response_model=Climb, tags=["Climbs"]
 )
-# def create_climb(
-#     content: testModel
-# ):
-    # print("TESTING:", **content)
 def create_climb(
-    content: testModel,
+    content: ClimbParams,
+    munro_id: str,
     climbs: ClimbsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-   
-    print(content.munro_id)
-    params = {
-        "munro_id": content.munro_id,
-        "account_id": str(account_data["id"]),
-        "duration": content.duration,
-        "datetime": content.datetime,
-        "difficulty": content.difficulty,
-        "weather": content.weather,
-        "notes": content.notes,
-    }
-    print("-----------:", params)
-    return climbs.create_one(params)
+    account = account_data["id"]
+    munro = munro_id
+    return climbs.create_one(account, munro, content)
 
+
+# @router.post(
+#     "/api/munros/{munro_id}/climbs/", response_model=Climb, tags=["Climbs"]
+# )
+# def create_climb(
+#     munro_id: str,
+#     datetime: str,
+#     duration: int,
+#     difficulty: int,
+#     weather: str,
+#     notes: str,
+#     climbs: ClimbsQueries = Depends(),
+#     account_data: dict = Depends(authenticator.get_current_account_data),
+# ):
+
+#     params = {
+#         "munro_id": munro_id,
+#         "account_id": str(account_data["id"]),
+#         "datetime": datetime,
+#         "duration": duration,
+#         "difficulty": difficulty,
+#         "weather": weather,
+#         "notes": notes,
+#     }
+#     print("-----------:", params)
+#     return climbs.create_one(params)
 
 
 @router.get(
@@ -76,9 +84,7 @@ def get_one_climb(
     return climbs.get_one(climb_id)
 
 
-@router.delete(
-    "/api/climbs/{climb_id}/", response_model=bool, tags=["Climbs"]
-)
+@router.delete("/api/climbs/{climb_id}/", response_model=bool, tags=["Climbs"])
 def delete_one_climb(
     climb_id: str,
     climbs: ClimbsQueries = Depends(),

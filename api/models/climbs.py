@@ -1,19 +1,26 @@
 from pydantic import BaseModel
 from typing import List, Optional
+
 from datetime import datetime
 
 
 class ClimbParams(BaseModel):
-    munro_id: str
-    account_id: str
     datetime: datetime
-    duration: Optional[str]
-    difficulty: Optional[int]
-    weather: Optional[str]
-    notes: Optional[str]
+    duration: str
+    difficulty: int
+    weather: str
+    notes: str
 
 
-class Climb(ClimbParams):
+class ClimbParamsWithAccount(ClimbParams):
+    account_id: str
+
+
+class ClimbParamsWithAccountWithId(ClimbParamsWithAccount):
+    munro_id: str
+
+
+class Climb(ClimbParamsWithAccountWithId):
     id: str
 
 

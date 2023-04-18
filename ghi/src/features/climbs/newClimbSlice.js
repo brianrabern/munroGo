@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   fields: {
-    munro_id: "",
     datetime: "",
     duration: "",
     difficulty: "",
@@ -16,9 +15,9 @@ export const newClimbSlice = createSlice({
   name: "newClimb",
   initialState,
   reducers: {
-    handleIDChange: (state, action) => {
-      state.fields.munro_id = action.payload;
-    },
+    // handleIDChange: (state, action) => {
+    //   state.fields.munro_id = action.payload;
+    // },
     handleDateChange: (state, action) => {
       state.fields.datetime = action.payload;
     },
@@ -43,7 +42,7 @@ export const newClimbSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-  handleIDChange,
+  // handleIDChange,
   handleDateChange,
   handleDurationChange,
   handleDifficultyChange,
