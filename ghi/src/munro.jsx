@@ -63,4 +63,3 @@ const Munros = () => {
 };
 
 export default Munros;
-// 642b5fd4ff9246c6766cb5cf

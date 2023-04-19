@@ -44,4 +44,3 @@ export const munrosApi = createApi({
 export const { useGetMunrosQuery, useGetClimbsQuery, useCreateClimbMutation } =
   munrosApi;
 
-// export const {useGetMunrosQuery, useGetClimbsQuery} = munrosApi;
