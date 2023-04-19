@@ -6,7 +6,7 @@ from datetime import datetime
 class ReviewParams(BaseModel):
     comment: str
     rating: int
-    # date: datetime = datetime.now()
+    date: datetime = datetime.now()
 
 class ReviewParamsWithAccount(ReviewParams):
     account_id: str
