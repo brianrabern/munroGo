@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { Marker } from "@react-google-maps/api";
 import { useGetMunrosQuery } from "./services/munros";
 
 const containerStyle = {
@@ -9,7 +8,7 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 56.81691839,
+  lat: 57.1,
   lng: -4.1826492694,
 };
 
@@ -20,7 +19,8 @@ function Map() {
     googleMapsApiKey: MAPS_API,
   });
 
-  const [map, setMap] = React.useState(null);
+  const [map, setMap] = useState(null);
+  const [markers, setMarkers] = useState([]);
 
   const { data, isLoading } = useGetMunrosQuery();
 
@@ -29,7 +29,6 @@ function Map() {
   };
 
   const onLoad = React.useCallback(function callback(map) {
-    // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center);
 
     setMap(map);
@@ -39,32 +38,47 @@ function Map() {
     setMap(null);
   }, []);
 
+  useEffect(() => {
+    if (data) {
+      const newMarkers = data.map((munro) => ({
+        id: munro.id,
+        position: {
+          lat: Number(munro.latitude),
+          lng: Number(munro.longitude),
+        },
+        title: munro.hillname,
+      }));
+
+      setMarkers(newMarkers);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (map && markers.length > 0) {
+      markers.forEach((marker) => {
+        const { id, position, title } = marker;
+        const newMarker = new window.google.maps.Marker({
+          position,
+          map,
+          title,
+        });
+
+        newMarker.addListener("click", () => {
+          handleClick(marker);
+        });
+      });
+    }
+  }, [map, markers]);
+
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={8}
+      zoom={7.9}
+      mapTypeId={"terrain"}
       onLoad={onLoad}
       onUnmount={onUnmount}
-    >
-      {data &&
-        data.map((munro) => {
-          return (
-            <Marker
-              clickable={true}
-              key={munro.id}
-              title={munro.hillname}
-              onClick={() => {
-                handleClick(munro);
-              }}
-              position={{
-                lat: Number(munro.latitude),
-                lng: Number(munro.longitude),
-              }}
-            />
-          );
-        })}
-    </GoogleMap>
+    />
   ) : (
     <></>
   );
