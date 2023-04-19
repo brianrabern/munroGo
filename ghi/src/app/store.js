@@ -9,7 +9,6 @@ import newClimbReducer from "../features/climbs/newClimbSlice";
 import { reviewsApi } from "../services/review";
 import newReviewReducer from "../features/reviews/newReviewSlice";
 import { ClimbsByAccountApi } from "../services/ClimbsByAccount";
-import ClimbsByAccount from "../ClimbsByAccount";
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +22,7 @@ export const store = configureStore({
     [munroDetailApi.reducerPath]: munroDetailApi.reducer,
     [reviewsApi.reducerPath]: reviewsApi.reducer,
     [ClimbsByAccountApi.reducerPath]: ClimbsByAccountApi.reducer,
+    [reviewsApi.reducerPath]: reviewsApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>

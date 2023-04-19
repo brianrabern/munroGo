@@ -9,6 +9,7 @@ import Munro from "./munrodetail";
 import NewClimb from "./newClimb";
 import NewReview from "./NewReview";
 import ClimbsByAccount from "./ClimbsByAccount";
+import ReviewsByAccount from "./reviews";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/climbs" element={<ClimbedMunros />} />
           <Route path="/munros/:munro_id/reviews/" element={<NewReview />} />
           <Route path="/account/climbs" element={<ClimbsByAccount />} />
+          <Route path="account/reviews" element={<ReviewsByAccount />} />
         </Routes>
       </BrowserRouter>
     </>
