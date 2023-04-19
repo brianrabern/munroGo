@@ -1,5 +1,6 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+// require("dotenv").config();
 
 const containerStyle = {
   width: "400px",
@@ -7,14 +8,15 @@ const containerStyle = {
 };
 
 const center = {
-  lat: 56.4907,
-  lng: -4.2026,
+  lat: 56.370717,
+  lng: -4.535753,
 };
 
 function MyComponent() {
+  const MAPS_API = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: MAPS_API, //"AIzaSyA9HU2NSu_99owfjC9FbF6EVtFQltW4ob0", //process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
   });
 
   const [map, setMap] = React.useState(null);
@@ -35,7 +37,7 @@ function MyComponent() {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={10}
+      zoom={8}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >

@@ -16,6 +16,7 @@ services:
       MONGO_URL: mongodb://admin:password@mongo
       SIGNING_KEY: ${SIGNING_KEY}
       OPEN_WEATHER_API_KEY: ${OPEN_WEATHER_API_KEY}
+
   mongo:
     image: mongo:6
     volumes:
@@ -52,3 +53,4 @@ services:
       HOST: "0.0.0.0"
       PUBLIC_URL: http://localhost:3000
       REACT_APP_SAMPLE_SERVICE_API_HOST: http://localhost:8000
+      REACT_APP_GOOGLE_MAPS_API_KEY: ${REACT_APP_GOOGLE_MAPS_API_KEY}
