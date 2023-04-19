@@ -6,15 +6,20 @@ import { munrosApi } from "../services/munros";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { munroDetailApi } from "../services/munrodetail";
 import newClimbReducer from "../features/climbs/newClimbSlice";
+import { reviewsApi } from "../services/review";
+import newReviewReducer from "../features/reviews/newReviewSlice"
 
 export const store = configureStore({
   reducer: {
     login: loginReducer,
     signup: signupReducer,
     newClimb: newClimbReducer,
+    newReview: newReviewReducer,
     [authApi.reducerPath]: authApi.reducer,
     [munrosApi.reducerPath]: munrosApi.reducer,
     [munroDetailApi.reducerPath]: munroDetailApi.reducer,
+    [reviewsApi.reducerPath]: reviewsApi.reducer,
+
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -22,6 +27,7 @@ export const store = configureStore({
       authApi.middleware,
       munrosApi.middleware,
       munroDetailApi.middleware,
+      reviewsApi.middleware,
     ]),
 });
 
