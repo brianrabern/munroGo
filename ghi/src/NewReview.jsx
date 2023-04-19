@@ -15,19 +15,18 @@ const NewReview = () => {
   const fields = newReview.fields;
   const { munro_id } = useParams();
 
-  const currentDate = new Date();
-  const isoDate = currentDate.toISOString();
+  // const currentDate = new Date();
+  // const isoDate = currentDate.toISOString();
 
   let review = {
     munro_id: munro_id,
     body: {
-    //   date: "2023-04-18T23:48:48.085Z",
+      //   date: "2023-04-18T23:48:48.085Z",
       comment: fields.comment,
       rating: fields.rating,
     },
   };
-  
-  console.log("##################",review);
+
   return (
     <>
       {" "}
@@ -39,7 +38,6 @@ const NewReview = () => {
           dispatch(reset());
         }}
       >
-
         <div className="mb-3">
           <label htmlFor="comment__field" className="form-label">
             Comment

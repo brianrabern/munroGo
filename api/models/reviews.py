@@ -8,6 +8,7 @@ class ReviewParams(BaseModel):
     rating: int
     date: datetime = datetime.now()
 
+
 class ReviewParamsWithAccount(ReviewParams):
     account_id: str
 

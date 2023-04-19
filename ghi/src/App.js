@@ -21,7 +21,7 @@ function App() {
           <Route path="/munros/:munro_id" element={<Munro />} />
           <Route path="/munros/:munro_id/climbs" element={<NewClimb />} />
           <Route path="/climbs" element={<ClimbedMunros />} />
-          <Route path="/munros/:munro_id/reviews" element={<NewReview />} />
+          <Route path="/munros/:munro_id/reviews/" element={<NewReview />} />
         </Routes>
       </BrowserRouter>
     </>
