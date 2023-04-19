@@ -1,5 +1,7 @@
 import React from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import { Marker } from "@react-google-maps/api";
+import { useGetMunrosQuery } from "./services/munros";
 
 const containerStyle = {
   width: "100%",
@@ -20,6 +22,12 @@ function Map() {
 
   const [map, setMap] = React.useState(null);
 
+  const { data, isLoading } = useGetMunrosQuery();
+
+  const handleClick = (munro) => {
+    window.location.href = `/munros/${munro.id}`;
+  };
+
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center);
@@ -36,12 +44,27 @@ function Map() {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={8}
+      zoom={6}
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-      {/* Child components, such as markers, info windows, etc. */}
-      <></>
+      {data &&
+        data.map((munro) => {
+          return (
+            <Marker
+              clickable={true}
+              key={munro.id}
+              title={munro.hillname}
+              onClick={() => {
+                handleClick(munro);
+              }}
+              position={{
+                lat: Number(munro.latitude),
+                lng: Number(munro.longitude),
+              }}
+            />
+          );
+        })}
     </GoogleMap>
   ) : (
     <></>
