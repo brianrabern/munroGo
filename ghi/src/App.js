@@ -10,7 +10,7 @@ import NewClimb from "./newClimb";
 import NewReview from "./NewReview";
 import ClimbsByAccount from "./ClimbsByAccount";
 import ReviewsByAccount from "./reviews";
-import MyComponent from "./mapPractice";
+import Map from "./map";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Route path="/munros/:munro_id/reviews/" element={<NewReview />} />
           <Route path="/account/climbs" element={<ClimbsByAccount />} />
           <Route path="/account/reviews" element={<ReviewsByAccount />} />
-          <Route path="/map" element={<MyComponent />} />
+          <Route path="/map" element={<Map />} />
         </Routes>
       </BrowserRouter>
     </>
