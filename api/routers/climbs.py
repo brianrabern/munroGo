@@ -46,33 +46,6 @@ def create_climb(
     return climbs.create_one(account, munro, content)
 
 
-# @router.post(
-#     "/api/munros/{munro_id}/climbs/", response_model=Climb, tags=["Climbs"]
-# )
-# def create_climb(
-#     munro_id: str,
-#     datetime: str,
-#     duration: int,
-#     difficulty: int,
-#     weather: str,
-#     notes: str,
-#     climbs: ClimbsQueries = Depends(),
-#     account_data: dict = Depends(authenticator.get_current_account_data),
-# ):
-
-#     params = {
-#         "munro_id": munro_id,
-#         "account_id": str(account_data["id"]),
-#         "datetime": datetime,
-#         "duration": duration,
-#         "difficulty": difficulty,
-#         "weather": weather,
-#         "notes": notes,
-#     }
-#     print("-----------:", params)
-#     return climbs.create_one(params)
-
-
 @router.get(
     "/api/munros/climbs/{climb_id}/", response_model=Climb, tags=["Climbs"]
 )
