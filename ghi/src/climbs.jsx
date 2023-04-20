@@ -1,6 +1,7 @@
 import React from "react";
 import { useGetMunrosQuery, useGetClimbsQuery } from "./services/munros";
 import { useGetAccountQuery } from "./services/auth";
+// import Progress from "./Progress";
 
 const ClimbedMunros = () => {
   const { data: account } = useGetAccountQuery();
@@ -33,15 +34,29 @@ const ClimbedMunros = () => {
           </tr>
         </thead>
         <tbody>
-          {filtered_data.map((munro) => {
+          {filtered_data.map((munro, index) => {
             return (
-              <tr key={munro}>
+              <tr key={index}>
                 <td>{munro}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
+      {/* <Progress
+        progData={[
+          { key: 1, name: "A", value: 80, color: "#ff0000" },
+          { key: 2, name: "B", value: 45, color: "#00ff00" },
+          { key: 3, name: "C", value: 25, color: "#0000ff" },
+        ]}
+        cx={150}
+        cy={200}
+        iR={50}
+        oR={100}
+        value={50}
+      >
+        {" "}
+      </Progress> */}
     </>
   );
 };

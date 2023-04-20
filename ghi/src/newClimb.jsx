@@ -2,15 +2,16 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  // handleIDChange,
   handleDateChange,
   handleDurationChange,
   handleDifficultyChange,
   handleWeatherChange,
   handleNotesChange,
+  handleImageUpload,
   reset,
 } from "./features/climbs/newClimbSlice";
 import { useCreateClimbMutation } from "./services/munros";
+import { Buffer } from "buffer";
 
 const NewClimb = () => {
   const dispatch = useDispatch();
@@ -27,7 +28,24 @@ const NewClimb = () => {
       difficulty: fields.difficulty,
       weather: fields.weather,
       notes: fields.notes,
+      image: fields.image,
     },
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    // read image file as array buffer
+    reader.readAsArrayBuffer(file);
+
+    reader.onload = () => {
+      //convert array buffer to base64 string
+      const binaryData = new Uint8Array(reader.result);
+      const base64Data = Buffer.from(binaryData).toString("base64");
+      console.log(base64Data);
+      // dispatch action to update store
+      dispatch(handleImageUpload(base64Data));
+    };
   };
 
   return (
@@ -41,22 +59,6 @@ const NewClimb = () => {
           dispatch(reset());
         }}
       >
-        {/* <div className="mb-3">
-        <label htmlFor="id__field" className="form-label">
-          Munro ID
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          id="id__field"
-          placeholder="Munro ID"
-          tabIndex={1}
-          value={fields.munro_id}
-          onChange={(e) => {
-            dispatch(handleIDChange(e.target.value));
-          }}
-        />
-      </div> */}
         <div className="mb-3">
           <label htmlFor="datetime__field" className="form-label">
             Date
@@ -106,22 +108,7 @@ const NewClimb = () => {
             dispatch(handleDifficultyChange(parseInt(e.target.value)));
           }}
         ></input>
-        {/* <div className="mb-3">
-          <label htmlFor="difficulty__field" className="form-label">
-            Difficulty
-          </label>
-          <input
-            type="number"
-            className="form-control"
-            id="difficulty__field"
-            placeholder="Difficulty"
-            tabIndex={4}
-            value={fields.difficulty}
-            onChange={(e) => {
-              dispatch(handleDifficultyChange(e.target.value));
-            }}
-          />
-        </div> */}
+
         <div className="mb-3">
           <label htmlFor="weather__field" className="form-label">
             Weather
@@ -153,6 +140,20 @@ const NewClimb = () => {
             onChange={(e) => {
               dispatch(handleNotesChange(e.target.value));
             }}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="image__field" className="form-label">
+            Add photo
+          </label>
+          <input
+            type="file"
+            className="form-control"
+            id="image__field"
+            placeholder="Photo"
+            tabIndex={7}
+            accept="image/*"
+            onChange={handleFileChange}
           />
         </div>
         <button type="submit" className="btn btn-success">
