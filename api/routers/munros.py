@@ -27,8 +27,18 @@ def get_one_munro(
 ):
     munro = munros.get_one(munro_id=munro_id)
     hillname = munro.hillname
-    summary = wikipedia.summary(hillname)
-    images = wikipedia.page(hillname).images
+    summary = ""
+    images = []
+    try:
+        summary = wikipedia.summary(hillname)
+        images = wikipedia.page(hillname).images
+    except Exception as e:
+        print(f"Error fetching data from Wikipedia: {e}")
+        summary = """"Lang may yer lum reek" as ye climb a Munro
+        in the Scottish highlands, a hill that's at least 3,000ft (914m) high.
+        It's a bonnie challenge for hillwalkers, a chance tae tak' in the
+        heather, bens and lochs o' the great outdoors, wi' a wee dram o'
+        whisky at the summit. So dinna be afeared, and gie it laldy!"""
     weather = munros.get_weather(munro_id)
     munro_data = munro.dict()
     munro_data["summary"] = summary

@@ -35,6 +35,11 @@ const Munro = () => {
         filteredImages.push(images[i]);
       }
     }
+    if (filteredImages.length === 0) {
+      filteredImages.push(
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/McCulloch_Horatio_Loch_Lomond.jpg/2560px-McCulloch_Horatio_Loch_Lomond.jpg"
+      );
+    }
     return filteredImages;
   }
 
@@ -42,7 +47,7 @@ const Munro = () => {
     <>
       <h2> {data.hillname}</h2>
       <img
-        src={data.images[1]}
+        src={filterImages(data.images)[0]}
         className="rounded"
         alt={data.hillname}
         style={{ width: "400px", height: "auto" }}
