@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetMunroDetailQuery } from "./services/munrodetail";
+import { Link } from "react-router-dom";
 
 const Munro = () => {
   const { munro_id } = useParams();
@@ -45,6 +46,8 @@ const Munro = () => {
 
   return (
     <>
+      <h1><Link type="button" className="btn btn-success" to="/dashboard"> Dashboard </Link></h1>
+      <h1><Link type="button" className="btn btn-success" to="/munros"> Munros </Link></h1>
       <h2> {data.hillname}</h2>
       <img
         src={filterImages(data.images)[0]}
@@ -62,6 +65,7 @@ const Munro = () => {
             <th>Summary</th>
             <th>Weather conditions</th>
             <th>Temperature</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -80,6 +84,8 @@ const Munro = () => {
             <td>
               {Math.floor((data.weather.main.temp - 273.15) * 1.8 + 32)}&#176;F
             </td>
+            <td> <Link type="button" className="btn btn-success" to="climbs/">Add Climbs </Link> &nbsp;
+                 <Link type="button" className="btn btn-success" to="reviews/">Add Reviews </Link></td>
           </tr>
         </tbody>
       </table>

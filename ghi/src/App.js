@@ -11,6 +11,7 @@ import NewReview from "./NewReview";
 import ClimbsByAccount from "./ClimbsByAccount";
 import ReviewsByAccount from "./reviews";
 import Map from "./map";
+import Dashboard from "./dashboard";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/munros" element={<Munros />} />
           <Route path="/munros/:munro_id" element={<Munro />} />
           <Route path="/munros/:munro_id/climbs" element={<NewClimb />} />
