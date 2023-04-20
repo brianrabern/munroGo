@@ -6,20 +6,24 @@ import {
   reset,
 } from "./features/auth/loginSlice";
 import { useLoginMutation } from "./services/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [login] = useLoginMutation();
   const { fields } = useSelector((state) => state.login);
+  const navigate = useNavigate(); // Add useNavigate hook
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    // Make handleSubmit async
     e.preventDefault();
     console.log("handleSubmit");
     console.log({ fields });
-    login(fields);
+    await login(fields); // Wait for login function to complete
     dispatch(reset());
+    navigate("/dashboard"); // Navigate to dashboard route
   };
+
   return (
     <div className="card">
       <div className="card-body">
