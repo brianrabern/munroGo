@@ -30,7 +30,6 @@ function App() {
           <Route path="/account/climbs" element={<ClimbsByAccount />} />
           <Route path="/account/reviews" element={<ReviewsByAccount />} />
           <Route path="/map" element={<Map />} />
-          <Route path="/listexample" element={<Example />} />
         </Routes>
       </BrowserRouter>
     </>
