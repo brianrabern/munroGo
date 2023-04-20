@@ -1,12 +1,33 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetMunroDetailQuery } from "./services/munrodetail";
+import MapComp from "./MapComp";
 
 const Munro = () => {
   const { munro_id } = useParams();
   const { data, isLoading } = useGetMunroDetailQuery(munro_id);
 
   if (isLoading) return <div>Loading...</div>;
+
+  //map stuff
+  let center = {
+    lat: Number(data.latitude),
+    lng: Number(data.longitude),
+  };
+  let zoom = 8;
+  let markers = [
+    {
+      id: data.id,
+      position: {
+        lat: Number(data.latitude),
+        lng: Number(data.longitude),
+      },
+      title: data.hillname,
+    },
+  ];
+  let width = "100%";
+  let height = "400px";
+  const handleClick = () => {};
 
   const region_names = {
     "01": "Firth of Clyde to Strathtay",
@@ -35,18 +56,42 @@ const Munro = () => {
         filteredImages.push(images[i]);
       }
     }
+    if (filteredImages.length === 0) {
+      filteredImages.push(
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/McCulloch_Horatio_Loch_Lomond.jpg/2560px-McCulloch_Horatio_Loch_Lomond.jpg"
+      );
+    }
     return filteredImages;
   }
 
   return (
     <>
       <h2> {data.hillname}</h2>
-      <img
-        src={data.images[1]}
-        className="rounded"
-        alt={data.hillname}
-        style={{ width: "400px", height: "auto" }}
-      ></img>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm">
+            {" "}
+            <img
+              src={filterImages(data.images)[0]}
+              className="rounded"
+              alt={data.hillname}
+              style={{ width: "400px", height: "400px" }}
+            ></img>
+          </div>
+          <div className="col-sm">
+            {" "}
+            <MapComp
+              center={center}
+              zoom={zoom}
+              markers={markers}
+              width={width}
+              height={height}
+              handleClick={handleClick}
+            />
+          </div>
+        </div>
+      </div>
+
       <table className="table table-striped">
         <thead>
           <tr>
@@ -78,7 +123,6 @@ const Munro = () => {
           </tr>
         </tbody>
       </table>
-      visibility: {data.weather.visibility}m
     </>
   );
 };

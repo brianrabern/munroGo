@@ -10,6 +10,7 @@ class ClimbParams(BaseModel):
     difficulty: int
     weather: str
     notes: str
+    image: Optional[str] = None
 
 
 class ClimbParamsWithAccount(ClimbParams):
