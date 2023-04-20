@@ -6,6 +6,7 @@ import {
   reset,
 } from "./features/auth/loginSlice";
 import { useLoginMutation } from "./services/auth";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const Login = () => {
           </button>
         </form>
       </div>
+      <Link to={`/munros/`}>munros</Link>
     </div>
   );
 };
