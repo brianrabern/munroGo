@@ -66,71 +66,142 @@ const Munro = () => {
   }
 
   return (
-    <>
-      <h1><Link type="button" className="btn btn-success" to="/dashboard"> Dashboard </Link></h1>
-      <h1><Link type="button" className="btn btn-success" to="/munros"> Munros </Link></h1>
-      <h2> {data.hillname}</h2>
-      <div className="container">
-        <div className="row">
-          <div className="col-sm">
-            {" "}
-            <img
-              src={filterImages(data.images)[0]}
-              className="rounded"
-              alt={data.hillname}
-              style={{ width: "400px", height: "400px" }}
-            ></img>
+    <div classclassName="flex min-h-screen pt-[30px] px-[40px]">
+      <h1>
+        <Link type="button" className="btn btn-success" to="/dashboard">
+          {" "}
+          Dashboard{" "}
+        </Link>
+      </h1>
+      <h1>
+        <Link type="button" className="btn btn-success" to="/munros">
+          {" "}
+          Munros{" "}
+        </Link>
+      </h1>
+      <div className="min-w-full">
+        <h1
+          className="text-[#00153B] text-[20px] leading-[40px] font-semibold"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          {data.hillname}
+        </h1>
+
+        <div className="mt-[20px] grid grid-cols-2 gap-[20px]">
+          <div
+            key="1"
+            className="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y"
+          >
+            <div className="pt-[15px] px-[25px] pb-[25px]">
+              <div className="flex justify-end">
+                <div className="bg-[#F6F6F7] rounded-[20px] flex justify-center align-center px-[12px]"></div>
+              </div>
+
+              <div
+                style={{
+                  width: "400px",
+                  height: "400px",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <p className="text-[#00153B] text-[19px] leading-[24px] font-bold">
+                  <h1
+                    className="text-[#00153B] text-[20px] leading-[40px] font-semibold"
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    Information
+                  </h1>
+                  <img
+                    src={filterImages(data.images)[0]}
+                    // className="object-center"
+                    alt={data.hillname}
+                  ></img>
+                </p>
+              </div>
+
+              <div>
+                <p className="text-[#717F87] text-[18px] leading-[28px] font-medium">
+                  {region_names[data.region.slice(0, -1)]}
+                </p>
+                <p className="text-[#717F87] text-[18px] leading-[28px] font-medium">
+                  {data.metres} meters
+                </p>
+              </div>
+            </div>
+
+            <div className="pt-[25px] px-[25px] pb-[35px]">
+              <div>
+                <p className="text-[#717F87] text-[14px] leading-[24px] font-medium">
+                  {data.summary}
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="col-sm">
-            {" "}
-            <MapComp
-              center={center}
-              zoom={zoom}
-              markers={markers}
-              width={width}
-              height={height}
-              handleClick={handleClick}
-            />
+
+          <div
+            key="3"
+            className="w-full bg-[#fff] rounded-[10px] shadow-[0px 1px 2px #E1E3E5] border border-[#E1E3E5] divide-y"
+          >
+            <div className="pt-[15px] px-[25px] pb-[25px]">
+              <div className="flex justify-end">
+                <div className="bg-[#F6F6F7] rounded-[20px] flex justify-center align-center px-[12px]">
+                  <p className="text-[#00153B] text-[12px] leading-[28px] font-bold">
+                    Pro
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h1
+                  className="text-[#00153B] text-[20px] leading-[40px] font-semibold"
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  Map
+                </h1>
+                <p className="text-[#00153B] text-[50px] leading-[63px] font-bold">
+                  <MapComp
+                    center={center}
+                    zoom={zoom}
+                    markers={markers}
+                    width={width}
+                    height={height}
+                    handleClick={handleClick}
+                  />
+                </p>
+              </div>
+
+              <div></div>
+            </div>
+
+            <div className="pt-[25px] px-[25px] pb-[35px]">
+              <div>
+                <p className="text-[#717F87] text-[14px] leading-[24px] font-medium">
+                  {data.weather.weather[0].description}
+                </p>
+                <p className="text-[#717F87] text-[14px] leading-[24px] font-medium">
+                  {Math.floor((data.weather.main.temp - 273.15) * 1.8 + 32)}
+                  &#176;F
+                </p>
+              </div>
+
+              <div className="mt-[25px] flex space-x-4">
+                <button className="bg-moss-green rounded-[5px] py-[15px] px-[25px] text-[#fff] text-[14px] leading-[17px] font-semibold">
+                  <Link type="button" className="btn btn-success" to="climbs/">
+                    Add Climbs{" "}
+                  </Link>{" "}
+                </button>
+                <button className="bg-moss-green rounded-[5px] py-[15px] px-[25px] text-[#fff] text-[14px] leading-[17px] font-semibold">
+                  <Link type="button" className="btn btn-success" to="reviews/">
+                    Add Reviews{" "}
+                  </Link>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>Region</th>
-            <th>Meters</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th>Summary</th>
-            <th>Weather conditions</th>
-            <th>Temperature</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              {data.region}: {region_names[data.region.slice(0, -1)]}
-            </td>
-            <td>{data.metres}</td>
-            <td>{data.latitude}</td>
-            <td>{data.longitude}</td>
-            <td>{data.summary}</td>
-            {/* <td>
-              <img src={data.images[1]} />
-            </td> */}
-            <td>{data.weather.weather[0].description}</td>
-            <td>
-              {Math.floor((data.weather.main.temp - 273.15) * 1.8 + 32)}&#176;F
-            </td>
-            <td> <Link type="button" className="btn btn-success" to="climbs/">Add Climbs </Link> &nbsp;
-                 <Link type="button" className="btn btn-success" to="reviews/">Add Reviews </Link></td>
-          </tr>
-        </tbody>
-      </table>
-    </>
+    </div>
   );
 };
-
 export default Munro;
