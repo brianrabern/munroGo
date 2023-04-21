@@ -58,3 +58,6 @@ const MapComp = ({ center, zoom, markers, width, height, handleClick }) => {
 };
 
 export default MapComp;
+
+
+

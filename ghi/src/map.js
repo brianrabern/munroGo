@@ -93,14 +93,23 @@ function Map() {
   }, [map, markers]);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={7.9}
-      mapTypeId={"terrain"}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-    />
+    <div>
+      <h1
+        className="text-[#00153B] text-[20px] leading-[40px] font-semibold"
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        Map
+      </h1>
+      <p className="text-[#00153B] text-[50px] leading-[63px] font-bold"></p>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={7.9}
+        mapTypeId={"terrain"}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      />
+    </div>
   ) : (
     <></>
   );
