@@ -75,6 +75,12 @@ const Login = () => {
               </button>
             </div>
           </form>
+          <div style={{ display: "flex", marginTop: "1rem", gap: "5px" }}>
+            <div>Don't Have An Account?</div>
+            <Link to={{ pathname: "/Signup" }} style={{ color: "#7F8D38ff" }}>
+              Sign Up
+            </Link>
+          </div>
         </div>
       </div>
     </div>
