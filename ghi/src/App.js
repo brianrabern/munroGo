@@ -1,18 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./main";
 import "./App.css";
-import Login from "./Login";
-import Signup from "./Signup";
-import Munros from "./munro";
-import ClimbedMunros from "./climbs";
-import Munro from "./munrodetail";
-import NewClimb from "./newClimb";
-import NewReview from "./NewReview";
-import ClimbsByAccount from "./ClimbsByAccount";
-import ReviewsByAccount from "./reviews";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Munros from "./components/Munro";
+import ClimbedMunros from "./components/Climbs";
+import Munro from "./components/MunroDetail";
+import NewClimb from "./components/NewClimb";
+import NewReview from "./components/NewReview";
+import ClimbsByAccount from "./components/ClimbsByAccount";
+import ReviewsByAccount from "./components/Reviews";
 import Map from "./map";
-import Dashboard from "./Dashboard";
-
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (

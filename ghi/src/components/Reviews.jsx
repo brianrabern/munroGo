@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetReviewsQuery } from "./services/review";
+import { useGetReviewsQuery } from "../services/review";
 
 const ReviewsByAccount = () => {
   const { data, isLoading } = useGetReviewsQuery();

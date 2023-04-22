@@ -1,6 +1,6 @@
 import React from "react";
-import { useGetMunrosQuery, useGetClimbsQuery } from "./services/munros";
-import { useGetAccountQuery } from "./services/auth";
+import { useGetMunrosQuery, useGetClimbsQuery } from "../services/munros";
+import { useGetAccountQuery } from "../services/auth";
 // import Progress from "./Progress";
 
 const ClimbedMunros = () => {

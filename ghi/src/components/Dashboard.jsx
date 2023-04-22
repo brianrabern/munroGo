@@ -1,6 +1,6 @@
 import React from "react";
-import { useGetMunrosQuery, useGetClimbsQuery } from "./services/munros";
-import { useGetAccountQuery } from "./services/auth";
+import { useGetMunrosQuery, useGetClimbsQuery } from "../services/munros";
+import { useGetAccountQuery } from "../services/auth";
 import { Link } from "react-router-dom";
 // import Progress from "./Progress";
 

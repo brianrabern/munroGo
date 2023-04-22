@@ -5,8 +5,8 @@ import {
   handleRatingChange,
   handleCommentChange,
   reset,
-} from "./features/reviews/newReviewSlice";
-import { useCreateReviewMutation } from "./services/review";
+} from "../features/reviews/newReviewSlice";
+import { useCreateReviewMutation } from "../services/review";
 
 const NewReview = () => {
   const dispatch = useDispatch();

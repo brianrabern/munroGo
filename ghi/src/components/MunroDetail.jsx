@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetMunroDetailQuery } from "./services/munrodetail";
+import { useGetMunroDetailQuery } from "../services/munrodetail";
 import MapComp from "./MapComp";
 import { Link } from "react-router-dom";
 

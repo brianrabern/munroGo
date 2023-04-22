@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetClimbsByAccountQuery } from "./services/ClimbsByAccount";
+import { useGetClimbsByAccountQuery } from "../services/climbsByAccount";
 
 const ClimbsByAccount = () => {
   const { data, isLoading } = useGetClimbsByAccountQuery();
