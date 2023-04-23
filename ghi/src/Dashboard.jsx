@@ -10,7 +10,7 @@ const Dashboard = () => {
   const { data: myClimbs } = useGetClimbsQuery();
 
   if (isLoading) return <div>Loading...</div>;
-  if (myClimbs?.length === 0) return <div>You bum</div>;
+  // if (myClimbs?.length === 0) return <div>You bum</div>;
 
   const climbsList = myClimbs.map((climb) => climb.munro_id);
 
@@ -24,19 +24,6 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-      <Link type="button" className="btn btn-success" to="/map">
-        Map
-      </Link>
-      <Link type="button" className="btn btn-success" to="/munros">
-        Munros
-      </Link>
-      <Link type="button" className="btn btn-success" to="/climbs">
-        Climbs
-      </Link>
-      <Link type="button" className="btn btn-success" to="/reviews">
-        Reviews
-      </Link>
-
       <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
         <div>
           <div className="-mx-6 px-6 py-4">

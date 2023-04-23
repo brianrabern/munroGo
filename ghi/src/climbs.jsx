@@ -1,6 +1,7 @@
 import React from "react";
 import { useGetMunrosQuery, useGetClimbsQuery } from "./services/munros";
 import { useGetAccountQuery } from "./services/auth";
+import { Buffer } from "buffer";
 // import Progress from "./Progress";
 
 const ClimbedMunros = () => {
@@ -43,6 +44,17 @@ const ClimbedMunros = () => {
           })}
         </tbody>
       </table>
+      {/* {myClimbs.map((climb) => {
+        let base64String = climb.image;
+        let decodedData = Buffer.from(base64String, "base64");
+        let imageUrl = `data:image/jpeg;base64,${decodedData.toString(
+          "base64"
+        )}`;
+        let newImage = new Image();
+        newImage.src = imageUrl;
+        <img scr={newImage} />;
+      })} */}
+
       {/* <Progress
         progData={[
           { key: 1, name: "A", value: 80, color: "#ff0000" },

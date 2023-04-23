@@ -13,7 +13,6 @@ import ReviewsByAccount from "./reviews";
 import Map from "./map";
 import Dashboard from "./Dashboard";
 
-
 function App() {
   return (
     <>
