@@ -8,7 +8,7 @@ import { munroDetailApi } from "../services/munrodetail";
 import newClimbReducer from "../features/climbs/newClimbSlice";
 import { reviewsApi } from "../services/review";
 import newReviewReducer from "../features/reviews/newReviewSlice";
-import { ClimbsByAccountApi } from "../services/climbsByAccount";
+import { ClimbsByAccountApi } from "../services/ClimbsByAccount";
 
 export const store = configureStore({
   reducer: {

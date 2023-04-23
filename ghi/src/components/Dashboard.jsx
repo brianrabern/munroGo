@@ -10,7 +10,7 @@ const Dashboard = () => {
   const { data: myClimbs } = useGetClimbsQuery();
 
   if (isLoading) return <div>Loading...</div>;
-  if (myClimbs?.length === 0) return <div>You bum</div>;
+  // if (myClimbs?.length === 0) return <div>You bum</div>;
 
   const climbsList = myClimbs.map((climb) => climb.munro_id);
 
