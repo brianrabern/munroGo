@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useGetMunrosQuery } from "./services/munros";
-import styles from "./index.css";
+import { useGetMunrosQuery } from "../services/munros";
+import styles from "../index.css";
 
 const Munros = () => {
   const { data, isLoading } = useGetMunrosQuery();

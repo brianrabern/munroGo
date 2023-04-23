@@ -5,13 +5,13 @@ module.exports = {
   theme: {
     extend: {},
     colors: {
-      "zomp": "#66A182",
+      zomp: "#66A182",
       "hunter-green": "#40693Eff",
       "moss-green": "#7F8D38ff",
-      "peach":"#EBBA92ff",
+      peach: "#EBBA92ff",
       "light-orange": "#ECD1B0ff",
-      "sepia": "#7A501Dff",
-    }
+      sepia: "#7A501Dff",
+    },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };

@@ -4,8 +4,8 @@ import {
   handlePasswordChange,
   handleUsernameChange,
   reset,
-} from "./features/auth/loginSlice";
-import { useLoginMutation } from "./services/auth";
+} from "../features/auth/loginSlice";
+import { useLoginMutation } from "../services/auth";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -41,13 +41,13 @@ const Login = () => {
               alt=""
               srcSet=""
             />
-            <h1 className="mb-2 text-2xl">MunroGo</h1>
-            <span className="text-gray-300">Enter Login Details</span>
+            <h1 className="mb-2 text-2xl text-neutral-900">MunroGo</h1>
+            <span className="text-neutral-900">Enter Login Details</span>
           </div>
           <form onSubmit={handleSubmit}>
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-moss-green bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-moss-green bg-opacity-50 px-6 py-2 text-center text-inherit text-neutral-900 placeholder-neutral-600 shadow-lg outline-none backdrop-blur-md"
                 type="text"
                 id="Login__username"
                 value={fields.username}
@@ -58,7 +58,7 @@ const Login = () => {
 
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-moss-green bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-moss-green bg-opacity-50 px-6 py-2 text-center text-inherit text-neutral-900 placeholder-neutral-600 shadow-lg outline-none backdrop-blur-md"
                 type="password"
                 id="Login__password"
                 value={fields.password}
@@ -69,12 +69,18 @@ const Login = () => {
             <div className="mt-8 flex justify-center text-lg text-black">
               <button
                 type="submit"
-                className="rounded-3xl bg-moss-green bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600"
+                className="rounded-3xl bg-moss-green bg-opacity-50 px-10 py-2 shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600 text-neutral-900"
               >
                 Login
               </button>
             </div>
           </form>
+          <div style={{ display: "flex", marginTop: "1rem", gap: "5px" }}>
+            <div className="text-neutral-900">Don't Have An Account?</div>
+            <Link to={{ pathname: "/Signup" }} className="text-moss-green">
+              Sign Up
+            </Link>
+          </div>
         </div>
       </div>
     </div>

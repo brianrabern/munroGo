@@ -1,35 +1,107 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Main from "./main";
 import "./App.css";
-import Login from "./Login";
-import Signup from "./Signup";
-import Munros from "./munro";
-import ClimbedMunros from "./climbs";
-import Munro from "./munrodetail";
-import NewClimb from "./newClimb";
-import NewReview from "./NewReview";
-import ClimbsByAccount from "./ClimbsByAccount";
-import ReviewsByAccount from "./reviews";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import Munros from "./components/Munro";
+import ClimbedMunros from "./components/Climbs";
+import Munro from "./components/MunroDetail";
+import NewClimb from "./components/NewClimb";
+import NewReview from "./components/NewReview";
+import ClimbsByAccount from "./components/ClimbsByAccount";
+import ReviewsByAccount from "./components/Reviews";
 import Map from "./map";
-import Dashboard from "./Dashboard";
+import Dashboard from "./components/Dashboard";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/munros" element={<Munros />} />
-          <Route path="/munros/:munro_id" element={<Munro />} />
-          <Route path="/munros/:munro_id/climbs" element={<NewClimb />} />
-          <Route path="/climbs" element={<ClimbedMunros />} />
-          <Route path="/munros/:munro_id/reviews/" element={<NewReview />} />
-          <Route path="/account/climbs" element={<ClimbsByAccount />} />
-          <Route path="/account/reviews" element={<ReviewsByAccount />} />
-          <Route path="/map" element={<Map />} />
+          <Route
+            path="/dashboard"
+            element={
+              <>
+                <Navbar />
+                <Dashboard />
+              </>
+            }
+          />
+          <Route
+            path="/munros"
+            element={
+              <>
+                <Navbar />
+                <Munros />
+              </>
+            }
+          />
+          <Route
+            path="/munros/:munro_id"
+            element={
+              <>
+                <Navbar />
+                <Munro />
+              </>
+            }
+          />
+          <Route
+            path="/munros/:munro_id/climbs"
+            element={
+              <>
+                <Navbar />
+                <NewClimb />
+              </>
+            }
+          />
+          <Route
+            path="/climbs"
+            element={
+              <>
+                <Navbar />
+                <ClimbedMunros />
+              </>
+            }
+          />
+          <Route
+            path="/munros/:munro_id/reviews/"
+            element={
+              <>
+                <Navbar />
+                <NewReview />
+              </>
+            }
+          />
+          <Route
+            path="/account/climbs"
+            element={
+              <>
+                <Navbar />
+                <ClimbsByAccount />
+              </>
+            }
+          />
+          <Route
+            path="/reviews"
+            element={
+              <>
+                <Navbar />
+                <ReviewsByAccount />
+              </>
+            }
+          />
+          <Route
+            path="/map"
+            element={
+              <>
+                <Navbar />
+                <Map />
+              </>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </>
