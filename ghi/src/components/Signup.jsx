@@ -49,8 +49,8 @@ const Signup = () => {
               alt=""
               srcSet=""
             />
-            <h1 className="mb-2 text-2xl">MunroGo</h1>
-            <span className="text-gray-300">Enter Signup Details</span>
+            <h1 className="mb-2 text-2xl text-neutral-900">MunroGo</h1>
+            <span className="text-neutral-900">Enter Signup Details</span>
           </div>
           <form className="flex flex-col items-center" onSubmit={handleSubmit}>
             {errorMessage && (
@@ -58,7 +58,7 @@ const Signup = () => {
             )}
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
                 type={`text`}
                 id="Signup__username"
                 value={fields.username}
@@ -68,7 +68,7 @@ const Signup = () => {
             </div>
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
                 type={`text`}
                 id="Signup__full__name"
                 value={fields.full_name}
@@ -78,7 +78,7 @@ const Signup = () => {
             </div>
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
                 type={`password`}
                 id="Signup__password"
                 value={fields.password}
@@ -88,7 +88,7 @@ const Signup = () => {
             </div>
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
                 type={`password`}
                 id="Signup__password__confirmation"
                 value={fields.passwordConfirmation}
@@ -98,7 +98,7 @@ const Signup = () => {
                 }
               />
             </div>
-            <div className="mt-8 flex justify-center text-lg text-black">
+            <div className="mt-8 flex justify-center text-lg text-neutral-900">
               <button
                 type="submit"
                 className="rounded-3xl bg-moss-green px-10 py-2"
@@ -108,8 +108,8 @@ const Signup = () => {
             </div>
           </form>
           <div style={{ display: "flex", marginTop: "1rem", gap: "5px" }}>
-            <div>Already Have An Account?</div>
-            <Link to={{ pathname: "/" }} style={{ color: "#7F8D38ff" }}>
+            <div className="text-neutral-900">Already Have An Account?</div>
+            <Link to={{ pathname: "/" }} className="text-moss-green">
               Login
             </Link>
           </div>
