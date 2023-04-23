@@ -85,7 +85,7 @@ function App() {
             }
           />
           <Route
-            path="/account/reviews"
+            path="/reviews"
             element={
               <>
                 <Navbar />
