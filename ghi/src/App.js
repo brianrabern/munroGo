@@ -1,15 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Main from "./main";
+// import Main from "./main";
 import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import Munros from "./components/Munro";
-import ClimbedMunros from "./components/Climbs";
-import Munro from "./components/MunroDetail";
+import Munros from "./components/Munros";
+import Climbs from "./components/Climbs";
+import MunroDetail from "./components/MunroDetail";
 import NewClimb from "./components/NewClimb";
 import NewReview from "./components/NewReview";
-import ClimbsByAccount from "./components/ClimbsByAccount";
-import ReviewsByAccount from "./components/Reviews";
+import Reviews from "./components/Reviews";
 import Map from "./map";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
@@ -44,12 +43,12 @@ function App() {
             element={
               <>
                 <Navbar />
-                <Munro />
+                <MunroDetail />
               </>
             }
           />
           <Route
-            path="/munros/:munro_id/climbs"
+            path="/munros/:munro_id/add-climb"
             element={
               <>
                 <Navbar />
@@ -58,16 +57,7 @@ function App() {
             }
           />
           <Route
-            path="/climbs"
-            element={
-              <>
-                <Navbar />
-                <ClimbedMunros />
-              </>
-            }
-          />
-          <Route
-            path="/munros/:munro_id/reviews/"
+            path="/munros/:munro_id/add-review/"
             element={
               <>
                 <Navbar />
@@ -76,20 +66,20 @@ function App() {
             }
           />
           <Route
-            path="/account/climbs"
+            path="/my-climbs"
             element={
               <>
                 <Navbar />
-                <ClimbsByAccount />
+                <Climbs />
               </>
             }
           />
           <Route
-            path="/reviews"
+            path="/my-reviews"
             element={
               <>
                 <Navbar />
-                <ReviewsByAccount />
+                <Reviews />
               </>
             }
           />

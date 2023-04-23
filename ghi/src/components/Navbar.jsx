@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <div className="navbar bg-neutral-900">
-      <div className="flex-1 normal-case text-xl">Munro Go</div>
+      <div className="flex-1 normal-case text-xl">MunroGo</div>
       <Link
         type="button"
         className="btn btn-ghost normal-case text-xl"
-        to="/Dashboard"
+        to="/dashboard"
       >
         Dashboard
       </Link>
@@ -30,18 +30,20 @@ export default function Navbar() {
       <Link
         type="button"
         className="btn btn-ghost normal-case text-xl"
-        to="/climbs"
+        to="/my-climbs"
       >
         Climbs
       </Link>
       <Link
         type="button"
         className="btn btn-ghost normal-case text-xl"
-        to="/reviews"
+        to="/my-reviews"
       >
         Reviews
       </Link>
       <Logout />
     </div>
   );
-}
+};
+
+export default Navbar;

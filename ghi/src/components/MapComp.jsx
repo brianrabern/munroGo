@@ -43,6 +43,7 @@ const MapComp = ({ center, zoom, markers, width, height, handleClick }) => {
     }
   }, [map, markers]);
   console.log(isLoaded);
+
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
@@ -58,6 +59,3 @@ const MapComp = ({ center, zoom, markers, width, height, handleClick }) => {
 };
 
 export default MapComp;
-
-
-

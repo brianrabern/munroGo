@@ -6,7 +6,7 @@ import {
   handleCommentChange,
   reset,
 } from "../features/reviews/newReviewSlice";
-import { useCreateReviewMutation } from "../services/review";
+import { useCreateReviewMutation } from "../services/revs";
 
 const NewReview = () => {
   const dispatch = useDispatch();
@@ -15,13 +15,9 @@ const NewReview = () => {
   const fields = newReview.fields;
   const { munro_id } = useParams();
 
-  // const currentDate = new Date();
-  // const isoDate = currentDate.toISOString();
-
   let review = {
     munro_id: munro_id,
     body: {
-      //   date: "2023-04-18T23:48:48.085Z",
       comment: fields.comment,
       rating: fields.rating,
     },

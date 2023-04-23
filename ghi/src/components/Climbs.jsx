@@ -1,11 +1,11 @@
 import React from "react";
-import { useGetMunrosQuery, useGetClimbsQuery } from "../services/munros";
+import { useGetMunrosQuery } from "../services/munros";
+import { useGetClimbsQuery } from "../services/climbs";
 import { useGetAccountQuery } from "../services/auth";
-// import Progress from "./Progress";
 
-const ClimbedMunros = () => {
-  const { data: account } = useGetAccountQuery();
+const Climbs = () => {
   const { data, isLoading } = useGetMunrosQuery();
+  const { data: account } = useGetAccountQuery();
   const { data: myClimbs } = useGetClimbsQuery();
 
   if (isLoading) return <div>Loading...</div>;
@@ -43,22 +43,20 @@ const ClimbedMunros = () => {
           })}
         </tbody>
       </table>
-      {/* <Progress
-        progData={[
-          { key: 1, name: "A", value: 80, color: "#ff0000" },
-          { key: 2, name: "B", value: 45, color: "#00ff00" },
-          { key: 3, name: "C", value: 25, color: "#0000ff" },
-        ]}
-        cx={150}
-        cy={200}
-        iR={50}
-        oR={100}
-        value={50}
-      >
-        {" "}
-      </Progress> */}
+
+      {myClimbs.map((climb) => {
+        return (
+          <img
+            src={`data:image/png;base64,${climb.image}`}
+            alt=""
+            width="100"
+            height="100"
+            key={climb.id}
+          />
+        );
+      })}
     </>
   );
 };
 
-export default ClimbedMunros;
+export default Climbs;

@@ -1,12 +1,12 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useLoginMutation } from "../services/auth";
 import {
   handlePasswordChange,
   handleUsernameChange,
   reset,
 } from "../features/auth/loginSlice";
-import { useLoginMutation } from "../services/auth";
-import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -36,10 +36,8 @@ const Login = () => {
         <div className="text-white">
           <div className="mb-8 flex flex-col items-center">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Mountains-By-The-Icon-Z-3322972.svg/600px-Mountains-By-The-Icon-Z-3322972.svg.png?20201122172855"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Mountains-By-The-Icon-Z-3322972.svg/600px-Mountains-By-The-Icon-Z-3322972.svg.png?20201122172855; SameSite=None; Secure"
               width="150"
-              alt=""
-              srcSet=""
             />
             <h1 className="mb-2 text-2xl text-neutral-900">MunroGo</h1>
             <span className="text-neutral-900">Enter Login Details</span>

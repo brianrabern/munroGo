@@ -1,14 +1,19 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import { useGetMunroDetailQuery } from "../services/munrodetail";
+import { useParams, Link } from "react-router-dom";
+import { useGetMunroDetailQuery } from "../services/munros";
+import { useGetReviewsForMunroQuery } from "../services/revs";
+import Modal from "./Modal";
 import MapComp from "./MapComp";
-import { Link } from "react-router-dom";
+import NewReview from "./NewReview";
 
-const Munro = () => {
+const MunroDetail = () => {
   const { munro_id } = useParams();
   const { data, isLoading } = useGetMunroDetailQuery(munro_id);
+  const { data: reviews, isLoading: isLoadingReviews } =
+    useGetReviewsForMunroQuery(munro_id);
 
-  if (isLoading)
+  if (isLoading || isLoadingReviews) {
+    console.log(reviews);
     return (
       <div>
         <p className="text-[#adb9c0] text-[14px] leading-[24px] font-medium">
@@ -16,6 +21,7 @@ const Munro = () => {
         </p>
       </div>
     );
+  }
 
   //map stuff
   let center = {
@@ -75,19 +81,6 @@ const Munro = () => {
   return (
     <>
       <div className="flex min-h-screen pt-[30px] px-[40px] bg-moss-green">
-        {/* <h1>
-        <Link type="button" className="btn btn-success" to="/dashboard">
-          {" "}
-          Dashboard{" "}
-        </Link>
-      </h1>
-      <h1>
-        <Link type="button" className="btn btn-success" to="/munros">
-          {" "}
-          Munros{" "}
-        </Link>
-      </h1> */}
-
         <div className="min-w-full">
           <h1 className="text-[#d6d8d9] text-[50px] leading-[40px] font-semibold text-center">
             {data.hillname}
@@ -99,13 +92,13 @@ const Munro = () => {
             >
               <div className="pt-[15px] px-[25px] pb-[25px]">
                 <div>
-                  <p className="text-[#00153B] text-[50px] leading-[63px] font-bold">
+                  <div className="text-[#00153B] text-[50px] leading-[63px] font-bold">
                     <img
                       className="w-[100%]"
                       src={filterImages(data.images)[0]}
                       alt={data.hillname}
                     ></img>
-                  </p>
+                  </div>
                 </div>
 
                 <div>
@@ -135,7 +128,7 @@ const Munro = () => {
             >
               <div className="pt-[15px] px-[25px] pb-[25px]">
                 <div>
-                  <p className="text-[#00153B] text-[50px] leading-[63px] font-bold">
+                  <div className="text-[#00153B] text-[50px] leading-[63px] font-bold">
                     <MapComp
                       center={center}
                       zoom={zoom}
@@ -144,7 +137,7 @@ const Munro = () => {
                       height={height}
                       handleClick={handleClick}
                     />
-                  </p>
+                  </div>
                 </div>
 
                 <div>
@@ -181,24 +174,25 @@ const Munro = () => {
                 <p className="text-[#717F87] text-[14px] leading-[24px] font-medium text-justify">
                   {data.summary}
                 </p>
+                <p>Number of Reviews: {reviews.length}</p>
+                <Modal>
+                  <NewReview />
+                </Modal>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="mt-[25px] flex space-x-4 justify-center">
-        <button className="bg-moss-green rounded-[5px] py-[15px] px-[25px] text-[#fff] text-[14px] leading-[17px] font-semibold">
-          <Link type="button" className="btn btn-success" to="climbs/">
-            Climbed{" "}
-          </Link>{" "}
-        </button>
-        <button className="bg-moss-green rounded-[5px] py-[15px] px-[25px] text-[#fff] text-[14px] leading-[17px] font-semibold">
-          <Link type="button" className="btn btn-success" to="reviews/">
-            Add Review{" "}
-          </Link>
-        </button>
+
+      <div className="justify-center">
+        <Link type="button" className="btn btn-active" to={"add-climb"}>
+          Climbed{" "}
+        </Link>{" "}
+        <Link type="button" className="btn btn-active" to="add-review">
+          Add Review{" "}
+        </Link>
       </div>
     </>
   );
 };
-export default Munro;
+export default MunroDetail;

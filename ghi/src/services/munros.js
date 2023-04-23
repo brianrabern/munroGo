@@ -17,32 +17,10 @@ export const munrosApi = createApi({
       },
     }),
 
-    getClimbs: builder.query({
-      query: () => `/api/account/climbs/`,
-      transformResponse: (response) => response.climbs,
-      providesTags: (result) => {
-        const tags = [{ type: "Climbs", id: "LIST" }];
-        if (!result) return tags;
-        return [...result.map(({ id }) => ({ type: "Climbs", id })), ...tags];
-      },
-    }),
-
-    createClimb: builder.mutation({
-      query: ({ munro_id, body }) => {
-        // const image = body.image;
-        // const binaryImage = Buffer.from(image, "base64");
-        // const modifiedBody = { ...body, image: binaryImage };
-        return {
-          url: `/api/munros/${munro_id}/climbs`,
-          method: "POST",
-          munro_id: munro_id,
-          body: body,
-        };
-      },
-      invalidatesTags: [{ type: "climb", id: "str" }],
+    getMunroDetail: builder.query({
+      query: (munro_id) => `/api/munros/${munro_id}/`,
     }),
   }),
 });
 
-export const { useGetMunrosQuery, useGetClimbsQuery, useCreateClimbMutation } =
-  munrosApi;
+export const { useGetMunrosQuery, useGetMunroDetailQuery } = munrosApi;

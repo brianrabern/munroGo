@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { useGetMunrosQuery, useGetClimbsQuery } from "./services/munros";
+import { useGetMunrosQuery } from "./services/munros";
+import { useGetClimbsQuery } from "./services/climbs";
 
 function Map() {
   const containerStyle = {

@@ -9,7 +9,7 @@ import {
   error,
 } from "../features/auth/signupSlice";
 import { useSignupMutation } from "../services/auth";
-import ErrorNotification from "../ErrorNotification";
+import ErrorNotification from "./ErrorNotification";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
@@ -21,13 +21,13 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (fields.password != fields.passwordConfirmation) {
+    if (fields.password !== fields.passwordConfirmation) {
       dispatch(error("Password does not match confirmation"));
       return;
     }
     const { username, password, full_name } = fields;
-    signup({ username, password, full_name });
-    await signup(fields);
+    let body = { username, password, full_name, rank: "Beginner" };
+    await signup(body);
     dispatch(reset());
     navigate("/");
   };
@@ -44,10 +44,8 @@ const Signup = () => {
         <div className="text-white">
           <div className="mb-8 flex flex-col items-center">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Mountains-By-The-Icon-Z-3322972.svg/600px-Mountains-By-The-Icon-Z-3322972.svg.png?20201122172855"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Mountains-By-The-Icon-Z-3322972.svg/600px-Mountains-By-The-Icon-Z-3322972.svg.png?20201122172855; SameSite=None; Secure"
               width="150"
-              alt=""
-              srcSet=""
             />
             <h1 className="mb-2 text-2xl text-neutral-900">MunroGo</h1>
             <span className="text-neutral-900">Enter Signup Details</span>
