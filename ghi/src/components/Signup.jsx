@@ -68,7 +68,7 @@ const Signup = () => {
             </div>
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center text-neutral-800 placeholder-neutral-600"
                 type={`text`}
                 id="Signup__full__name"
                 value={fields.full_name}
@@ -78,7 +78,7 @@ const Signup = () => {
             </div>
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center text-neutral-800 placeholder-neutral-600"
                 type={`password`}
                 id="Signup__password"
                 value={fields.password}

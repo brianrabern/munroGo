@@ -47,7 +47,7 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-moss-green bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-neutral-600 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-moss-green bg-opacity-50 px-6 py-2 text-center text-inherit text-neutral-900 placeholder-neutral-600 shadow-lg outline-none backdrop-blur-md"
                 type="text"
                 id="Login__username"
                 value={fields.username}
@@ -58,7 +58,7 @@ const Login = () => {
 
             <div className="mb-4 text-lg">
               <input
-                className="rounded-3xl border-none bg-moss-green bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-neutral-600 shadow-lg outline-none backdrop-blur-md"
+                className="rounded-3xl border-none bg-moss-green bg-opacity-50 px-6 py-2 text-center text-inherit text-neutral-900 placeholder-neutral-600 shadow-lg outline-none backdrop-blur-md"
                 type="password"
                 id="Login__password"
                 value={fields.password}
