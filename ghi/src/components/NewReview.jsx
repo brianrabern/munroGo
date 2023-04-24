@@ -7,6 +7,7 @@ import {
   reset,
 } from "../features/reviews/newReviewSlice";
 import { useCreateReviewMutation } from "../services/revs";
+import { useGetAccountQuery } from "../services/auth";
 
 const NewReview = () => {
   const dispatch = useDispatch();
@@ -14,14 +15,21 @@ const NewReview = () => {
   const newReview = useSelector((state) => state.newReview);
   const fields = newReview.fields;
   const { munro_id } = useParams();
+  const {data: account} = useGetAccountQuery();
+
+
 
   let review = {
     munro_id: munro_id,
     body: {
       comment: fields.comment,
       rating: fields.rating,
+      full_name: account.full_name
     },
   };
+
+
+
 
   return (
     <>

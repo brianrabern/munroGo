@@ -9,7 +9,7 @@ const Logout = () => {
     navigate("/");
   };
   return (
-    <button className="btn btn-secondary" onClick={handleLogOut}>
+    <button className="btn btn-danger" onClick={handleLogOut}>
       Log Out
     </button>
   );
