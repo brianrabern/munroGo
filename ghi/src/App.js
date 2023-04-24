@@ -12,6 +12,7 @@ import ClimbsByAccount from "./ClimbsByAccount";
 import ReviewsByAccount from "./reviews";
 import Map from "./map";
 import Dashboard from "./dashboard";
+import Example from "./munro";
 
 function App() {
   return (
