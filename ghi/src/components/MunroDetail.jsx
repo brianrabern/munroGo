@@ -175,7 +175,7 @@ const MunroDetail = () => {
                   {data.summary}
                 </p>
                 <p>Number of Reviews: {reviews.length}</p>
-                <Modal>
+                <Modal label="Add review">
                   <NewReview />
                 </Modal>
               </div>

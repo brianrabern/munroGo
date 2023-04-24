@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   fields: {
-    // date: "",
     comment: "",
     rating: "",
   },
@@ -26,12 +25,7 @@ export const newReviewSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
-export const {
-  handleRatingChange,
-  handleCommentChange,
-  error,
-  reset,
-} = newReviewSlice.actions;
+export const { handleRatingChange, handleCommentChange, error, reset } =
+  newReviewSlice.actions;
 
 export default newReviewSlice.reducer;

@@ -48,7 +48,6 @@ const Munros = () => {
 
   const handleSearchFilter = (e) => {
     setSearchFilter(e.target.value);
-    // searchInput.current.focus();
   };
 
   const searchedData = () => {

@@ -9,9 +9,9 @@ import MunroDetail from "./components/MunroDetail";
 import NewClimb from "./components/NewClimb";
 import NewReview from "./components/NewReview";
 import Reviews from "./components/Reviews";
-import Map from "./map";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
+import MainMap from "./components/MainMap";
 
 function App() {
   return (
@@ -88,7 +88,7 @@ function App() {
             element={
               <>
                 <Navbar />
-                <Map />
+                <MainMap />
               </>
             }
           />

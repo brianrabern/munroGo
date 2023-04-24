@@ -6,7 +6,7 @@ function Modal(props) {
   return (
     <>
       <label htmlFor="my-modal" className="btn">
-        open modal
+        {props.label}
       </label>
 
       <input
@@ -19,7 +19,7 @@ function Modal(props) {
 
       <div className="modal">
         <div className="modal-box">
-          {props.children} {/* The child components go here */}
+          {props.children}
           <div className="modal-action">
             <label htmlFor="my-modal" className="btn">
               Close

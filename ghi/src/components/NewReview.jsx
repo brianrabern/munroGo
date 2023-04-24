@@ -50,8 +50,60 @@ const NewReview = () => {
             }}
           />
         </div>
+        <div className="rating">
+          <input
+            type="radio"
+            name="rating-4"
+            className="mask mask-triangle bg-green-500"
+            checked={fields.rating === 1}
+            value={1}
+            onChange={(e) => {
+              dispatch(handleRatingChange(parseInt(e.target.value)));
+            }}
+          />
+          <input
+            type="radio"
+            name="rating-4"
+            className="mask mask-triangle bg-green-500"
+            checked={fields.rating === 2}
+            value={2}
+            onChange={(e) => {
+              dispatch(handleRatingChange(parseInt(e.target.value)));
+            }}
+          />
+          <input
+            type="radio"
+            name="rating-4"
+            className="mask mask-triangle bg-green-500"
+            checked={fields.rating === 3}
+            value={3}
+            onChange={(e) => {
+              dispatch(handleRatingChange(parseInt(e.target.value)));
+            }}
+          />
+          <input
+            type="radio"
+            name="rating-4"
+            className="mask mask-triangle bg-green-500"
+            checked={fields.rating === 4}
+            value={4}
+            onChange={(e) => {
+              dispatch(handleRatingChange(parseInt(e.target.value)));
+            }}
+          />
+          <input
+            type="radio"
+            name="rating-4"
+            className="mask mask-triangle bg-green-500"
+            checked={fields.rating === 5}
+            value={5}
+            onChange={(e) => {
+              dispatch(handleRatingChange(parseInt(e.target.value)));
+            }}
+          />
+        </div>
 
-        <div className="mb-3"></div>
+        {/* <div className="mb-3"></div>
         <label htmlFor="rating__field" className="form-label">
           Rating
         </label>
@@ -66,7 +118,7 @@ const NewReview = () => {
           onChange={(e) => {
             dispatch(handleRatingChange(parseInt(e.target.value)));
           }}
-        ></input>
+        ></input> */}
         <button type="submit" className="btn btn-success">
           Submit
         </button>

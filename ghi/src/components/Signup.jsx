@@ -15,7 +15,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
   const dispatch = useDispatch();
   const [signup] = useSignupMutation();
-  const navigate = useNavigate(); // Add useNavigate hook
+  const navigate = useNavigate();
 
   const { errorMessage, fields } = useSelector((state) => state.signup);
 

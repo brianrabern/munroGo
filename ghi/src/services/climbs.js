@@ -20,9 +20,6 @@ export const climbsApi = createApi({
 
     createClimb: builder.mutation({
       query: ({ munro_id, body }) => {
-        // const image = body.image;
-        // const binaryImage = Buffer.from(image, "base64");
-        // const modifiedBody = { ...body, image: binaryImage };
         return {
           url: `/api/munros/${munro_id}/climbs`,
           method: "POST",

@@ -54,7 +54,11 @@ const MapComp = ({ center, zoom, markers, width, height, handleClick }) => {
       onUnmount={onUnmount}
     />
   ) : (
-    <></>
+    <div>
+      <p className="text-[#adb9c0] text-[14px] leading-[24px] font-medium">
+        Haste ye nae mair, for the map's a-comin' tae ye...
+      </p>
+    </div>
   );
 };
 
