@@ -9,8 +9,8 @@ import {
   handleNotesChange,
   handleImageUpload,
   reset,
-} from "./features/climbs/newClimbSlice";
-import { useCreateClimbMutation } from "./services/munros";
+} from "../features/climbs/newClimbSlice";
+import { useCreateClimbMutation } from "../services/climbs";
 import { Buffer } from "buffer";
 
 const NewClimb = () => {

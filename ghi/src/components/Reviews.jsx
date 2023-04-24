@@ -1,7 +1,7 @@
 import React from "react";
-import { useGetReviewsQuery } from "./services/review";
+import { useGetReviewsQuery } from "../services/revs";
 
-const ReviewsByAccount = () => {
+const Reviews = () => {
   const { data, isLoading } = useGetReviewsQuery();
 
   if (isLoading) return <div>Loading...</div>;
@@ -31,4 +31,4 @@ const ReviewsByAccount = () => {
   );
 };
 
-export default ReviewsByAccount;
+export default Reviews;

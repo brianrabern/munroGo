@@ -8,7 +8,17 @@ export const reviewsApi = createApi({
   }),
   endpoints: (builder) => ({
     getReviews: builder.query({
-      query: () => `/api/account/reviews`,
+      query: () => `/api/account/reviews/`,
+      transformResponse: (response) => response.reviews,
+      providesTags: (result) => {
+        const tags = [{ type: "Reviews", id: "LIST" }];
+        if (!result) return tags;
+        return [...result.map(({ id }) => ({ type: "Reviews", id })), ...tags];
+      },
+    }),
+
+    getReviewsForMunro: builder.query({
+      query: (munro_id) => `/api/munros/${munro_id}/reviews`,
       transformResponse: (response) => response.reviews,
       providesTags: (result) => {
         const tags = [{ type: "Reviews", id: "LIST" }];
@@ -31,4 +41,8 @@ export const reviewsApi = createApi({
   }),
 });
 
-export const { useGetReviewsQuery, useCreateReviewMutation } = reviewsApi;
+export const {
+  useGetReviewsQuery,
+  useGetReviewsForMunroQuery,
+  useCreateReviewMutation,
+} = reviewsApi;

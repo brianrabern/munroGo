@@ -1,14 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import loginReducer from "../features/auth/loginSlice";
 import signupReducer from "../features/auth/signupSlice";
+import newClimbReducer from "../features/climbs/newClimbSlice";
+import newReviewReducer from "../features/reviews/newReviewSlice";
 import { authApi } from "../services/auth";
 import { munrosApi } from "../services/munros";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import { munroDetailApi } from "../services/munrodetail";
-import newClimbReducer from "../features/climbs/newClimbSlice";
-import { reviewsApi } from "../services/review";
-import newReviewReducer from "../features/reviews/newReviewSlice";
-import { ClimbsByAccountApi } from "../services/ClimbsByAccount";
+import { climbsApi } from "../services/climbs";
+import { reviewsApi } from "../services/revs";
 
 export const store = configureStore({
   reducer: {
@@ -19,9 +18,7 @@ export const store = configureStore({
 
     [authApi.reducerPath]: authApi.reducer,
     [munrosApi.reducerPath]: munrosApi.reducer,
-    [munroDetailApi.reducerPath]: munroDetailApi.reducer,
-    [reviewsApi.reducerPath]: reviewsApi.reducer,
-    [ClimbsByAccountApi.reducerPath]: ClimbsByAccountApi.reducer,
+    [climbsApi.reducerPath]: climbsApi.reducer,
     [reviewsApi.reducerPath]: reviewsApi.reducer,
   },
 
@@ -29,9 +26,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat([
       authApi.middleware,
       munrosApi.middleware,
-      munroDetailApi.middleware,
+      climbsApi.middleware,
       reviewsApi.middleware,
-      ClimbsByAccountApi.middleware,
     ]),
 });
 

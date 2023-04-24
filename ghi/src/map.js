@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-import { useGetMunrosQuery, useGetClimbsQuery } from "./services/munros";
+import { useGetMunrosQuery } from "./services/munros";
+import { useGetClimbsQuery } from "./services/climbs";
 
 function Map() {
   const containerStyle = {
@@ -93,14 +94,16 @@ function Map() {
   }, [map, markers]);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={7.9}
-      mapTypeId={"terrain"}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-    />
+    <div>
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={7.9}
+        mapTypeId={"terrain"}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+      />
+    </div>
   ) : (
     <></>
   );
