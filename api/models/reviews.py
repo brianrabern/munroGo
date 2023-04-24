@@ -1,11 +1,12 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from datetime import datetime
 
 
 class ReviewParams(BaseModel):
     comment: str
     rating: int
+    full_name: Optional[str]
     date: datetime = datetime.now()
 
 
