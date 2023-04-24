@@ -1,10 +1,10 @@
 import React from "react";
-import { formatDistance, subDays } from "date-fns";
+import { formatDistance, formatRelative } from "date-fns";
 import { useGetMunrosQuery } from "../services/munros";
 
 export default function ClimbCard({ climb }) {
   const { data: munros, isLoading } = useGetMunrosQuery();
-  const date = formatDistance(new Date(climb.datetime), new Date(), {
+  const date = formatRelative(new Date(climb.datetime), new Date(), {
     addSuffix: true,
   });
   const munro = munros.find((munro) => munro.id === climb.munro_id);
