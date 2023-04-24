@@ -1,14 +1,20 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGetMunrosQuery } from "../services/munros";
+
 import LoadingBar from "./LoadingBar";
 
 import styles from "../index.css";
 
 const Munros = () => {
-  const { data, isLoading } = useGetMunrosQuery();
+  const { data, error, isLoading } = useGetMunrosQuery();
   const [searchInput, setSearchInput] = useState(" ");
   const [searchFilter, setSearchFilter] = useState("hillname");
+  const navigate = useNavigate();
+
+  if (error) {
+    navigate("/");
+  }
 
   if (isLoading)
     return (
