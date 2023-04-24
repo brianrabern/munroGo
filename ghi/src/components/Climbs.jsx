@@ -14,10 +14,13 @@ const Climbs = () => {
 
   return (
     <>
-      <h1>My climbs </h1>
-      <div className="flex gap-3 px-6 justify-center">
+      {/* <h1>My climbs </h1> */}
+
+      <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
         {myClimbs.map((climb) => (
-          <ClimbCard key={climb.id} climb={climb} />
+          <div key={climb.id} className="carousel-item">
+            <ClimbCard key={climb.id} climb={climb} />
+          </div>
         ))}
       </div>
     </>
