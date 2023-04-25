@@ -2,26 +2,32 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useLoginMutation } from "../services/auth";
+import { setToken } from "../features/auth/authSlice";
+import ErrorNotification from "./ErrorNotification";
 import {
   handlePasswordChange,
   handleUsernameChange,
+  error,
   reset,
 } from "../features/auth/loginSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
   const [login] = useLoginMutation();
-  const { fields } = useSelector((state) => state.login);
-  const navigate = useNavigate(); // Add useNavigate hook
+  const { fields, errorMessage } = useSelector((state) => state.login);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    // Make handleSubmit async
     e.preventDefault();
-    console.log("handleSubmit");
-    console.log({ fields });
-    await login(fields); // Wait for login function to complete
-    dispatch(reset());
-    navigate("/dashboard"); // Navigate to dashboard route
+    try {
+      const { data } = await login(fields);
+      dispatch(reset());
+      dispatch(setToken(data.access_token));
+      navigate("/dashboard");
+    } catch (error) {
+      console.log("errorMessage", errorMessage);
+      alert("Unable to log in. Please check your credentials and try again.");
+    }
   };
 
   return (
@@ -72,6 +78,9 @@ const Login = () => {
                 Login
               </button>
             </div>
+            {errorMessage && (
+              <ErrorNotification>{errorMessage}</ErrorNotification>
+            )}
           </form>
           <div style={{ display: "flex", marginTop: "1rem", gap: "5px" }}>
             <div className="text-neutral-900">Don't Have An Account?</div>

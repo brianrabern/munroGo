@@ -11,6 +11,7 @@ import {
 import { useSignupMutation, useLoginMutation } from "../services/auth";
 import ErrorNotification from "./ErrorNotification";
 import { Link, useNavigate } from "react-router-dom";
+import { setToken } from "../features/auth/authSlice";
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -19,19 +20,6 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const { errorMessage, fields } = useSelector((state) => state.signup);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (fields.password !== fields.passwordConfirmation) {
-  //     dispatch(error("Password does not match confirmation"));
-  //     return;
-  //   }
-  //   const { username, password, full_name } = fields;
-  //   let body = { username, password, full_name, rank: "Beginner" };
-  //   await signup(body);
-  //   dispatch(reset());
-  //   navigate("/");
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,11 +31,12 @@ const Signup = () => {
     let body = { username, password, full_name, rank: "Beginner" };
     try {
       await signup(body);
-      await login({ username, password }); // log the user in
+      const { data } = await login(fields);
       dispatch(reset());
+      dispatch(setToken(data.access_token));
       navigate("/dashboard");
     } catch (error) {
-      dispatch(error(error.message));
+      // dispatch(error(error.message));
     }
   };
 

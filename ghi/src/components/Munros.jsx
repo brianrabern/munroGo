@@ -12,10 +12,6 @@ const Munros = () => {
   const [searchFilter, setSearchFilter] = useState("hillname");
   const navigate = useNavigate();
 
-  if (error) {
-    navigate("/");
-  }
-
   if (isLoading)
     return (
       <div>

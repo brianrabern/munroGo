@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useGetAccountQuery } from "../services/auth";
 import { useGetMunrosQuery } from "../services/munros";
 import { useGetClimbsQuery } from "../services/climbs";
-import HeatCal from "./HeatCal";
+// import HeatCal from "./HeatCal";
 
 const Dashboard = () => {
+  const token = useSelector((state) => state.auth.token);
   const { data, isLoading } = useGetMunrosQuery();
   const { data: account } = useGetAccountQuery();
   const { data: myClimbs } = useGetClimbsQuery();
@@ -28,6 +30,11 @@ const Dashboard = () => {
 
   const filtered_data = selectClimbedMunroNames(data, climbsList);
   const percentDone = Math.round((myClimbs.length / 282) * 100);
+  console.log("token", token);
+
+  if (!token) {
+    return <div>Not logged in. Go back to login.</div>;
+  }
   return (
     <>
       <div className="container">
@@ -990,9 +997,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="justify-center">
+      {/* <div className="justify-center">
         <HeatCal> </HeatCal>
-      </div>
+      </div> */}
     </>
   );
 };

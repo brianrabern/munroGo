@@ -8,6 +8,7 @@ import { authApi } from "../services/auth";
 import { munrosApi } from "../services/munros";
 import { climbsApi } from "../services/climbs";
 import { reviewsApi } from "../services/revs";
+import { authSlice } from "../features/auth/authSlice"; // Import the authSlice
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,7 @@ export const store = configureStore({
     signup: signupReducer,
     newClimb: newClimbReducer,
     newReview: newReviewReducer,
-
+    auth: authSlice.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [munrosApi.reducerPath]: munrosApi.reducer,
     [climbsApi.reducerPath]: climbsApi.reducer,
