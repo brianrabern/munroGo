@@ -15,21 +15,18 @@ const NewReview = () => {
   const newReview = useSelector((state) => state.newReview);
   const fields = newReview.fields;
   const { munro_id } = useParams();
-  const {data: account} = useGetAccountQuery();
+  const { data: account, isLoading } = useGetAccountQuery();
 
+  if (isLoading) return <div>Loading...</div>;
 
-  
   let review = {
     munro_id: munro_id,
     body: {
       comment: fields.comment,
       rating: fields.rating,
-      full_name: account.full_name
+      full_name: account.full_name,
     },
   };
-
-
-
 
   return (
     <>
