@@ -12,8 +12,8 @@ const Munros = () => {
 
   if (isLoading)
     return (
-      <div>
-        <p className="text-[#adb9c0] text-[14px] leading-[24px] font-medium">
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-[#adb9c0] text-3xl font-medium text-center">
           Birl awa', bide a blink...
         </p>
         <LoadingBar increment={20} interval={50} />
