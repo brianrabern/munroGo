@@ -18,6 +18,18 @@ export default function ClimbCard({ climb }) {
         <p>Notes: {climb.notes}</p>
         <p>Weather: {climb.weather}</p>
       </div>
+      <figure>
+        <img
+          src={
+            climb.image
+              ? `data:image/png;base64,${climb.image}`
+              : "https://brianrabern.net/munro.png"
+          }
+          alt=""
+          key={climb.id}
+          style={{ maxHeight: "100px" }}
+        />
+      </figure>
     </div>
   );
 }
