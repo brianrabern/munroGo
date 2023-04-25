@@ -7,7 +7,7 @@ export default function ReviewCard({ review }) {
   });
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
+    <div className="card w-96 bg-neutral-50 text-base-300 shadow-xl">
       <div className="card-body">
         <h2 className="card-title">{review.hillname}</h2>
         <p>{date}</p>

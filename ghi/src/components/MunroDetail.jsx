@@ -175,38 +175,40 @@ const MunroDetail = () => {
                 <p className="text-[#717F87] text-[14px] leading-[24px] font-medium text-justify">
                   {data.summary}
                 </p>
-                <p>Number of Reviews: {reviews.length}</p>
-                <Modal label="Add review">
+                <div className="flex justify-center py-5">
+                <Modal label="Add review" >
                   <NewReview />
                 </Modal>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="justify-center">
-        <Link type="button" className="btn btn-active" to={"add-climb"}>
-          Climbed{" "}
-        </Link>{" "}
-        <Link type="button" className="btn btn-active" to="add-review">
-          Add Review{" "}
-        </Link>
-      </div>
-      <div className="px-6 pt-6 2xl:container">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-auto">
-          <div className="md:col-span-2 lg:col-span-1">
-            {/* <div className="flex flex-col bg-white border rounded p-4"> */}
-            {/* First Card */}
-            {reviews.map((review) => (
-              <div key={review.id}>
-                <ReviewCard key={review.id} review={review} />
-              </div>
-            ))}
+      <div className="grid place-items-center py-7 gap-7 md:grid-cols-2 lg:grid-cols-3  bg-moss-green">
+        {/* First Card */}
+        {reviews.map((review) => (
+          <div key={review.id}>
+            <ReviewCard key={review.id} review={review} />
           </div>
-        </div>
+        ))}
+        {/* </div> */}
+        {/* </div> */}
       </div>
+
+      {/* </div> */}
     </>
   );
 };
 export default MunroDetail;
+
+
+{/* <div className="justify-center">
+  <Link type="button" className="btn btn-active" to={"add-climb"}>
+    Climbed{" "}
+  </Link>{" "}
+  <Link type="button" className="btn btn-active" to="add-review">
+    Add Review{" "}
+  </Link>
+</div>; */}
