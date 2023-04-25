@@ -153,8 +153,12 @@ const Dashboard = () => {
                 {/* First Card */}
                 <div className="card w-96 bg-base-300 shadow-xl">
                   <div className="card-body">
-                    <h2 className="card-title">Climbs</h2>
-                    <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+                    <div className="flex justify-center items-center">
+                      <h2 className="text-3xl card-title font-bold text-center">
+                        Climbs
+                      </h2>
+                    </div>
+                    <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                       {myClimbs.map((climb) => (
                         <div key={climb.id} className="carousel-item">
                           <ClimbCard key={climb.id} climb={climb} />
@@ -165,12 +169,12 @@ const Dashboard = () => {
                 </div>
               </div>
               {/* Second Card */}
-              <div className="md:col-span-2 lg:col-span-1">
+              <div className="md:col-span-2 lg:col-span-1 rounded-box">
                 {/* <div className="flex flex-col bg-white border rounded p-4"> */}
                 <div className="card w-96 bg-base-300 shadow-xl">
                   <div className="card-body items-center">
                     <h2 className="card-title"></h2>
-                    <div className="stats shadow">
+                    <div className="stats shadow bg-base-300">
                       <div className="stat items-center">
                         <img
                           src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
@@ -191,14 +195,19 @@ const Dashboard = () => {
                 {/* <div className="flex flex-col bg-white border rounded p-4"> */}
                 <div className="card w-96 bg-base-300 shadow-xl">
                   <div className="card-body">
-                    <h2 className="card-title">Reviews</h2>
-                    <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+                    <div className="flex justify-center items-center">
+                      <h2 className="text-3xl card-title font-bold text-center">
+                        Reviews
+                      </h2>
+                    </div>
+                    {/* <h2 className="card-title">Reviews</h2> */}
+                    <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                       {myReviews.map((review) => (
                         <div key={review.id} className="carousel-item">
-                          <div className="card w-96 bg-base-100 shadow-xl">
+                          <div className="card w-96 bg-base-300">
                             <div className="card-body">
                               <h2 className="card-title">
-                                Hillname: {getMunroName(data, review.munro_id)}
+                                {getMunroName(data, review.munro_id)}
                               </h2>
                               <p>
                                 {formatRelative(
@@ -224,6 +233,9 @@ const Dashboard = () => {
               <div></div>
             </div>
             <div className="overflow-x">
+              <h1 className="text-center font-bold text-gray-500 text-3xl py-3">
+                Munros Bagged
+              </h1>
               <table className="table table-compact w-full">
                 <thead className="bg-gray-50">
                   <tr>

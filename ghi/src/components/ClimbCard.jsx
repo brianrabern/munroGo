@@ -9,7 +9,7 @@ export default function ClimbCard({ climb }) {
   });
   const munro = munros.find((munro) => munro.id === climb.munro_id);
   return (
-    <div className="card w-96 bg-base-300 shadow-xl">
+    <div className="card w-96 bg-base-300">
       <div className="card-body">
         <h2 className="card-title">{munro.hillname}</h2>
         <p>{date}</p>
@@ -19,7 +19,7 @@ export default function ClimbCard({ climb }) {
         <p>Weather: {climb.weather}</p>
       </div>
       <figure>
-        <img
+        <img className="rounded-box"
           src={
             climb.image
               ? `data:image/png;base64,${climb.image}`
