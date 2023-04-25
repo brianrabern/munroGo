@@ -1,14 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useGetAccountQuery } from "../services/auth";
 import { useGetMunrosQuery } from "../services/munros";
 import { useGetClimbsQuery } from "../services/climbs";
 import HeatCal from "./HeatCal";
 import ClimbCard from "./ClimbCard";
+import { useGetReviewsQuery } from "../services/revs";
+import { formatDistance, formatRelative } from "date-fns";
+import MainMap from "./MainMap";
+import MapComp from "./MapComp";
 
 const Dashboard = () => {
   const { data, isLoading } = useGetMunrosQuery();
   const { data: account } = useGetAccountQuery();
   const { data: myClimbs } = useGetClimbsQuery();
+  const { data: myReviews } = useGetReviewsQuery();
+  const [markers, setMarkers] = useState([]);
+
+  const center = {
+    lat: 57.1,
+    lng: -4.1826492694,
+  };
+  const zoom = 7.9;
+  const width = "100%";
+  const height = "600px";
+
+  const handleClick = (munro) => {
+    window.location.href = `/munros/${munro.id}`;
+  };
+
+  useEffect(() => {
+    if (data) {
+      const climbsList = myClimbs.map((climb) => climb.munro_id);
+      const newMarkers = data.map((munro) => {
+        if (climbsList.includes(munro.id)) {
+          return {
+            id: munro.id,
+            position: {
+              lat: Number(munro.latitude),
+              lng: Number(munro.longitude),
+            },
+            title: munro.hillname,
+            icon: {
+              url: "http://maps.google.com/mapfiles/kml/pal4/icon60.png",
+            },
+          };
+        } else {
+          return {
+            id: munro.id,
+            position: {
+              lat: Number(munro.latitude),
+              lng: Number(munro.longitude),
+            },
+            title: munro.hillname,
+            icon: {
+              url: "http://maps.google.com/mapfiles/kml/pal4/icon52.png",
+            },
+          };
+        }
+      });
+
+      setMarkers(newMarkers);
+    }
+  }, [data]);
 
   if (isLoading)
     return (
@@ -18,190 +71,30 @@ const Dashboard = () => {
         </p>
       </div>
     );
+  function getMunroName(munros, munroId) {
+    for (let i = 0; i < munros.length; i++) {
+      if (munros[i].id === munroId) {
+        return munros[i].hillname;
+      }
+    }
+    return null;
+  }
+  // const date = formatRelative(new Date(review.date), new Date(), {
+  //   addSuffix: true,
+  // });
+  // const reviewsList = myReviews.map((review) => review.munro_id);
 
-  const climbsList = myClimbs.map((climb) => climb.munro_id);
+  // const selectClimbedMunroNames = (data, reviewsList) => {
+  //   const climbedMunros = data.filter((munro) => reviewsList.includes(munro.id));
+  //   const climbedMunroNames = climbedMunros.map((munro) => munro.hillname);
+  //   return climbedMunroNames;
+  // };
 
-  const selectClimbedMunroNames = (data, climbsList) => {
-    const climbedMunros = data.filter((munro) => climbsList.includes(munro.id));
-    const climbedMunroNames = climbedMunros.map((munro) => munro.hillname);
-    return climbedMunroNames;
-  };
-
-  const filtered_data = selectClimbedMunroNames(data, climbsList);
+  // const filtered_data = selectClimbedMunroNames(data, climbsList);
   const percentDone = Math.round((myClimbs.length / 282) * 100);
   return (
     <>
       <div className="container">
-        {/* <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
-        <div>
-          <div className="-mx-6 px-6 py-4">
-            <a href="#" title="home">
-              <img
-                src="https://tailus.io/sources/blocks/stats-cards/preview/images/logo.svg"
-                className="w-32"
-                alt="tailus logo"
-              />
-            </a>
-          </div>
-
-          <div className="mt-8 text-center">
-            <img
-              src="https://tailus.io/sources/blocks/stats-cards/preview/images/second_user.webp"
-              alt=""
-              className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28"
-            />
-            <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
-              {account.full_name}, {account.rank}
-            </h5>
-            <span className="hidden text-gray-400 lg:block">Admin</span>
-          </div>
-
-          <ul className="space-y-2 tracking-wide mt-8">
-            <li>
-              <a
-                href="#"
-                aria-label="dashboard"
-                className="relative px-4 py-3 flex items-center space-x-4 rounded-xl text-white bg-gradient-to-r from-sky-600 to-cyan-400"
-              >
-                <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z"
-                    className="fill-current text-cyan-400 dark:fill-slate-600"
-                  ></path>
-                  <path
-                    d="M13 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V8Z"
-                    className="fill-current text-cyan-200 group-hover:text-cyan-300"
-                  ></path>
-                  <path
-                    d="M13 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-1Z"
-                    className="fill-current group-hover:text-sky-300"
-                  ></path>
-                </svg>
-                <span className="-mr-1 font-medium">Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    className="fill-current text-gray-300 group-hover:text-cyan-300"
-                    fill-rule="evenodd"
-                    d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z"
-                    clip-rule="evenodd"
-                  />
-                  <path
-                    className="fill-current text-gray-600 group-hover:text-cyan-600"
-                    d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z"
-                  />
-                </svg>
-                <span className="group-hover:text-gray-700">Categories</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    className="fill-current text-gray-600 group-hover:text-cyan-600"
-                    fill-rule="evenodd"
-                    d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                    clip-rule="evenodd"
-                  />
-                  <path
-                    className="fill-current text-gray-300 group-hover:text-cyan-300"
-                    d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"
-                  />
-                </svg>
-                <span className="group-hover:text-gray-700">Reports</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    className="fill-current text-gray-600 group-hover:text-cyan-600"
-                    d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"
-                  />
-                  <path
-                    className="fill-current text-gray-300 group-hover:text-cyan-300"
-                    d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"
-                  />
-                </svg>
-                <span className="group-hover:text-gray-700">Other data</span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    className="fill-current text-gray-300 group-hover:text-cyan-300"
-                    d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z"
-                  />
-                  <path
-                    className="fill-current text-gray-600 group-hover:text-cyan-600"
-                    fill-rule="evenodd"
-                    d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                <span className="group-hover:text-gray-700">Finance</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-          <button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            wstroke-width="2"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
-            <span className="group-hover:text-gray-700">Logout</span>
-          </button>
-        </div>
-      </aside> */}
-
         <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
           <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
             <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
@@ -305,15 +198,24 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-
+          <div className="container sm">
+            <MapComp
+              center={center}
+              zoom={zoom}
+              markers={markers}
+              width={width}
+              height={height}
+              handleClick={handleClick}
+            />
+          </div>
           <div className="px-6 pt-6 2xl:container">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-auto">
               <div className="md:col-span-2 lg:col-span-1">
+                {/* <div className="flex flex-col bg-white border rounded p-4"> */}
                 {/* First Card */}
-                <div className="card w-96 bg-base-100 shadow-xl">
+                <div className="card w-96 bg-base-300 shadow-xl">
                   <div className="card-body">
-                    <h2 className="card-title">Climb Info</h2>
-                    <h3>Total Climbs Completed: {myClimbs.length}</h3>
+                    <h2 className="card-title">Climbs</h2>
                     <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
                       {myClimbs.map((climb) => (
                         <div key={climb.id} className="carousel-item">
@@ -324,15 +226,64 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
-              <div className="stats shadow">
-                <div className="stat">
-                  <div className="stat-title">Total Page Views</div>
-                  <div className="stat-value">89,400</div>
-                  <div className="stat-desc">21% more than last month</div>
+              {/* Second Card */}
+              <div className="md:col-span-2 lg:col-span-1">
+                {/* <div className="flex flex-col bg-white border rounded p-4"> */}
+                <div className="card w-96 bg-base-300 shadow-xl">
+                  <div className="card-body items-center">
+                    <h2 className="card-title"></h2>
+                    <div className="stats shadow">
+                      <div className="stat items-center">
+                        <img
+                          src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
+                          style={{ maxHeight: "235px" }}
+                        />
+                        <div className="stat-value py-2">Rank:</div>
+                        <div className="stat-value py-2">Beginner</div>
+                        <div className="stat-desc py-2">
+                          <h3>Total Climbs Completed: {myClimbs.length}</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* Third Card */}
+              <div className="md:col-span-2 lg:col-span-1">
+                {/* <div className="flex flex-col bg-white border rounded p-4"> */}
+                <div className="card w-96 bg-base-300 shadow-xl">
+                  <div className="card-body">
+                    <h2 className="card-title">Reviews</h2>
+                    <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
+                      {myReviews.map((review) => (
+                        <div key={review.id} className="carousel-item">
+                          <div className="card w-96 bg-base-100 shadow-xl">
+                            <div className="card-body">
+                              <h2 className="card-title">
+                                Hillname: {getMunroName(data, review.munro_id)}
+                              </h2>
+                              <p>
+                                {formatRelative(
+                                  new Date(review.date),
+                                  new Date(),
+                                  {
+                                    addSuffix: true,
+                                  }
+                                )}
+                              </p>
+                              <p>Name: {review.full_name}</p>
+                              <p>Comment: {review.comment}</p>
+                              <p>Rating:{review.rating} </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
               <div>
-                <div className="lg:h-full py-8 px-6 text-gray-600 rounded-xl border border-gray-200 bg-white">
+                {/* <div className="lg:h-full py-8 px-6 text-gray-600 rounded-xl border border-gray-200 bg-white">
                   <svg
                     className="w-40 m-auto"
                     viewBox="0 0 56 56"
@@ -594,15 +545,15 @@ const Dashboard = () => {
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="justify-center">
+      {/* <div className="justify-center">
         <HeatCal> </HeatCal>
-      </div>
+      </div> */}
     </>
   );
 };
