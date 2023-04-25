@@ -18,14 +18,14 @@ const loginSlice = createSlice({
     handlePasswordChange: (state, action) => {
       state.fields.password = action.payload;
     },
-    error: (state, action) => {
+    setError: (state, action) => {
       state.errorMessage = action.payload;
     },
     reset: () => initialState,
   },
 });
 
-export const { handlePasswordChange, handleUsernameChange, error, reset } =
+export const { handlePasswordChange, handleUsernameChange, setError, reset } =
   loginSlice.actions;
 
 export default loginSlice.reducer;

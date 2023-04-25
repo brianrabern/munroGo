@@ -6,7 +6,7 @@ import {
   handlePasswordConfirmationChange,
   handleNameChange,
   reset,
-  error,
+  setError,
 } from "../features/auth/signupSlice";
 import { useSignupMutation, useLoginMutation } from "../services/auth";
 import ErrorNotification from "./ErrorNotification";
@@ -24,7 +24,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (fields.password !== fields.passwordConfirmation) {
-      dispatch(error("Password does not match confirmation"));
+      dispatch(setError("Password does not match confirmation"));
       return;
     }
     const { username, password, full_name } = fields;
@@ -114,8 +114,13 @@ const Signup = () => {
             </div>
           </form>
           <div style={{ display: "flex", marginTop: "1rem", gap: "5px" }}>
-            <div className="text-neutral-900">Already Have An Account?</div>
-            <Link to={{ pathname: "/" }} className="text-moss-green">
+            <div className="text-neutral-900 justify-center">
+              Already Have An Account?
+            </div>
+            <Link
+              to={{ pathname: "/" }}
+              className="text-moss-green justify-center"
+            >
               Login
             </Link>
           </div>

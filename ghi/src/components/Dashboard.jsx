@@ -10,6 +10,9 @@ const Dashboard = () => {
   const { data, isLoading } = useGetMunrosQuery();
   const { data: account } = useGetAccountQuery();
   const { data: myClimbs } = useGetClimbsQuery();
+  if (!token) {
+    return <div>Not logged in. Go back to login.</div>;
+  }
 
   if (isLoading)
     return (
@@ -32,9 +35,6 @@ const Dashboard = () => {
   const percentDone = Math.round((myClimbs.length / 282) * 100);
   console.log("token", token);
 
-  if (!token) {
-    return <div>Not logged in. Go back to login.</div>;
-  }
   return (
     <>
       <div className="container">
