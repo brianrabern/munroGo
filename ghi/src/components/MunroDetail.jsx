@@ -5,6 +5,7 @@ import { useGetReviewsForMunroQuery } from "../services/revs";
 import Modal from "./Modal";
 import MapComp from "./MapComp";
 import NewReview from "./NewReview";
+import ReviewCard from "./ReviewCard";
 
 const MunroDetail = () => {
   const { munro_id } = useParams();
@@ -191,6 +192,19 @@ const MunroDetail = () => {
         <Link type="button" className="btn btn-active" to="add-review">
           Add Review{" "}
         </Link>
+      </div>
+      <div className="px-6 pt-6 2xl:container">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-auto">
+          <div className="md:col-span-2 lg:col-span-1">
+            {/* <div className="flex flex-col bg-white border rounded p-4"> */}
+            {/* First Card */}
+            {reviews.map((review) => (
+              <div key={review.id}>
+                <ReviewCard key={review.id} review={review} />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
