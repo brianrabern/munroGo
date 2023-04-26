@@ -81,9 +81,9 @@ const MunroDetail = () => {
 
   return (
     <>
-      <div className="flex min-h-screen pt-[30px] px-[40px] bg-moss-green">
+      <div className="flex min-h-screen pt-[30px] px-[40px] bg-gray-500">
         <div className="min-w-full">
-          <h1 className="text-[#292a2b] text-[50px] leading-[40px] font-semibold text-center">
+          <h1 className="text-[#ffffff] text-[50px] leading-[40px] font-semibold text-center">
             {data.hillname}
           </h1>
           <div className="mt-[20px] grid grid-cols-2 gap-[20px]">
@@ -93,7 +93,7 @@ const MunroDetail = () => {
             >
               <div className="pt-[15px] px-[25px] pb-[25px]">
                 <div>
-                  <div className="text-[#00153B] text-[50px] leading-[63px] font-bold">
+                  <div className="text-[#121111] text-[50px] leading-[63px] font-bold">
                     <img
                       className="w-[100%]"
                       src={filterImages(data.images)[0]}
@@ -186,7 +186,7 @@ const MunroDetail = () => {
         </div>
       </div>
 
-      <div className="grid place-items-center py-7 gap-7 md:grid-cols-2 lg:grid-cols-3  bg-moss-green">
+      <div className="grid place-items-center py-7 gap-7 md:grid-cols-2 lg:grid-cols-3  bg-gray-500">
         {/* First Card */}
         {reviews.map((review) => (
           <div key={review.id}>
