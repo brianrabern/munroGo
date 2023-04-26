@@ -106,22 +106,21 @@ const Dashboard = () => {
           height={height}
           handleClick={handleClick}
         />
-        <div className="2xl:container">
-          <div className="grid grid-flow-col auto-cols-max gap-6">
-            <div className="">
-              {/* First Card */}
-              <div className="card w-96 h-full bg-base-300 shadow-xl">
-                <div className="card-body">
-                  <div className="flex justify-center items-center">
-                    <div className="stat-value py-2 text-center">My Climbs</div>
-                  </div>
-                  <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                    {myClimbs.map((climb) => (
-                      <div key={climb.id} className="carousel-item">
-                        <ClimbCard key={climb.id} climb={climb} />
-                      </div>
-                    ))}
-                  </div>
+        <div className="flex flex-col items-center">
+          {/* <div className="grid grid-flow-col auto-cols-max gap-6"> */}
+          <div className="flex justify-center items-center gap-6">
+            {/* First Card */}
+            <div className="card w-96 h-full bg-base-300 shadow-xl">
+              <div className="card-body">
+                <div className="flex justify-center items-center">
+                  <div className="stat-value py-2 text-center">My Climbs</div>
+                </div>
+                <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
+                  {myClimbs.map((climb) => (
+                    <div key={climb.id} className="carousel-item">
+                      <ClimbCard key={climb.id} climb={climb} />
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -196,7 +195,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="overflow-x">
-            <h1 className="text-center font-bold text-gray-500 text-3xl py-3">
+            <h1 className="text-center font-bold text-gray-500 text-3xl py-10">
               Munros Bagged
             </h1>
             <table className="table table-compact w-full">
