@@ -12,16 +12,13 @@ const Login = () => {
   const dispatch = useDispatch();
   const [login] = useLoginMutation();
   const { fields } = useSelector((state) => state.login);
-  const navigate = useNavigate(); // Add useNavigate hook
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    // Make handleSubmit async
     e.preventDefault();
-    console.log("handleSubmit");
-    console.log({ fields });
-    await login(fields); // Wait for login function to complete
+    await login(fields);
     dispatch(reset());
-    navigate("/dashboard"); // Navigate to dashboard route
+    navigate("/dashboard");
   };
 
   return (

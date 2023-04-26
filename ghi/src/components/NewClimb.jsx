@@ -42,7 +42,6 @@ const NewClimb = () => {
       //convert array buffer to base64 string
       const binaryData = new Uint8Array(reader.result);
       const base64Data = Buffer.from(binaryData).toString("base64");
-      console.log(base64Data);
       // dispatch action to update store
       dispatch(handleImageUpload(base64Data));
     };

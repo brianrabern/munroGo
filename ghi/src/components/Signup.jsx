@@ -20,19 +20,6 @@ const Signup = () => {
 
   const { errorMessage, fields } = useSelector((state) => state.signup);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (fields.password !== fields.passwordConfirmation) {
-  //     dispatch(error("Password does not match confirmation"));
-  //     return;
-  //   }
-  //   const { username, password, full_name } = fields;
-  //   let body = { username, password, full_name, rank: "Beginner" };
-  //   await signup(body);
-  //   dispatch(reset());
-  //   navigate("/");
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (fields.password !== fields.passwordConfirmation) {

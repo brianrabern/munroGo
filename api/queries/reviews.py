@@ -34,7 +34,6 @@ class ReviewsQueries(Queries):
     def update_review(
         self, review_id: str, review_params: ReviewParams
     ) -> Review:
-        print(review_params, review_params.dict())
         self.collection.update_one(
             {"_id": ObjectId(review_id)}, {"$set": review_params.dict()}
         )

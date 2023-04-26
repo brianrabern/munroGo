@@ -10,12 +10,8 @@ const Climbs = () => {
   if (isLoading) return <div>Loading...</div>;
   if (myClimbs?.length === 0) return <div>You bum</div>;
 
-  console.log(myClimbs);
-
   return (
     <>
-      {/* <h1>My climbs </h1> */}
-
       <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
         {myClimbs.map((climb) => (
           <div key={climb.id} className="carousel-item">
