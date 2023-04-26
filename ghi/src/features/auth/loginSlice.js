@@ -19,6 +19,9 @@ const loginSlice = createSlice({
       state.fields.password = action.payload;
     },
     reset: () => initialState,
+    setErrorMessage: (state, action) => {
+      state.errorMessage = action.payload;
+    },
   },
 });
 

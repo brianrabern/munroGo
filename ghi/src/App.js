@@ -12,13 +12,15 @@ import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
 import MainMap from "./components/MainMap";
+import Landing from "./components/Landing";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route
             path="/dashboard"
