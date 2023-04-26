@@ -42,7 +42,6 @@ const MapComp = ({ center, zoom, markers, width, height, handleClick }) => {
       });
     }
   }, [map, markers]);
-  console.log(isLoaded);
 
   return isLoaded ? (
     <GoogleMap

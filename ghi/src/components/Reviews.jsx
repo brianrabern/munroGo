@@ -1,6 +1,6 @@
 import React from "react";
 import { useGetReviewsQuery } from "../services/revs";
-import ReviewCard from "./ReviewCard"
+import ReviewCard from "./ReviewCard";
 
 const Reviews = () => {
   const { data: myReviews, isLoading } = useGetReviewsQuery();
@@ -17,26 +17,6 @@ const Reviews = () => {
         ))}
       </div>
     </>
-    // <table className="table table-striped">
-    //   <thead>
-    //     <tr>
-    //       <th key="datetime">Comment</th>
-    //       <th key="duration">Rating</th>
-    //       <th key="difficulty">Date</th>
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     {data.map((reviews) => {
-    //       return (
-    //         <tr key={reviews.id}>
-    //           <td>{reviews.comment}</td>
-    //           <td>{reviews.rating}</td>
-    //           <td>{reviews.date}</td>
-    //         </tr>
-    //       );
-    //     })}
-    //   </tbody>
-    // </table>
   );
 };
 

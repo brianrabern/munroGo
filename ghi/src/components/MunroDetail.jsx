@@ -14,7 +14,6 @@ const MunroDetail = () => {
     useGetReviewsForMunroQuery(munro_id);
 
   if (isLoading || isLoadingReviews) {
-    console.log(reviews);
     return (
       <div className="flex justify-center items-center h-screen">
         <p className="text-[#adb9c0] text-3xl font-medium text-center">

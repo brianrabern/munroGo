@@ -106,7 +106,6 @@ const Dashboard = () => {
         <div className="2xl:container">
           <div className="grid grid-flow-col auto-cols-max gap-6">
             <div className="">
-              {/* <div className="flex flex-col bg-white border rounded p-4"> */}
               {/* First Card */}
               <div className="card w-96 h-full bg-base-300 shadow-xl">
                 <div className="card-body">
@@ -127,7 +126,6 @@ const Dashboard = () => {
             </div>
             {/* Second Card */}
             <div className="rounded-box">
-              {/* <div className="flex flex-col bg-white border rounded p-4"> */}
               <div className="card h-full w-96 bg-base-300 shadow-xl">
                 <div className="card-body items-center">
                   <h2 className="card-title"></h2>
@@ -138,7 +136,6 @@ const Dashboard = () => {
                         src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
                         style={{ maxHeight: "250px" }}
                       />
-                      {/* <div className="stat-value py-2 text-center">Rank:</div> */}
                       <div className="stat-value py-2 text-center">
                         Beginner
                       </div>
@@ -152,7 +149,6 @@ const Dashboard = () => {
             </div>
             {/* Third Card */}
             <div className="">
-              {/* <div className="flex flex-col bg-white border rounded p-4"> */}
               <div className="card h-full w-96 bg-base-300 shadow-xl">
                 <div className="card-body">
                   <div className="flex justify-center items-center">
@@ -160,7 +156,6 @@ const Dashboard = () => {
                       Reviews
                     </h2>
                   </div>
-                  {/* <h2 className="card-title">Reviews</h2> */}
                   <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                     {myReviews.map((review) => (
                       <div key={review.id} className="carousel-item">
