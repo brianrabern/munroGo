@@ -72,7 +72,7 @@ export default function ReviewCard({ review }) {
           )}
         </div>
         <h2 className="card-title">{getMunroName(data, review.munro_id)}</h2>
-        <p>{review.comment}</p>
+        <p className="italic">"{review.comment}"</p>
         <p className="font-bold text-right">{review.full_name}</p>
         <p className="text-right">{date}</p>
       </div>

@@ -107,11 +107,14 @@ const Dashboard = () => {
                 <div className="flex justify-center items-center">
                   <div className="stat-value py-2 text-center">My Climbs</div>
                 </div>
-                <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
+                <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                   {myClimbs.map((climb) => (
-                    <div key={climb.id} className="carousel-item">
-                      <ClimbCard key={climb.id} climb={climb} />
-                    </div>
+                    <>
+                      <div key={climb.id} className="carousel-item h-full">
+                        <ClimbCard key={climb.id} climb={climb} />
+                      </div>
+                      <div className="divider"></div>
+                    </>
                   ))}
                 </div>
               </div>
@@ -146,21 +149,20 @@ const Dashboard = () => {
               </div>
             </div>
             {/* Third Card */}
-            <div className="">
-              <div className="card h-full w-96 bg-base-300 shadow-xl">
-                <div className="card-body">
-                  <div className="flex justify-center items-center">
-                    <div className="stat-value py-2 text-center">
-                      My Reviews
-                    </div>
-                  </div>
-                  <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                    {myReviews.map((review) => (
+            <div className="card h-full w-96 bg-base-300 shadow-xl">
+              <div className="card-body">
+                <div className="flex justify-center items-center">
+                  <div className="stat-value py-2 text-center">My Reviews</div>
+                </div>
+                <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
+                  {myReviews.map((review) => (
+                    <>
                       <div key={review.id} className="carousel-item">
                         <ReviewCardDash key={review.id} review={review} />
                       </div>
-                    ))}
-                  </div>
+                      <div className="divider"></div>
+                    </>
+                  ))}
                 </div>
               </div>
             </div>
