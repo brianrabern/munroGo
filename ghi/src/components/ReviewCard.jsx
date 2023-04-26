@@ -10,10 +10,41 @@ export default function ReviewCard({ review }) {
     <div className="card w-96 bg-neutral-50 text-[#737a7e]">
       <div className="card-body">
         <h2 className="card-title">{review.hillname}</h2>
-        <p>Rating: {review.rating} </p>
         <p>{review.comment}</p>
         <p className="font-bold text-right">{review.full_name}</p>
         <p className="text-right">{date}</p>
+        <div className="rating">
+          <input
+            type="radio"
+            name="rating"
+            className="mask mask-triangle bg-green-500"
+            disabled={review.rating < 1}
+          />
+          <input
+            type="radio"
+            name="rating"
+            className="mask mask-triangle bg-green-500"
+            disabled={review.rating < 2}
+          />
+          <input
+            type="radio"
+            name="rating"
+            className="mask mask-triangle bg-green-500"
+            disabled={review.rating < 3}
+          />
+          <input
+            type="radio"
+            name="rating"
+            className="mask mask-triangle bg-green-500"
+            disabled={review.rating < 4}
+          />
+          <input
+            type="radio"
+            name="rating"
+            className="mask mask-triangle bg-green-500"
+            disabled={review.rating < 5}
+          />
+        </div>
       </div>
     </div>
   );

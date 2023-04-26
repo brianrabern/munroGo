@@ -4,6 +4,7 @@ import { useGetMunroDetailQuery } from "../services/munros";
 import { useGetReviewsForMunroQuery } from "../services/revs";
 import Modal from "./Modal";
 import MapComp from "./MapComp";
+import LoadingBar from "./LoadingBar";
 import NewReview from "./NewReview";
 import ReviewCard from "./ReviewCard";
 
@@ -14,14 +15,7 @@ const MunroDetail = () => {
     useGetReviewsForMunroQuery(munro_id);
 
   if (isLoading || isLoadingReviews) {
-    console.log(reviews);
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-[#adb9c0] text-3xl font-medium text-center">
-          Birl awa', bide a blink...
-        </p>
-      </div>
-    );
+    return <LoadingBar increment={20} interval={50} />;
   }
 
   //map stuff
@@ -186,30 +180,14 @@ const MunroDetail = () => {
         </div>
       </div>
 
-      <div className="grid place-items-center py-7 gap-7 md:grid-cols-2 lg:grid-cols-3  bg-gray-500">
-        {/* First Card */}
+      <div className="grid place-items-center px-[40px] py-7 gap-7 md:grid-cols-2 lg:grid-cols-3  bg-gray-500">
         {reviews.map((review) => (
           <div key={review.id}>
             <ReviewCard key={review.id} review={review} />
           </div>
         ))}
-        {/* </div> */}
-        {/* </div> */}
       </div>
-
-      {/* </div> */}
     </>
   );
 };
 export default MunroDetail;
-
-{
-  /* <div className="justify-center">
-  <Link type="button" className="btn btn-active" to={"add-climb"}>
-    Climbed{" "}
-  </Link>{" "}
-  <Link type="button" className="btn btn-active" to="add-review">
-    Add Review{" "}
-  </Link>
-</div>; */
-}
