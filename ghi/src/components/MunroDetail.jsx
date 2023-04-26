@@ -6,22 +6,19 @@ import Modal from "./Modal";
 import MapComp from "./MapComp";
 import LoadingBar from "./LoadingBar";
 import NewReview from "./NewReview";
+import NewClimb from "./NewClimb";
 import ReviewCard from "./ReviewCard";
+import { useState } from "react";
 
 const MunroDetail = () => {
   const { munro_id } = useParams();
   const { data, isLoading } = useGetMunroDetailQuery(munro_id);
   const { data: reviews, isLoading: isLoadingReviews } =
     useGetReviewsForMunroQuery(munro_id);
+  const [isOpen, setIsOpen] = useState(false);
 
   if (isLoading || isLoadingReviews) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-[#adb9c0] text-3xl font-medium text-center">
-          Birl awa', bide a blink...
-        </p>
-      </div>
-    );
+    return <LoadingBar increment={20} interval={50} />;
   }
 
   //map stuff
@@ -175,10 +172,17 @@ const MunroDetail = () => {
                 <p className="text-[#717F87] text-[14px] leading-[24px] font-medium text-justify py-2">
                   {data.summary}
                 </p>
-                <div className="flex justify-center py-5">
-                  <Modal label="Add review">
-                    <NewReview />
-                  </Modal>
+                <div className="flex justify-center py-5 gap-6">
+                  <div>
+                    <Modal label="Add review" id="Review" warren="hi">
+                      <NewReview />
+                    </Modal>
+                  </div>
+                  <div>
+                    <Modal label="Add a Climb" id="Climb">
+                      <NewClimb />
+                    </Modal>
+                  </div>
                 </div>
               </div>
             </div>

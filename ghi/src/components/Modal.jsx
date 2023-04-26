@@ -5,13 +5,13 @@ function Modal(props) {
 
   return (
     <>
-      <label htmlFor="my-modal" className="btn">
+      <label htmlFor={props.id} className="btn">
         {props.label}
       </label>
 
       <input
         type="checkbox"
-        id="my-modal"
+        id={props.id}
         className="modal-toggle"
         checked={isOpen}
         onChange={() => setIsOpen(!isOpen)}
@@ -21,7 +21,7 @@ function Modal(props) {
         <div className="modal-box">
           {props.children}
           <div className="modal-action">
-            <label htmlFor="my-modal" className="btn">
+            <label htmlFor={props.id} className="btn">
               Close
             </label>
           </div>

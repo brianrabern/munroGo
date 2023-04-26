@@ -23,8 +23,18 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (fields.password !== fields.passwordConfirmation) {
-      dispatch(reset());
+      dispatch(reset(fields.passwordConfirmation));
       dispatch(setError("Password does not match confirmation"));
+      return;
+    }
+    if (
+      fields.username === "" ||
+      fields.full_name === "" ||
+      fields.password === "" ||
+      fields.passwordConfirmation === ""
+    ) {
+      dispatch(reset());
+      dispatch(setError("Fill in all fields."));
       return;
     }
     const { username, password, full_name } = fields;
@@ -32,7 +42,7 @@ const Signup = () => {
     const response = await signup(body);
     if (response.error) {
       dispatch(reset());
-      dispatch(setError("Fill in required fields."));
+      dispatch(setError("Fill in all fields."));
     } else {
       await login({ username, password });
       navigate("/dashboard");

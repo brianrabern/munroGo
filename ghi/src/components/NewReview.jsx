@@ -59,7 +59,7 @@ const NewReview = () => {
           <input
             type="radio"
             name="rating-4"
-            className="mask mask-triangle bg-green-500"
+            className="mask mask-star-2 bg-warning hover:bg-lightyellow"
             checked={fields.rating === 1}
             value={1}
             onChange={(e) => {
@@ -69,7 +69,7 @@ const NewReview = () => {
           <input
             type="radio"
             name="rating-4"
-            className="mask mask-triangle bg-green-500"
+            className="mask mask-star-2 bg-warning hover:bg-lightyellow"
             checked={fields.rating === 2}
             value={2}
             onChange={(e) => {
@@ -79,7 +79,7 @@ const NewReview = () => {
           <input
             type="radio"
             name="rating-4"
-            className="mask mask-triangle bg-green-500"
+            className="mask mask-star-2 bg-warning hover:bg-lightyellow"
             checked={fields.rating === 3}
             value={3}
             onChange={(e) => {
@@ -89,7 +89,7 @@ const NewReview = () => {
           <input
             type="radio"
             name="rating-4"
-            className="mask mask-triangle bg-green-500"
+            className="mask mask-star-2 bg-warning hover:bg-lightyellow"
             checked={fields.rating === 4}
             value={4}
             onChange={(e) => {
@@ -99,7 +99,7 @@ const NewReview = () => {
           <input
             type="radio"
             name="rating-4"
-            className="mask mask-triangle bg-green-500"
+            className="mask mask-star-2 bg-warning hover:bg-lightyellow"
             checked={fields.rating === 5}
             value={5}
             onChange={(e) => {
@@ -107,35 +107,8 @@ const NewReview = () => {
             }}
           />
         </div>
-
-        {/* <div className="mb-3"></div>
-        <label htmlFor="rating__field" className="form-label">
-          Rating
-        </label>
-        <input
-          type="range"
-          className="form-range"
-          defaultValue={fields.rating}
-          min="0"
-          max="5"
-          step="1"
-          id="customRange3"
-          onChange={(e) => {
-            dispatch(handleRatingChange(parseInt(e.target.value)));
-          }}
-        ></input> */}
         <button type="submit" className="btn btn-success">
           Submit
-        </button>
-        {` `}
-        <button
-          className="btn btn-info"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(reset());
-          }}
-        >
-          Reset
         </button>
       </form>
     </>

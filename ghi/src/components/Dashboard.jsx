@@ -5,9 +5,9 @@ import { useGetClimbsQuery } from "../services/climbs";
 import ClimbCard from "./ClimbCard";
 import ReviewCard from "./ReviewCard";
 import { useGetReviewsQuery } from "../services/revs";
-import { formatRelative } from "date-fns";
 import LoadingBar from "./LoadingBar";
 import MapComp from "./MapComp";
+import ReviewCardDash from "./ReviewCardDash";
 
 const Dashboard = () => {
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
@@ -80,14 +80,6 @@ const Dashboard = () => {
 
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
   const todoMunros = 282 - climbedMunros.length;
-  function getMunroName(munros, munroId) {
-    for (let i = 0; i < munros.length; i++) {
-      if (munros[i].id === munroId) {
-        return munros[i].hillname;
-      }
-    }
-    return null;
-  }
 
   return (
     <>
@@ -115,11 +107,14 @@ const Dashboard = () => {
                 <div className="flex justify-center items-center">
                   <div className="stat-value py-2 text-center">My Climbs</div>
                 </div>
-                <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
+                <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                   {myClimbs.map((climb) => (
-                    <div key={climb.id} className="carousel-item">
-                      <ClimbCard key={climb.id} climb={climb} />
-                    </div>
+                    <>
+                      <div key={climb.id} className="carousel-item h-full">
+                        <ClimbCard key={climb.id} climb={climb} />
+                      </div>
+                      <div className="divider"></div>
+                    </>
                   ))}
                 </div>
               </div>
@@ -154,42 +149,20 @@ const Dashboard = () => {
               </div>
             </div>
             {/* Third Card */}
-            <div className="">
-              <div className="card h-full w-96 bg-base-300 shadow-xl">
-                <div className="card-body">
-                  <div className="flex justify-center items-center">
-                    <div className="stat-value py-2 text-center">
-                      My Reviews
-                    </div>
-                  </div>
-                  <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                    {myReviews.map((review) => (
+            <div className="card h-full w-96 bg-base-300 shadow-xl">
+              <div className="card-body">
+                <div className="flex justify-center items-center">
+                  <div className="stat-value py-2 text-center">My Reviews</div>
+                </div>
+                <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
+                  {myReviews.map((review) => (
+                    <>
                       <div key={review.id} className="carousel-item">
-                        <ReviewCard key={review.id} review={review} />
+                        <ReviewCardDash key={review.id} review={review} />
                       </div>
-                      // <div key={review.id} className="carousel-item">
-                      //   <div className="card w-96 bg-base-300">
-                      //     <div className="card-body">
-                      //       <h2 className="card-title">
-                      //         {getMunroName(data, review.munro_id)}
-                      //       </h2>
-                      //       <p className="text-lg">
-                      //         {formatRelative(
-                      //           new Date(review.date),
-                      //           new Date(),
-                      //           {
-                      //             addSuffix: true,
-                      //           }
-                      //         )}
-                      //       </p>
-                      //       <p className="text-lg">Name: {review.full_name}</p>
-                      //       <p className="text-lg">Comment: {review.comment}</p>
-                      //       <p className="text-lg">Rating: {review.rating} </p>
-                      //     </div>
-                      //   </div>
-                      // </div>
-                    ))}
-                  </div>
+                      <div className="divider"></div>
+                    </>
+                  ))}
                 </div>
               </div>
             </div>

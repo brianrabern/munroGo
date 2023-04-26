@@ -9,7 +9,7 @@ export default function ClimbCard({ climb }) {
   });
   const munro = munros.find((munro) => munro.id === climb.munro_id);
   return (
-    <div className="card w-96 bg-base-300">
+    <div className="card w-96 text-[#737a7e]">
       <div className="card-body">
         <h2 className="card-title">{munro.hillname}</h2>
         <p className="text-lg">{date}</p>
