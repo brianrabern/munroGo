@@ -1,0 +1,10 @@
+{
+  "editor.formatOnPaste": true,
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "search.useIgnoreFiles": false
+}
