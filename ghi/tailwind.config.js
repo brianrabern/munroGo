@@ -11,6 +11,7 @@ module.exports = {
       peach: "#EBBA92ff",
       "light-orange": "#ECD1B0ff",
       sepia: "#7A501Dff",
+      lightyellow: "#fde68a",
     },
   },
   plugins: [require("daisyui")],

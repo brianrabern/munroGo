@@ -27,20 +27,6 @@ const Navbar = () => {
       >
         Munros
       </Link>
-      <Link
-        type="button"
-        className="btn btn-ghost normal-case text-xl"
-        to="/my-climbs"
-      >
-        Climbs
-      </Link>
-      <Link
-        type="button"
-        className="btn btn-ghost normal-case text-xl"
-        to="/my-reviews"
-      >
-        Reviews
-      </Link>
       <Logout />
     </div>
   );
