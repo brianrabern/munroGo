@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useGetAccountQuery } from "../services/auth";
 import { useGetMunrosQuery } from "../services/munros";
 import { useGetClimbsQuery } from "../services/climbs";
-import HeatCal from "./HeatCal";
 import ClimbCard from "./ClimbCard";
 import { useGetReviewsQuery } from "../services/revs";
-import { formatDistance, formatRelative } from "date-fns";
-import MainMap from "./MainMap";
+import { formatRelative } from "date-fns";
 import MapComp from "./MapComp";
 
 const Dashboard = () => {
@@ -75,12 +73,9 @@ const Dashboard = () => {
 
   const selectClimbedMunroNames = (data, climbsList) => {
     const climbedMunros = data.filter((munro) => climbsList.includes(munro.id));
-    //  const climbedMunroNames = climbedMunros.map((munro) => munro.hillname);
+
     return climbedMunros;
   };
-  console.log(selectClimbedMunroNames(data, climbsList));
-  //  const filtered_data = selectClimbedMunroNames(data, climbsList);
-  //  const percentDone = Math.round((myClimbs.length / 282) * 100);
 
   function getMunroName(munros, munroId) {
     for (let i = 0; i < munros.length; i++) {
@@ -90,233 +85,186 @@ const Dashboard = () => {
     }
     return null;
   }
-  // const date = formatRelative(new Date(review.date), new Date(), {
-  //   addSuffix: true,
-  // });
-  // const reviewsList = myReviews.map((review) => review.munro_id);
-  // const selectClimbedMunroNames = (data, reviewsList) => {
-  //   const climbedMunros = data.filter((munro) => reviewsList.includes(munro.id));
-  //   const climbedMunroNames = climbedMunros.map((munro) => munro.hillname);
-  //   return climbedMunroNames;
-  // };
 
-  // const filtered_data = selectClimbedMunroNames(data, climbsList);
-  // const percentDone = Math.round((myClimbs.length / 282) * 100);
   return (
     <>
-      <div className="container">
-        <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
-          <div className=" z-10 top-0 h-16 border-b bg-white lg:py-2.5">
-            <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
-              <h5
-                hidden
-                className="text-2xl text-gray-600 font-medium lg:block"
-              >
-                {account.full_name}'s Dashboard
-              </h5>
-              <button className="w-12 h-16 -mr-2 border-r lg:hidden">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 my-auto"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div className="container sm">
-            <MapComp
-              center={center}
-              zoom={zoom}
-              markers={markers}
-              width={width}
-              height={height}
-              handleClick={handleClick}
-            />
-          </div>
-
-          <div className="px-6 pt-6 2xl:container">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-auto">
-              <div className="md:col-span-2 lg:col-span-1">
-                {/* <div className="flex flex-col bg-white border rounded p-4"> */}
-                {/* First Card */}
-                <div className="card w-96 bg-base-300 shadow-xl">
-                  <div className="card-body">
-                    <div className="flex justify-center items-center">
-                      <h2 className="text-3xl card-title font-bold text-center">
-                        Climbs
-                      </h2>
-                    </div>
-                    <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                      {myClimbs.map((climb) => (
-                        <div key={climb.id} className="carousel-item">
-                          <ClimbCard key={climb.id} climb={climb} />
-                        </div>
-                      ))}
-                    </div>
+      <div className="flex flex-col items-center gap-10 px-20">
+        <h5
+          hidden
+          className="text-2xl text-gray-600 font-medium lg:block pt-10 text-center"
+        >
+          {account.full_name}'s Dashboard
+        </h5>
+        <MapComp
+          center={center}
+          zoom={zoom}
+          markers={markers}
+          width={width}
+          height={height}
+          handleClick={handleClick}
+        />
+        <div className="2xl:container">
+          <div className="grid grid-flow-col auto-cols-max gap-6">
+            <div className="">
+              {/* <div className="flex flex-col bg-white border rounded p-4"> */}
+              {/* First Card */}
+              <div className="card w-96 h-full bg-base-300 shadow-xl">
+                <div className="card-body">
+                  <div className="flex justify-center items-center">
+                    <h2 className="text-3xl card-title font-bold text-center">
+                      Climbs
+                    </h2>
+                  </div>
+                  <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
+                    {myClimbs.map((climb) => (
+                      <div key={climb.id} className="carousel-item">
+                        <ClimbCard key={climb.id} climb={climb} />
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-              {/* Second Card */}
-              <div className="md:col-span-2 lg:col-span-1 rounded-box">
-                {/* <div className="flex flex-col bg-white border rounded p-4"> */}
-                <div className="card w-96 bg-base-300 shadow-xl">
-                  <div className="card-body items-center">
-                    <h2 className="card-title"></h2>
-                    <div className="stats bg-base-300">
-                      <div className="stat items-center">
-                        <div className="stat-value py-2 text-center">Rank:</div>
-                        <img
-                          src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
-                          style={{ maxHeight: "250px" }}
-                        />
-                        {/* <div className="stat-value py-2 text-center">Rank:</div> */}
-                        <div className="stat-value py-2 text-center">
-                          Beginner
-                        </div>
-                        <div className="stat-desc py-2 text-lg text-center">
-                          <h3>Total Climbs Completed: {myClimbs.length}</h3>
-                        </div>
+            </div>
+            {/* Second Card */}
+            <div className="rounded-box">
+              {/* <div className="flex flex-col bg-white border rounded p-4"> */}
+              <div className="card h-full w-96 bg-base-300 shadow-xl">
+                <div className="card-body items-center">
+                  <h2 className="card-title"></h2>
+                  <div className="stats bg-base-300">
+                    <div className="stat items-center">
+                      <div className="stat-value py-2 text-center">Rank:</div>
+                      <img
+                        src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
+                        style={{ maxHeight: "250px" }}
+                      />
+                      {/* <div className="stat-value py-2 text-center">Rank:</div> */}
+                      <div className="stat-value py-2 text-center">
+                        Beginner
+                      </div>
+                      <div className="stat-desc py-2 text-lg text-center">
+                        <h3>Total Climbs Completed: {myClimbs.length}</h3>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              {/* Third Card */}
-              <div className="md:col-span-2 lg:col-span-1">
-                {/* <div className="flex flex-col bg-white border rounded p-4"> */}
-                <div className="card w-96 bg-base-300 shadow-xl">
-                  <div className="card-body">
-                    <div className="flex justify-center items-center">
-                      <h2 className="text-3xl card-title font-bold text-center">
-                        Reviews
-                      </h2>
-                    </div>
-                    {/* <h2 className="card-title">Reviews</h2> */}
-                    <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                      {myReviews.map((review) => (
-                        <div key={review.id} className="carousel-item">
-                          <div className="card w-96 bg-base-300">
-                            <div className="card-body">
-                              <h2 className="card-title">
-                                {getMunroName(data, review.munro_id)}
-                              </h2>
-                              <p className="text-lg">
-                                {formatRelative(
-                                  new Date(review.date),
-                                  new Date(),
-                                  {
-                                    addSuffix: true,
-                                  }
-                                )}
-                              </p>
-                              <p className="text-lg">
-                                Name: {review.full_name}
-                              </p>
-                              <p className="text-lg">
-                                Comment: {review.comment}
-                              </p>
-                              <p className="text-lg">
-                                Rating: {review.rating}{" "}
-                              </p>
-                            </div>
+            </div>
+            {/* Third Card */}
+            <div className="">
+              {/* <div className="flex flex-col bg-white border rounded p-4"> */}
+              <div className="card h-full w-96 bg-base-300 shadow-xl">
+                <div className="card-body">
+                  <div className="flex justify-center items-center">
+                    <h2 className="text-3xl card-title font-bold text-center">
+                      Reviews
+                    </h2>
+                  </div>
+                  {/* <h2 className="card-title">Reviews</h2> */}
+                  <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
+                    {myReviews.map((review) => (
+                      <div key={review.id} className="carousel-item">
+                        <div className="card w-96 bg-base-300">
+                          <div className="card-body">
+                            <h2 className="card-title">
+                              {getMunroName(data, review.munro_id)}
+                            </h2>
+                            <p className="text-lg">
+                              {formatRelative(
+                                new Date(review.date),
+                                new Date(),
+                                {
+                                  addSuffix: true,
+                                }
+                              )}
+                            </p>
+                            <p className="text-lg">Name: {review.full_name}</p>
+                            <p className="text-lg">Comment: {review.comment}</p>
+                            <p className="text-lg">Rating: {review.rating} </p>
                           </div>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-
-              <div></div>
             </div>
-            <div className="overflow-x">
-              <h1 className="text-center font-bold text-gray-500 text-3xl py-3">
-                Munros Bagged
-              </h1>
-              <table className="table table-compact w-full">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                    >
-                      Hillname
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                    >
-                      Region
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                    >
-                      Metres
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                    >
-                      Feet
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                    >
-                      Longitude
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                    >
-                      Latitude
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {selectClimbedMunroNames(data, climbsList).map((munro) => {
-                    return (
-                      <tr key={munro.id}>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                          {munro.hillname}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                          {munro.region}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                          {munro.metres}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                          {munro.feet}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                          {munro.longitude}
-                        </td>
-                        <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                          {munro.latitude}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
+          </div>
+          <div className="overflow-x">
+            <h1 className="text-center font-bold text-gray-500 text-3xl py-3">
+              Munros Bagged
+            </h1>
+            <table className="table table-compact w-full">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                  >
+                    Hillname
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                  >
+                    Region
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                  >
+                    Metres
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                  >
+                    Feet
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                  >
+                    Longitude
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
+                  >
+                    Latitude
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200">
+                {selectClimbedMunroNames(data, climbsList).map((munro) => {
+                  return (
+                    <tr key={munro.id}>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                        {munro.hillname}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                        {munro.region}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                        {munro.metres}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                        {munro.feet}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                        {munro.longitude}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                        {munro.latitude}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      {/* <div className="justify-center">
-        <HeatCal> </HeatCal>
-      </div> */}
     </>
   );
 };
