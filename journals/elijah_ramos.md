@@ -23,3 +23,15 @@ April 17, 2023: munro detail paged completed, started workin on create climb for
 April 18, 2023: updated and finished create climb form, updated backend models for climb and adjusted features accordingly
 
 April 19, 2023: create review frontend form working, display reviews lit page working
+
+April 20, 2023: refactored map component, installed tailwind and messed around with styling
+
+April 21, 2023: worked on styling of munro detail pages and dashboard
+
+April 22, 2023: refactored and organized jsx components into its own file, created working navbar, landing page, and restyled login/sign up pages
+
+April 23, 2023: installed daisy, remade navbar and added logout functionality, messed around with styling of login/signup
+
+April 24, 2023: created climb cards and refactored climbs component to use climb cards, repeated for reviews, implemented rough sketch for card carousel for both
+
+April 25, 2023: styling of dashboard and integration of climbs and reviews compenents as well as listing rank and munros completed
