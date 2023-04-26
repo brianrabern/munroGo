@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-function Modal(props) {
+function Modal({ content }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <label htmlFor="my-modal" className="btn">
-        {props.label}
+        {content}
       </label>
 
       <input

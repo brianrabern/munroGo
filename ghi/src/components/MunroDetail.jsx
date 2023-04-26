@@ -6,6 +6,7 @@ import Modal from "./Modal";
 import MapComp from "./MapComp";
 import LoadingBar from "./LoadingBar";
 import NewReview from "./NewReview";
+import NewClimb from "./NewClimb";
 import ReviewCard from "./ReviewCard";
 
 const MunroDetail = () => {
@@ -15,13 +16,7 @@ const MunroDetail = () => {
     useGetReviewsForMunroQuery(munro_id);
 
   if (isLoading || isLoadingReviews) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-[#adb9c0] text-3xl font-medium text-center">
-          Birl awa', bide a blink...
-        </p>
-      </div>
-    );
+    return <LoadingBar increment={20} interval={50} />;
   }
 
   //map stuff
@@ -176,9 +171,12 @@ const MunroDetail = () => {
                   {data.summary}
                 </p>
                 <div className="flex justify-center py-5">
-                  <Modal label="Add review">
-                    <NewReview />
-                  </Modal>
+                  <div>
+                    <Modal content={<NewReview />} label="Add review"></Modal>
+                  </div>
+                  <div>
+                    <Modal content={<NewClimb />} label="Add climb"></Modal>
+                  </div>
                 </div>
               </div>
             </div>
