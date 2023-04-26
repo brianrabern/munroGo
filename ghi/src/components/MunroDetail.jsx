@@ -83,7 +83,7 @@ const MunroDetail = () => {
     <>
       <div className="flex min-h-screen pt-[30px] px-[40px] bg-moss-green">
         <div className="min-w-full">
-          <h1 className="text-[#d6d8d9] text-[50px] leading-[40px] font-semibold text-center">
+          <h1 className="text-[#292a2b] text-[50px] leading-[40px] font-semibold text-center">
             {data.hillname}
           </h1>
           <div className="mt-[20px] grid grid-cols-2 gap-[20px]">
@@ -103,7 +103,7 @@ const MunroDetail = () => {
                 </div>
 
                 <div>
-                  <p className="text-[#717F87] text-[18px] leading-[28px] font-medium">
+                  <p className="text-[#717F87] text-[18px] leading-[28px] font-medium py-2">
                     Summit: {data.metres} meters
                   </p>
                 </div>
@@ -142,8 +142,8 @@ const MunroDetail = () => {
                 </div>
 
                 <div>
-                  <p className="text-[#717F87] text-[18px] leading-[28px] font-medium">
-                    Region: {region_names[data.region.slice(0, -1)]}
+                  <p className="text-[#717F87] text-[18px] leading-[28px] font-medium py-3">
+                    {region_names[data.region.slice(0, -1)]}
                   </p>
                 </div>
               </div>
@@ -172,13 +172,13 @@ const MunroDetail = () => {
                 </div>
               </div>
               <div>
-                <p className="text-[#717F87] text-[14px] leading-[24px] font-medium text-justify">
+                <p className="text-[#717F87] text-[14px] leading-[24px] font-medium text-justify py-2">
                   {data.summary}
                 </p>
                 <div className="flex justify-center py-5">
-                <Modal label="Add review" >
-                  <NewReview />
-                </Modal>
+                  <Modal label="Add review">
+                    <NewReview />
+                  </Modal>
                 </div>
               </div>
             </div>
@@ -203,12 +203,13 @@ const MunroDetail = () => {
 };
 export default MunroDetail;
 
-
-{/* <div className="justify-center">
+{
+  /* <div className="justify-center">
   <Link type="button" className="btn btn-active" to={"add-climb"}>
     Climbed{" "}
   </Link>{" "}
   <Link type="button" className="btn btn-active" to="add-review">
     Add Review{" "}
   </Link>
-</div>; */}
+</div>; */
+}

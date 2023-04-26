@@ -12,14 +12,15 @@ export default function ClimbCard({ climb }) {
     <div className="card w-96 bg-base-300">
       <div className="card-body">
         <h2 className="card-title">{munro.hillname}</h2>
-        <p>{date}</p>
-        <p>Difficulty: {climb.difficulty}</p>
-        <p>Duration: {climb.duration}</p>
-        <p>Notes: {climb.notes}</p>
-        <p>Weather: {climb.weather}</p>
+        <p className="text-lg">{date}</p>
+        <p className="text-lg">Difficulty: {climb.difficulty}</p>
+        <p className="text-lg">Duration: {climb.duration}</p>
+        <p className="text-lg">Notes: {climb.notes}</p>
+        <p className="text-lg">Weather: {climb.weather}</p>
       </div>
       <figure>
-        <img className="rounded-box"
+        <img
+          className="rounded-box"
           src={
             climb.image
               ? `data:image/png;base64,${climb.image}`

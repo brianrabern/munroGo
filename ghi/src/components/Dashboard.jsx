@@ -71,18 +71,16 @@ const Dashboard = () => {
         </p>
       </div>
     );
-     const climbsList = myClimbs.map((climb) => climb.munro_id);
+  const climbsList = myClimbs.map((climb) => climb.munro_id);
 
-     const selectClimbedMunroNames = (data, climbsList) => {
-       const climbedMunros = data.filter((munro) =>
-         climbsList.includes(munro.id)
-       );
-      //  const climbedMunroNames = climbedMunros.map((munro) => munro.hillname);
-       return climbedMunros;
-     };
-     console.log(selectClimbedMunroNames(data, climbsList))
-    //  const filtered_data = selectClimbedMunroNames(data, climbsList);
-    //  const percentDone = Math.round((myClimbs.length / 282) * 100);
+  const selectClimbedMunroNames = (data, climbsList) => {
+    const climbedMunros = data.filter((munro) => climbsList.includes(munro.id));
+    //  const climbedMunroNames = climbedMunros.map((munro) => munro.hillname);
+    return climbedMunros;
+  };
+  console.log(selectClimbedMunroNames(data, climbsList));
+  //  const filtered_data = selectClimbedMunroNames(data, climbsList);
+  //  const percentDone = Math.round((myClimbs.length / 282) * 100);
 
   function getMunroName(munros, munroId) {
     for (let i = 0; i < munros.length; i++) {
@@ -96,7 +94,6 @@ const Dashboard = () => {
   //   addSuffix: true,
   // });
   // const reviewsList = myReviews.map((review) => review.munro_id);
-
   // const selectClimbedMunroNames = (data, reviewsList) => {
   //   const climbedMunros = data.filter((munro) => reviewsList.includes(munro.id));
   //   const climbedMunroNames = climbedMunros.map((munro) => munro.hillname);
@@ -174,15 +171,18 @@ const Dashboard = () => {
                 <div className="card w-96 bg-base-300 shadow-xl">
                   <div className="card-body items-center">
                     <h2 className="card-title"></h2>
-                    <div className="stats shadow bg-base-300">
+                    <div className="stats bg-base-300">
                       <div className="stat items-center">
+                        <div className="stat-value py-2 text-center">Rank:</div>
                         <img
                           src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
-                          style={{ maxHeight: "235px" }}
+                          style={{ maxHeight: "250px" }}
                         />
-                        <div className="stat-value py-2">Rank:</div>
-                        <div className="stat-value py-2">Beginner</div>
-                        <div className="stat-desc py-2">
+                        {/* <div className="stat-value py-2 text-center">Rank:</div> */}
+                        <div className="stat-value py-2 text-center">
+                          Beginner
+                        </div>
+                        <div className="stat-desc py-2 text-lg text-center">
                           <h3>Total Climbs Completed: {myClimbs.length}</h3>
                         </div>
                       </div>
@@ -209,7 +209,7 @@ const Dashboard = () => {
                               <h2 className="card-title">
                                 {getMunroName(data, review.munro_id)}
                               </h2>
-                              <p>
+                              <p className="text-lg">
                                 {formatRelative(
                                   new Date(review.date),
                                   new Date(),
@@ -218,9 +218,15 @@ const Dashboard = () => {
                                   }
                                 )}
                               </p>
-                              <p>Name: {review.full_name}</p>
-                              <p>Comment: {review.comment}</p>
-                              <p>Rating:{review.rating} </p>
+                              <p className="text-lg">
+                                Name: {review.full_name}
+                              </p>
+                              <p className="text-lg">
+                                Comment: {review.comment}
+                              </p>
+                              <p className="text-lg">
+                                Rating: {review.rating}{" "}
+                              </p>
                             </div>
                           </div>
                         </div>

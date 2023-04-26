@@ -30,7 +30,7 @@ const Munros = () => {
 
   if (data?.length === 0) return <div>Somethin's amiss.</div>;
 
- 
+
 
   const region_names = {
     "01": "Firth of Clyde to Strathtay",
