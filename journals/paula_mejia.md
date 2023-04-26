@@ -73,8 +73,33 @@ Friday, April 7th, 2023
 - finish munro list
 - user munro list
 
+#          Week 4
 Monday, April 17th, 2023
 - munro detail pages
 - started adding a climb
 
 Tuesday, April 18th, 2023
+- got feedback on climbs
+- made climbs params restful/ reconfigured climbs
+- add review
+- review list
+
+Wednesday, April 19th, 2023
+- Google maps API
+- map landing page
+- user specific map page with colored markers
+
+Thursday, April 20th, 2023
+- installed tailwind
+- Munro detail page
+- login sign up
+- Munro list
+- map into page & map page
+
+#          Week 5
+Monday, April 24th, 2023
+- review card
+
+Tuesday, April 25th, 2023
+- user dashboard
+- isLoading authentication error

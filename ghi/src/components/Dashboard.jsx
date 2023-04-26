@@ -3,15 +3,17 @@ import { useGetAccountQuery } from "../services/auth";
 import { useGetMunrosQuery } from "../services/munros";
 import { useGetClimbsQuery } from "../services/climbs";
 import ClimbCard from "./ClimbCard";
+import ReviewCard from "./ReviewCard";
 import { useGetReviewsQuery } from "../services/revs";
 import { formatRelative } from "date-fns";
+import LoadingBar from "./LoadingBar";
 import MapComp from "./MapComp";
 
 const Dashboard = () => {
-  const { data, isLoading } = useGetMunrosQuery();
-  const { data: account } = useGetAccountQuery();
-  const { data: myClimbs } = useGetClimbsQuery();
-  const { data: myReviews } = useGetReviewsQuery();
+  const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
+  const { data: account, isLoading: isLoadingAccount } = useGetAccountQuery();
+  const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
+  const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
   const [markers, setMarkers] = useState([]);
 
   const center = {
@@ -61,22 +63,23 @@ const Dashboard = () => {
     }
   }, [data]);
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-[#adb9c0] text-3xl font-medium text-center">
-          Birl awa', bide a blink...
-        </p>
-      </div>
-    );
+  if (
+    isLoadingMunros ||
+    isLoadingAccount ||
+    isLoadingClimbs ||
+    isLoadingReviews
+  )
+    return <LoadingBar increment={20} interval={50} />;
+
   const climbsList = myClimbs.map((climb) => climb.munro_id);
 
-  const selectClimbedMunroNames = (data, climbsList) => {
-    const climbedMunros = data.filter((munro) => climbsList.includes(munro.id));
-
-    return climbedMunros;
+  const getClimbedMunros = (data, climbsList) => {
+    return data.filter((munro) => climbsList.includes(munro.id));
   };
+  const climbedMunros = getClimbedMunros(data, climbsList);
 
+  const percentDone = Math.round((climbedMunros.length / 282) * 100);
+  const todoMunros = 282 - climbedMunros.length;
   function getMunroName(munros, munroId) {
     for (let i = 0; i < munros.length; i++) {
       if (munros[i].id === munroId) {
@@ -110,9 +113,7 @@ const Dashboard = () => {
               <div className="card w-96 h-full bg-base-300 shadow-xl">
                 <div className="card-body">
                   <div className="flex justify-center items-center">
-                    <h2 className="text-3xl card-title font-bold text-center">
-                      Climbs
-                    </h2>
+                    <div className="stat-value py-2 text-center">My Climbs</div>
                   </div>
                   <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                     {myClimbs.map((climb) => (
@@ -128,10 +129,11 @@ const Dashboard = () => {
             <div className="rounded-box">
               <div className="card h-full w-96 bg-base-300 shadow-xl">
                 <div className="card-body items-center">
-                  <h2 className="card-title"></h2>
                   <div className="stats bg-base-300">
                     <div className="stat items-center">
-                      <div className="stat-value py-2 text-center">Rank:</div>
+                      <div className="stat-value py-2 text-center">
+                        My Stats
+                      </div>
                       <img
                         src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
                         style={{ maxHeight: "250px" }}
@@ -141,6 +143,11 @@ const Dashboard = () => {
                       </div>
                       <div className="stat-desc py-2 text-lg text-center">
                         <h3>Total Climbs Completed: {myClimbs.length}</h3>
+                        <div className="stat-value">{percentDone}%</div>
+                        <div className="stat-title">Munros bagged</div>
+                        <div className="stat-desc text-secondary">
+                          {todoMunros} remaining
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -152,33 +159,36 @@ const Dashboard = () => {
               <div className="card h-full w-96 bg-base-300 shadow-xl">
                 <div className="card-body">
                   <div className="flex justify-center items-center">
-                    <h2 className="text-3xl card-title font-bold text-center">
-                      Reviews
-                    </h2>
+                    <div className="stat-value py-2 text-center">
+                      My Reviews
+                    </div>
                   </div>
                   <div className="carousel carousel-center max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                     {myReviews.map((review) => (
                       <div key={review.id} className="carousel-item">
-                        <div className="card w-96 bg-base-300">
-                          <div className="card-body">
-                            <h2 className="card-title">
-                              {getMunroName(data, review.munro_id)}
-                            </h2>
-                            <p className="text-lg">
-                              {formatRelative(
-                                new Date(review.date),
-                                new Date(),
-                                {
-                                  addSuffix: true,
-                                }
-                              )}
-                            </p>
-                            <p className="text-lg">Name: {review.full_name}</p>
-                            <p className="text-lg">Comment: {review.comment}</p>
-                            <p className="text-lg">Rating: {review.rating} </p>
-                          </div>
-                        </div>
+                        <ReviewCard key={review.id} review={review} />
                       </div>
+                      // <div key={review.id} className="carousel-item">
+                      //   <div className="card w-96 bg-base-300">
+                      //     <div className="card-body">
+                      //       <h2 className="card-title">
+                      //         {getMunroName(data, review.munro_id)}
+                      //       </h2>
+                      //       <p className="text-lg">
+                      //         {formatRelative(
+                      //           new Date(review.date),
+                      //           new Date(),
+                      //           {
+                      //             addSuffix: true,
+                      //           }
+                      //         )}
+                      //       </p>
+                      //       <p className="text-lg">Name: {review.full_name}</p>
+                      //       <p className="text-lg">Comment: {review.comment}</p>
+                      //       <p className="text-lg">Rating: {review.rating} </p>
+                      //     </div>
+                      //   </div>
+                      // </div>
                     ))}
                   </div>
                 </div>
@@ -231,7 +241,7 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {selectClimbedMunroNames(data, climbsList).map((munro) => {
+                {climbedMunros.map((munro) => {
                   return (
                     <tr key={munro.id}>
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
