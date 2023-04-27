@@ -43,12 +43,3 @@ class MunrosQueries(Queries):
         weather_data = data.json()
 
         return weather_data
-
-    # def create_review(self, munro_id: str, review: dict) -> Munro:
-    #     munro = self.collection.find_one({"_id": ObjectId(munro_id)})
-    #     # munro["reviews"].append(review)
-    #     self.collection.update_one(
-    #         {"_id": ObjectId(munro_id)}, {"$push": {"reviews": review}}
-    #     )
-    #     munro["id"] = str(munro["_id"])
-    #     return Munro(**munro)

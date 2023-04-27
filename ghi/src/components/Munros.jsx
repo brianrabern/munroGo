@@ -48,8 +48,6 @@ const Munros = () => {
 
   const climbsIdList = myClimbs.map((climb) => climb.munro_id);
 
-  console.log(selectedMunro);
-
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
   };
@@ -171,18 +169,6 @@ const Munros = () => {
                   >
                     Climbed
                   </th>
-                  {/* <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
-                  >
-                    Longitude
-                  </th> */}
-                  {/* <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
-                  >
-                    Latitude
-                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
