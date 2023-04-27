@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useGetAccountQuery } from "../services/auth";
 import { useGetMunrosQuery } from "../services/munros";
 import { useGetClimbsQuery } from "../services/climbs";
-import ClimbCard from "./ClimbCard";
-import ReviewCard from "./ReviewCard";
 import { useGetReviewsQuery } from "../services/revs";
 import LoadingBar from "./LoadingBar";
 import MapComp from "./MapComp";
+import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
+import Select from "react-select";
 
 const Dashboard = () => {
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
@@ -15,6 +15,7 @@ const Dashboard = () => {
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
   const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
   const [markers, setMarkers] = useState([]);
+  const [selectedMunro, setSelectedMunro] = useState("");
 
   const center = {
     lat: 57.1,
@@ -25,7 +26,13 @@ const Dashboard = () => {
   const height = "600px";
 
   const handleClick = (munro) => {
-    window.location.href = `/munros/${munro.id}`;
+    window.location.href = `/munros/${munro.id}/add-climb`;
+  };
+  const handleChange = (selectedOption) => {
+    handleMunroSelected(selectedOption);
+  };
+  const handleMunroSelected = (munro) => {
+    window.location.href = `/munros/${munro.value}`;
   };
 
   useEffect(() => {
@@ -73,9 +80,17 @@ const Dashboard = () => {
 
   const climbsList = myClimbs.map((climb) => climb.munro_id);
 
+  const munroOptions = data.map((munro) => ({
+    label: munro.hillname,
+    value: munro.id,
+    key: munro.id,
+  }));
+
+  console.log(munroOptions);
   const getClimbedMunros = (data, climbsList) => {
     return data.filter((munro) => climbsList.includes(munro.id));
   };
+
   const climbedMunros = getClimbedMunros(data, climbsList);
 
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
@@ -83,6 +98,18 @@ const Dashboard = () => {
 
   return (
     <>
+      <div>
+        <Select
+          value={selectedMunro}
+          onChange={handleChange}
+          options={munroOptions}
+          className="w-52"
+          menuPlacement="auto"
+          components={{
+            DropdownIndicator: () => <span />,
+          }}
+        />
+      </div>
       <div className="flex flex-col items-center gap-10 px-20">
         <h5
           hidden
@@ -110,9 +137,15 @@ const Dashboard = () => {
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                   {myClimbs.map((climb) => (
                     <>
-                      <div key={climb.id} className="carousel-item h-full">
-                        <ClimbCard key={climb.id} climb={climb} />
+                      <div
+                        key={`climb-${climb.id}`}
+                        className="carousel-item h-full"
+                      >
+                        <ClimbCard key={`card-${climb.id}`} climb={climb} />
                       </div>
+                      {/* <div key={climb.id} className="carousel-item h-full">
+                        <ClimbCard key={climb.id} climb={climb} />
+                      </div> */}
                       <div className="divider"></div>
                     </>
                   ))}
@@ -157,9 +190,18 @@ const Dashboard = () => {
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                   {myReviews.map((review) => (
                     <>
-                      <div key={review.id} className="carousel-item">
-                        <ReviewCardDash key={review.id} review={review} />
+                      <div
+                        key={`review-${review.id}`}
+                        className="carousel-item"
+                      >
+                        <ReviewCardDash
+                          key={`card-${review.id}`}
+                          review={review}
+                        />
                       </div>
+                      {/* <div key={review.id} className="carousel-item">
+                        <ReviewCardDash key={review.id} review={review} />
+                      </div> */}
                       <div className="divider"></div>
                     </>
                   ))}
