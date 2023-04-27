@@ -3,9 +3,7 @@ from queries.munros import MunrosQueries
 from main import app
 from tests.utils import fake_munro, fake_munros_list, fake_munro_data
 from authenticator import authenticator
-from routers.accounts import AccountToken
-from models.accounts import AccountOut
-from unittest import TestCase
+from routers.accounts import AccountToken, AccountOut
 from models.munros import MunrosList, Munro, MunroWithData
 
 
@@ -35,6 +33,7 @@ class TestMunrosQueries:
         return {"key":"string"}
 
 
+
 def test_get_one_munro() -> MunroWithData:
     # Arrange
     app.dependency_overrides[MunrosQueries] = TestMunrosQueries
@@ -43,18 +42,18 @@ def test_get_one_munro() -> MunroWithData:
     ] = fake_get_token
 
     # Act
+
     munro_id = "643f0095ab5591a12a3a8c4b"
     response = client.get("/api/munros/{munro_id}")
     data = response.json()
     data["summary"] = "string"
     data["images"] = ["string"]
-
-    # Clean Up
     app.dependency_overrides = {}
 
     # Assert
     assert response.status_code == 200
     assert data == fake_munro_data
+
 
 def test_get_all_munros() -> MunrosList:
 
