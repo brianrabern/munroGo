@@ -47,135 +47,136 @@ const NewClimbClick = ({ munro_id }) => {
 
   return (
     <>
-      {" "}
-      <h4 className="text-center pb-5">Add climb</h4>
-      <form
-        className="flex flex-col items-center gap-2"
-        onSubmit={(e) => {
-          e.preventDefault();
-          createClimb(climb);
-          dispatch(reset());
-        }}
-      >
-        <div>
-          <input
-            type="datetime-local"
-            className="textarea textarea-bordered h-12 w-full"
-            id="datetime__field"
-            placeholder="Date"
-            tabIndex={2}
-            value={fields.datetime}
-            onChange={(e) => {
-              dispatch(handleDateChange(e.target.value));
-            }}
-          />
-        </div>
-
-        <textarea
-          type="text"
-          className="textarea textarea-bordered h-12 w-3/4"
-          placeholder="Duration"
-          tabIndex={4}
-          value={fields.duration}
-          onChange={(e) => {
-            dispatch(handleDurationChange(e.target.value));
+      <div className="bg-base-100">
+        <h4 className="text-center pb-5">Add climb</h4>
+        <form
+          className="flex flex-col items-center gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            createClimb(climb);
+            dispatch(reset());
           }}
-        ></textarea>
-        <textarea
-          type="text"
-          className="textarea textarea-bordered h-12 w-3/4"
-          placeholder="Weather"
-          tabIndex={5}
-          value={fields.weather}
-          onChange={(e) => {
-            dispatch(handleWeatherChange(e.target.value));
-          }}
-        ></textarea>
-        <textarea
-          type="text"
-          className="textarea textarea-bordered h-24 w-3/4"
-          id="notes__field"
-          placeholder="Notes"
-          tabIndex={6}
-          value={fields.notes}
-          onChange={(e) => {
-            dispatch(handleNotesChange(e.target.value));
-          }}
-        ></textarea>
-        <div className="rating">
-          {" "}
-          Difficulty:
-          <div className="px-2">
+        >
+          <div>
             <input
-              type="radio"
-              name="rating-4"
-              className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
-              checked={fields.difficulty === 1}
-              value={1}
+              type="datetime-local"
+              className="textarea textarea-bordered h-12 w-full"
+              id="datetime__field"
+              placeholder="Date"
+              tabIndex={2}
+              value={fields.datetime}
               onChange={(e) => {
-                dispatch(handleDifficultyChange(parseInt(e.target.value)));
-              }}
-            />
-            <input
-              type="radio"
-              name="rating-4"
-              className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
-              checked={fields.difficulty === 2}
-              value={2}
-              onChange={(e) => {
-                dispatch(handleDifficultyChange(parseInt(e.target.value)));
-              }}
-            />
-            <input
-              type="radio"
-              name="rating-4"
-              className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
-              checked={fields.difficulty === 3}
-              value={3}
-              onChange={(e) => {
-                dispatch(handleDifficultyChange(parseInt(e.target.value)));
-              }}
-            />
-            <input
-              type="radio"
-              name="rating-4"
-              className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
-              checked={fields.difficulty === 4}
-              value={4}
-              onChange={(e) => {
-                dispatch(handleDifficultyChange(parseInt(e.target.value)));
-              }}
-            />
-            <input
-              type="radio"
-              name="rating-4"
-              className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
-              checked={fields.difficulty === 5}
-              value={5}
-              onChange={(e) => {
-                dispatch(handleDifficultyChange(parseInt(e.target.value)));
+                dispatch(handleDateChange(e.target.value));
               }}
             />
           </div>
-        </div>
-        <div className="form-control w-full max-w-xs">
-          <input
-            type="file"
-            className="file-input file-input-bordered w-full max-w-xs"
-            id="image__field"
-            placeholder="Photo"
-            tabIndex={7}
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-        </div>
-        <div className="flex flex-col items-center">
-          <button type="submit" className="btn btn-success">
-            Submit
-          </button>
-        </div>
-        {` `}
-      </form>
+
+          <textarea
+            type="text"
+            className="textarea textarea-bordered h-12 w-3/4"
+            placeholder="Duration"
+            tabIndex={4}
+            value={fields.duration}
+            onChange={(e) => {
+              dispatch(handleDurationChange(e.target.value));
+            }}
+          ></textarea>
+          <textarea
+            type="text"
+            className="textarea textarea-bordered h-12 w-3/4"
+            placeholder="Weather"
+            tabIndex={5}
+            value={fields.weather}
+            onChange={(e) => {
+              dispatch(handleWeatherChange(e.target.value));
+            }}
+          ></textarea>
+          <textarea
+            type="text"
+            className="textarea textarea-bordered h-24 w-3/4"
+            id="notes__field"
+            placeholder="Notes"
+            tabIndex={6}
+            value={fields.notes}
+            onChange={(e) => {
+              dispatch(handleNotesChange(e.target.value));
+            }}
+          ></textarea>
+          <div className="rating">
+            {" "}
+            Difficulty:
+            <div className="px-2">
+              <input
+                type="radio"
+                name="rating-4"
+                className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
+                checked={fields.difficulty === 1}
+                value={1}
+                onChange={(e) => {
+                  dispatch(handleDifficultyChange(parseInt(e.target.value)));
+                }}
+              />
+              <input
+                type="radio"
+                name="rating-4"
+                className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
+                checked={fields.difficulty === 2}
+                value={2}
+                onChange={(e) => {
+                  dispatch(handleDifficultyChange(parseInt(e.target.value)));
+                }}
+              />
+              <input
+                type="radio"
+                name="rating-4"
+                className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
+                checked={fields.difficulty === 3}
+                value={3}
+                onChange={(e) => {
+                  dispatch(handleDifficultyChange(parseInt(e.target.value)));
+                }}
+              />
+              <input
+                type="radio"
+                name="rating-4"
+                className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
+                checked={fields.difficulty === 4}
+                value={4}
+                onChange={(e) => {
+                  dispatch(handleDifficultyChange(parseInt(e.target.value)));
+                }}
+              />
+              <input
+                type="radio"
+                name="rating-4"
+                className="mask mask-triangle bg-darkgreen hover:bg-lightgreen"
+                checked={fields.difficulty === 5}
+                value={5}
+                onChange={(e) => {
+                  dispatch(handleDifficultyChange(parseInt(e.target.value)));
+                }}
+              />
+            </div>
+          </div>
+          <div className="form-control w-full max-w-xs">
+            <input
+              type="file"
+              className="file-input file-input-bordered w-full max-w-xs"
+              id="image__field"
+              placeholder="Photo"
+              tabIndex={7}
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+          </div>
+          <div className="flex flex-col items-center">
+            <button type="submit" className="btn btn-success">
+              Submit
+            </button>
+          </div>
+          {` `}
+        </form>
+      </div>
     </>
   );
 };

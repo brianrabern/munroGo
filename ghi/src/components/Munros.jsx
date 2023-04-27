@@ -77,6 +77,10 @@ const Munros = () => {
           <label
             htmlFor="test"
             className="btn btn-sm btn-circle absolute right-2 top-2"
+            onClick={() => {
+              setSelectedMunro(null);
+              setIsModalOpen(!isModalOpen);
+            }}
           >
             x
           </label>
