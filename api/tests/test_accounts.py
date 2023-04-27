@@ -5,8 +5,9 @@ from tests.utils import fake_munro, fake_munros_list
 from authenticator import authenticator
 from routers.accounts import AccountToken
 from models.accounts import AccountOut
-from unittest import TestCase
-from models.munros import MunrosList, Munro
+
+# from unittest import TestCase
+from models.munros import MunrosList
 
 client = TestClient(app)
 test_account = AccountOut(
