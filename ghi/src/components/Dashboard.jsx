@@ -8,6 +8,7 @@ import MapComp from "./MapComp";
 import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
 import Select from "react-select";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
@@ -138,19 +139,12 @@ const Dashboard = () => {
                     </>
                   ))}
                 </div>
-                {/* <div className="flex justify-center items-center gap-6">
-                  <Select
-                    value={selectedMunro}
-                    onChange={handleChange}
-                    options={munroOptions}
-                    className="block w-full text-sm border-gray-200 rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-                    menuPlacement="auto"
-                    placeholder="Add a climb..."
-                    components={{
-                      DropdownIndicator: () => <span />,
-                    }}
-                  />
-                </div> */}
+                <Link
+                  to={{ pathname: "/my-climbs" }}
+                  className="stat-desc text-accent text-center"
+                >
+                  See all
+                </Link>
               </div>
             </div>
             {/* Second Card */}

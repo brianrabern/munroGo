@@ -43,6 +43,10 @@ const Munros = () => {
     17: "Skye and Mull",
   };
 
+  const climbsIdList = myClimbs.map((climb) => climb.munro_id);
+
+  console.log(climbsIdList);
+
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
   };
@@ -146,14 +150,20 @@ const Munros = () => {
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                   >
-                    Longitude
+                    Climbed
                   </th>
-                  <th
+                  {/* <th
+                    scope="col"
+                    className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
+                  >
+                    Longitude
+                  </th> */}
+                  {/* <th
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                   >
                     Latitude
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -175,11 +185,17 @@ const Munros = () => {
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                         {munro.feet}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        {munro.longitude}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        {munro.latitude}
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap text-center">
+                        {climbsIdList.includes(munro.id) ? (
+                          <input
+                            type="checkbox"
+                            checked
+                            className="checkbox checkbox-md checkbox-success"
+                            disabled
+                          />
+                        ) : (
+                          <button className="btn btn-xs btn-square btn-outline"></button>
+                        )}
                       </td>
                     </tr>
                   );

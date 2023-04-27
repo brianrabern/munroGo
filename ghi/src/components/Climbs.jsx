@@ -15,7 +15,7 @@ const Climbs = () => {
   return (
     <>
       <h1 className="text-2xl font-bold">My Climbs</h1>
-      <div className="max-w-xl grid grid-cols-2 gap-5">
+      <div className="max-w-3xl grid grid-cols-2 gap-5 overflow-hidden">
         {myClimbs.map((climb) => (
           <div key={climb.id} className="bg-neutral rounded-box p-4">
             <ClimbCard key={climb.id} climb={climb} />
