@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useGetMunrosQuery } from "../services/munros";
 import { useGetClimbsQuery } from "../services/climbs";
 import MapComp from "./MapComp";
+import LoadingBar from "./LoadingBar";
 
 const MainMap = () => {
   const { data, isLoading } = useGetMunrosQuery();
@@ -54,6 +55,8 @@ const MainMap = () => {
       setMarkers(newMarkers);
     }
   }, [data]);
+
+  if (isLoading) return <LoadingBar increment={20} interval={50} />;
 
   return (
     <div>

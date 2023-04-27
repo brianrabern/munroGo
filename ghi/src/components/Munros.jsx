@@ -12,25 +12,16 @@ const Munros = () => {
   const [searchInput, setSearchInput] = useState(" ");
   const [searchFilter, setSearchFilter] = useState("hillname");
   const navigate = useNavigate();
-  const {data: myClimbs, isLoading: isLoadingClimbs} = useGetClimbsQuery();
+  const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
 
   if (error) {
     navigate("/");
   }
 
   if (isLoading || isLoadingClimbs)
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-[#adb9c0] text-3xl font-medium text-center">
-          Birl awa', bide a blink...
-        </p>
-          <LoadingBar increment={20} interval={50} />
-      </div>
-    );
+    return <LoadingBar increment={20} interval={50} />;
 
   if (data?.length === 0) return <div>Somethin's amiss.</div>;
-
-
 
   const region_names = {
     "01": "Firth of Clyde to Strathtay",

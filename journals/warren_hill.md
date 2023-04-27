@@ -58,8 +58,9 @@
 * Implemented google maps API
 
 # Week 6 <> 04/24/23 - 04/28/23
-*
--
-*
--
-*
+* started styling dashboard
+- handled isLoading errors/auth errors
+* styled the loading screen
+- made all font sizes and colors consistent
+* added completed munros list to the dashboard
+- 

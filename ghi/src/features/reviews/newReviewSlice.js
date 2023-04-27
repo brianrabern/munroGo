@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   fields: {
     comment: "",
-    rating: "",
+    rating: 1,
   },
   errorMessage: null,
 };

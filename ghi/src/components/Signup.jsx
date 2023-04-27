@@ -6,7 +6,7 @@ import {
   handlePasswordConfirmationChange,
   handleNameChange,
   reset,
-  error,
+  setError,
 } from "../features/auth/signupSlice";
 import { useSignupMutation, useLoginMutation } from "../services/auth";
 import ErrorNotification from "./ErrorNotification";
@@ -20,35 +20,37 @@ const Signup = () => {
 
   const { errorMessage, fields } = useSelector((state) => state.signup);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   if (fields.password !== fields.passwordConfirmation) {
-  //     dispatch(error("Password does not match confirmation"));
-  //     return;
-  //   }
-  //   const { username, password, full_name } = fields;
-  //   let body = { username, password, full_name, rank: "Beginner" };
-  //   await signup(body);
-  //   dispatch(reset());
-  //   navigate("/");
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (fields.password !== fields.passwordConfirmation) {
-      dispatch(error("Password does not match confirmation"));
+      dispatch(reset(fields.passwordConfirmation));
+      dispatch(setError("Password does not match confirmation"));
+      return;
+    }
+    if (
+      fields.username === "" ||
+      fields.full_name === "" ||
+      fields.password === "" ||
+      fields.passwordConfirmation === ""
+    ) {
+      dispatch(reset());
+      dispatch(setError("Fill in all fields."));
       return;
     }
     const { username, password, full_name } = fields;
     let body = { username, password, full_name, rank: "Beginner" };
-    try {
-      await signup(body);
-      await login({ username, password }); // log the user in
+    const response = await signup(body);
+    if (response.error) {
       dispatch(reset());
+      dispatch(setError("Fill in all fields."));
+    } else {
+      await login({ username, password });
       navigate("/dashboard");
-    } catch (error) {
-      dispatch(error(error.message));
     }
+  };
+
+  const handleClick = () => {
+    dispatch(setError(null));
   };
 
   return (
@@ -70,12 +72,9 @@ const Signup = () => {
             <span className="text-neutral-900">Enter Signup Details</span>
           </div>
           <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-            {errorMessage && (
-              <ErrorNotification>{errorMessage}</ErrorNotification>
-            )}
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center text-neutral-800 placeholder-neutral-600"
                 type={`text`}
                 id="Signup__username"
                 value={fields.username}
@@ -105,7 +104,7 @@ const Signup = () => {
             </div>
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center text-neutral-800 placeholder-neutral-600"
                 type={`password`}
                 id="Signup__password__confirmation"
                 value={fields.passwordConfirmation}
@@ -124,11 +123,21 @@ const Signup = () => {
               </button>
             </div>
           </form>
-          <div style={{ display: "flex", marginTop: "1rem", gap: "5px" }}>
-            <div className="text-neutral-900">Already Have An Account?</div>
+          <div className="flex justify-center py-6">
+            <div className="text-neutral-900 px-2">
+              Already Have An Account?
+            </div>
             <Link to={{ pathname: "/" }} className="text-moss-green">
               Login
             </Link>
+          </div>
+          <div className="py-5">
+            {errorMessage && (
+              <ErrorNotification
+                message={errorMessage}
+                handleClick={handleClick}
+              />
+            )}
           </div>
         </div>
       </div>

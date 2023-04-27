@@ -31,7 +31,7 @@ const NewReview = () => {
   return (
     <>
       {" "}
-      <h4>Add review</h4>
+      <h4 className="text-center">Add review</h4>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -39,104 +39,80 @@ const NewReview = () => {
           dispatch(reset());
         }}
       >
-        <div className="mb-3">
-          <label htmlFor="comment__field" className="form-label">
-            Comment
-          </label>
+        <div className="form-control py-6">
           <textarea
             type="text"
-            className="form-control"
+            className="textarea textarea-bordered h-24"
             id="comment__field"
-            placeholder="Make A Comment"
+            placeholder="Make a Comment"
             tabIndex={1}
             value={fields.comment}
             onChange={(e) => {
               dispatch(handleCommentChange(e.target.value));
             }}
-          />
+          ></textarea>
+          <label className="label">
+            <span className="label-text-alt">
+              <div className="rating">
+                <input
+                  type="radio"
+                  name="rating-4"
+                  className="mask mask-star-2 bg-warning hover:bg-lightyellow"
+                  checked={fields.rating === 1}
+                  value={1}
+                  onChange={(e) => {
+                    dispatch(handleRatingChange(parseInt(e.target.value)));
+                  }}
+                />
+                <input
+                  type="radio"
+                  name="rating-4"
+                  className="mask mask-star-2 bg-warning hover:bg-lightyellow"
+                  checked={fields.rating === 2}
+                  value={2}
+                  onChange={(e) => {
+                    dispatch(handleRatingChange(parseInt(e.target.value)));
+                  }}
+                />
+                <input
+                  type="radio"
+                  name="rating-4"
+                  className="mask mask-star-2 bg-warning hover:bg-lightyellow"
+                  checked={fields.rating === 3}
+                  value={3}
+                  onChange={(e) => {
+                    dispatch(handleRatingChange(parseInt(e.target.value)));
+                  }}
+                />
+                <input
+                  type="radio"
+                  name="rating-4"
+                  className="mask mask-star-2 bg-warning hover:bg-lightyellow"
+                  checked={fields.rating === 4}
+                  value={4}
+                  onChange={(e) => {
+                    dispatch(handleRatingChange(parseInt(e.target.value)));
+                  }}
+                />
+                <input
+                  type="radio"
+                  name="rating-4"
+                  className="mask mask-star-2 bg-warning hover:bg-lightyellow"
+                  checked={fields.rating === 5}
+                  value={5}
+                  onChange={(e) => {
+                    dispatch(handleRatingChange(parseInt(e.target.value)));
+                  }}
+                />
+              </div>
+            </span>
+          </label>
         </div>
-        <div className="rating">
-          <input
-            type="radio"
-            name="rating-4"
-            className="mask mask-triangle bg-green-500"
-            checked={fields.rating === 1}
-            value={1}
-            onChange={(e) => {
-              dispatch(handleRatingChange(parseInt(e.target.value)));
-            }}
-          />
-          <input
-            type="radio"
-            name="rating-4"
-            className="mask mask-triangle bg-green-500"
-            checked={fields.rating === 2}
-            value={2}
-            onChange={(e) => {
-              dispatch(handleRatingChange(parseInt(e.target.value)));
-            }}
-          />
-          <input
-            type="radio"
-            name="rating-4"
-            className="mask mask-triangle bg-green-500"
-            checked={fields.rating === 3}
-            value={3}
-            onChange={(e) => {
-              dispatch(handleRatingChange(parseInt(e.target.value)));
-            }}
-          />
-          <input
-            type="radio"
-            name="rating-4"
-            className="mask mask-triangle bg-green-500"
-            checked={fields.rating === 4}
-            value={4}
-            onChange={(e) => {
-              dispatch(handleRatingChange(parseInt(e.target.value)));
-            }}
-          />
-          <input
-            type="radio"
-            name="rating-4"
-            className="mask mask-triangle bg-green-500"
-            checked={fields.rating === 5}
-            value={5}
-            onChange={(e) => {
-              dispatch(handleRatingChange(parseInt(e.target.value)));
-            }}
-          />
+        <div className="flex flex-col items-center">
+          <button type="submit" className="btn btn-success ">
+            Submit
+          </button>
         </div>
-
-        {/* <div className="mb-3"></div>
-        <label htmlFor="rating__field" className="form-label">
-          Rating
-        </label>
-        <input
-          type="range"
-          className="form-range"
-          defaultValue={fields.rating}
-          min="0"
-          max="5"
-          step="1"
-          id="customRange3"
-          onChange={(e) => {
-            dispatch(handleRatingChange(parseInt(e.target.value)));
-          }}
-        ></input> */}
-        <button type="submit" className="btn btn-success">
-          Submit
-        </button>
-        {` `}
-        <button
-          className="btn btn-info"
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(reset());
-          }}
-        >
-          Reset
-        </button>
       </form>
     </>
   );
