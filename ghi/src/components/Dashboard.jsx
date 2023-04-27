@@ -26,13 +26,13 @@ const Dashboard = () => {
   const height = "600px";
 
   const handleClick = (munro) => {
-    window.location.href = `/munros/${munro.id}/add-climb`;
+    window.location.href = `/munros/${munro.id}`;
   };
   const handleChange = (selectedOption) => {
     handleMunroSelected(selectedOption);
   };
   const handleMunroSelected = (munro) => {
-    window.location.href = `/munros/${munro.value}`;
+    window.location.href = `/munros/${munro.value}/add-climb`;
   };
 
   useEffect(() => {
@@ -98,18 +98,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <div>
-        <Select
-          value={selectedMunro}
-          onChange={handleChange}
-          options={munroOptions}
-          className="w-52"
-          menuPlacement="auto"
-          components={{
-            DropdownIndicator: () => <span />,
-          }}
-        />
-      </div>
       <div className="flex flex-col items-center gap-10 px-20">
         <h5
           hidden
@@ -150,6 +138,19 @@ const Dashboard = () => {
                     </>
                   ))}
                 </div>
+                {/* <div className="flex justify-center items-center gap-6">
+                  <Select
+                    value={selectedMunro}
+                    onChange={handleChange}
+                    options={munroOptions}
+                    className="block w-full text-sm border-gray-200 rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    menuPlacement="auto"
+                    placeholder="Add a climb..."
+                    components={{
+                      DropdownIndicator: () => <span />,
+                    }}
+                  />
+                </div> */}
               </div>
             </div>
             {/* Second Card */}
@@ -281,6 +282,19 @@ const Dashboard = () => {
                 })}
               </tbody>
             </table>
+          </div>
+          <div className="flex justify-center items-center gap-6 py-5">
+            <Select
+              value={selectedMunro}
+              onChange={handleChange}
+              options={munroOptions}
+              className="block w-40 text-sm border-gray-200 rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+              menuPlacement="auto"
+              placeholder="Add a climb..."
+              components={{
+                DropdownIndicator: () => <span />,
+              }}
+            />
           </div>
         </div>
       </div>
