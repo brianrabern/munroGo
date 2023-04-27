@@ -46,6 +46,8 @@ def test_get_one_munro() -> MunroWithData:
     data = response.json()
     data["summary"] = "string"
     data["images"] = ["string"]
+
+    # Clean
     app.dependency_overrides = {}
 
     # Assert
