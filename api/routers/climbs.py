@@ -3,7 +3,6 @@ from models.climbs import ClimbsList, ClimbParams
 from queries.climbs import Climb, ClimbsQueries
 from authenticator import authenticator
 
-
 router = APIRouter()
 
 

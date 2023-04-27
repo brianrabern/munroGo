@@ -9,8 +9,12 @@ from unittest import TestCase
 from models.munros import MunrosList, Munro
 
 client = TestClient(app)
-test_account = AccountOut(id="1234567890", username="fake", password="password", full_name="fake")
-test_account_token = AccountToken(access_token="0987654321", type="Bearer", account=test_account)
+test_account = AccountOut(
+    id="1234567890", username="fake", password="password", full_name="fake"
+)
+test_account_token = AccountToken(
+    access_token="0987654321", type="Bearer", account=test_account
+)
 
 
 async def fake_get_token():
@@ -25,11 +29,13 @@ class TestGetAllMunros:
         # return [fake_munro]
 
 
-def test_get_all_munros():
+def test_get_all_munros() -> MunrosList:
 
     # Arrange
     app.dependency_overrides[MunrosQueries] = TestGetAllMunros
-    app.dependency_overrides[authenticator.get_current_account_data] = fake_get_token
+    app.dependency_overrides[
+        authenticator.get_current_account_data
+    ] = fake_get_token
 
     # Act
     response = client.get("/api/munros")
@@ -40,6 +46,7 @@ def test_get_all_munros():
     # Assert
     assert response.status_code == 200
     assert response.json() == fake_munros_list
+
 
 # class ClimbsQueriesMock:
 #     def create_one(
@@ -52,19 +59,18 @@ def test_get_all_munros():
 #         self.collection.insert_one(climb_dict)
 #         climb_dict["id"] = str(climb_dict["_id"])
 #         return Climb(**climb_dict)
-    
-    # def get_all_by_munro(self, munro_id: str) -> List[Climb]:
-    #     climbs = []
-    #     climbs_cursor = self.collection.find({"munro_id": munro_id})
-    #     for climb in climbs_cursor:
-    #         climb["id"] = str(climb["_id"])
-    #         climbs.append(Climb(**climb))
-    #     return climbs
 
-    # def delete_one(self, climb_id: str) -> bool:
-    #     result = self.collection.delete_one({"_id": ObjectId(climb_id)})
-    #     return result.deleted_count == 1
+# def get_all_by_munro(self, munro_id: str) -> List[Climb]:
+#     climbs = []
+#     climbs_cursor = self.collection.find({"munro_id": munro_id})
+#     for climb in climbs_cursor:
+#         climb["id"] = str(climb["_id"])
+#         climbs.append(Climb(**climb))
+#     return climbs
 
+# def delete_one(self, climb_id: str) -> bool:
+#     result = self.collection.delete_one({"_id": ObjectId(climb_id)})
+#     return result.deleted_count == 1
 
 
 # def test_create_climb():
@@ -100,4 +106,3 @@ def test_get_all_munros():
 #     assert len(data['things']) == 1
 #     assert data['things'][0]['user_id'] == 'fakeuser'
 #     app.dependency_overrides = {}
-
