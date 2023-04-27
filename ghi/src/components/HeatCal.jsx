@@ -28,7 +28,6 @@ const HeatCal = () => {
       style={{ color: "#4B5563" }}
       startDate={new Date("2016/01/01")}
       rectRender={(props, data) => {
-        // if (!data.count) return <rect {...props} />;
         return (
           <Tooltip
             key={props.key}

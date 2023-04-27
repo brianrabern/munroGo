@@ -52,7 +52,6 @@ def update_review(
     reviews: ReviewsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    # munro = munro_id
     return reviews.update_review(review_id, content)
 
 

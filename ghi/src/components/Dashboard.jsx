@@ -87,7 +87,6 @@ const Dashboard = () => {
     key: munro.id,
   }));
 
-  console.log(munroOptions);
   const getClimbedMunros = (data, climbsList) => {
     return data.filter((munro) => climbsList.includes(munro.id));
   };
@@ -115,7 +114,6 @@ const Dashboard = () => {
           handleClick={handleClick}
         />
         <div className="flex flex-col items-center">
-          {/* <div className="grid grid-flow-col auto-cols-max gap-6"> */}
           <div className="flex justify-center items-center gap-6">
             {/* First Card */}
             <div className="card w-96 h-full bg-base-300 shadow-xl">
@@ -132,9 +130,6 @@ const Dashboard = () => {
                       >
                         <ClimbCard key={`card-${climb.id}`} climb={climb} />
                       </div>
-                      {/* <div key={climb.id} className="carousel-item h-full">
-                        <ClimbCard key={climb.id} climb={climb} />
-                      </div> */}
                       <div className="divider"></div>
                     </>
                   ))}
@@ -194,9 +189,6 @@ const Dashboard = () => {
                           review={review}
                         />
                       </div>
-                      {/* <div key={review.id} className="carousel-item">
-                        <ReviewCardDash key={review.id} review={review} />
-                      </div> */}
                       <div className="divider"></div>
                     </>
                   ))}
