@@ -8,6 +8,7 @@ from models.accounts import AccountOut
 from unittest import TestCase
 from models.munros import MunrosList, Munro, MunroWithData
 
+
 client = TestClient(app)
 test_account = AccountOut(
     id="1234567890", username="fake", password="password", full_name="fake"
@@ -15,7 +16,6 @@ test_account = AccountOut(
 test_account_token = AccountToken(
     access_token="0987654321", type="Bearer", account=test_account
 )
-
 
 
 async def fake_get_token():
@@ -26,15 +26,13 @@ class TestMunrosQueries:
     def get_all(self) -> MunrosList:
         munros = [fake_munro]
         return munros
-    
+
     def get_one(self, munro_id: str) -> Munro:
         munro = fake_munro_data
-
         return Munro(**munro)
-    
+
     def get_weather(self, munro_id: str) -> dict:
         return {"key":"string"}
-
 
 
 def test_get_one_munro() -> MunroWithData:
@@ -45,12 +43,13 @@ def test_get_one_munro() -> MunroWithData:
     ] = fake_get_token
 
     # Act
-
     munro_id = "643f0095ab5591a12a3a8c4b"
     response = client.get("/api/munros/{munro_id}")
     data = response.json()
     data["summary"] = "string"
     data["images"] = ["string"]
+
+    # Clean Up
     app.dependency_overrides = {}
 
     # Assert
@@ -74,5 +73,3 @@ def test_get_all_munros() -> MunrosList:
     # Assert
     assert response.status_code == 200
     assert response.json() == fake_munros_list
-
-
