@@ -1,22 +1,3 @@
-from main import app
-from fastapi.testclient import TestClient
-from queries.accounts import AccountQueries
-from queries.climbs import ClimbsQueries
-from models.accounts import AccountIn, AccountOut, AccountToken
-from models.climbs import ClimbParams, Climb
-from authenticator import authenticator
-from typing import List
-from bson import ObjectId
-
-client = TestClient(app)
-
-test_account = AccountOut(id="1234567890", username="fake", password="password", full_name="fake")
-test_account_token = AccountToken(access_token="0987654321", type="Bearer", account=test_account)
-
-
-async def fake_get_token():
-    return test_account.dict()
-
 from fastapi.testclient import TestClient
 from queries.munros import MunrosQueries
 from main import app
