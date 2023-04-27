@@ -5,7 +5,7 @@ const initialState = {
   fields: {
     datetime: "",
     duration: "",
-    difficulty: "",
+    difficulty: 1,
     weather: "",
     notes: "",
     image: "",

@@ -12,6 +12,8 @@ module.exports = {
       "light-orange": "#ECD1B0ff",
       sepia: "#7A501Dff",
       lightyellow: "#fde68a",
+      darkgreen: "#15803d",
+      lightgreen: "#4ade80",
     },
   },
   plugins: [require("daisyui")],

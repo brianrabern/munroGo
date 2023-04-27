@@ -11,7 +11,7 @@ export default function ClimbCard({ climb }) {
   return (
     <div className="card w-96 text-[#737a7e]">
       <div className="card-body">
-        <h2 className="card-title">{munro.hillname}</h2>
+        <h2 className="card-title font-bold">{munro.hillname}</h2>
         <p className="text-lg">{date}</p>
         <p className="text-lg">Difficulty: {climb.difficulty}</p>
         <p className="text-lg">Duration: {climb.duration}</p>

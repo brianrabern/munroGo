@@ -18,13 +18,15 @@ function Modal(props) {
       />
 
       <div className="modal">
-        <div className="modal-box">
+        <div className="modal-box relative">
           {props.children}
-          <div className="modal-action">
-            <label htmlFor={props.id} className="btn">
-              Close
-            </label>
-          </div>
+
+          <label
+            htmlFor={props.id}
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            x
+          </label>
         </div>
       </div>
     </>
