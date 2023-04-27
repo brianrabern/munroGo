@@ -1,8 +1,9 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetMunrosQuery } from "../services/munros";
-
 import LoadingBar from "./LoadingBar";
+// import Modal from "./Modal";
+import NewClimbClick from "./NewClimbClick";
 
 import styles from "../index.css";
 import { useGetClimbsQuery } from "../services/climbs";
@@ -11,9 +12,11 @@ const Munros = () => {
   const { data, error, isLoading } = useGetMunrosQuery();
   const [searchInput, setSearchInput] = useState(" ");
   const [searchFilter, setSearchFilter] = useState("hillname");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMunro, setSelectedMunro] = useState(null);
   const navigate = useNavigate();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
-
+  console.log(isModalOpen);
   if (error) {
     navigate("/");
   }
@@ -45,7 +48,7 @@ const Munros = () => {
 
   const climbsIdList = myClimbs.map((climb) => climb.munro_id);
 
-  console.log(climbsIdList);
+  console.log(selectedMunro);
 
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
@@ -69,6 +72,22 @@ const Munros = () => {
 
   return (
     <div className="flex flex-col">
+      {isModalOpen ? (
+        // <div className="modal">
+        <div className="fixed top-0 left-0 h-full w-full overflow-y-scroll bg-white z-50 modal-box">
+          <NewClimbClick munro_id={selectedMunro} />
+          <label
+            htmlFor="test"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            x
+          </label>
+        </div>
+      ) : (
+        // </div>
+        <></>
+      )}
+
       <div className="overflow-x-auto">
         <div className="flex justify-between py-3 pl-2">
           <div className="relative max-w-xs">
@@ -194,8 +213,17 @@ const Munros = () => {
                             disabled
                           />
                         ) : (
-                          <button className="btn btn-xs btn-square btn-outline"></button>
+                          <button
+                            id={munro.id}
+                            onClick={() => {
+                              setSelectedMunro(munro.id);
+                              setIsModalOpen(!isModalOpen);
+                            }}
+                            className="btn btn-xs btn-square btn-outline"
+                          ></button>
                         )}
+
+                        {/* <button className="btn btn-xs btn-square btn-outline"></button> */}
                       </td>
                     </tr>
                   );
