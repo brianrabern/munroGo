@@ -26,12 +26,12 @@ class TestMunrosQueries:
     def get_all(self) -> MunrosList:
         munros = [fake_munro]
         return munros
-    
+
     def get_one(self, munro_id: str) -> Munro:
         munro = fake_munro_data
 
         return Munro(**munro)
-    
+
     def get_weather(self, munro_id: str) -> dict:
         return {"key":"string"}
 
@@ -51,6 +51,8 @@ def test_get_one_munro() -> MunroWithData:
     data = response.json()
     data["summary"] = "string"
     data["images"] = ["string"]
+
+    # Clean
     app.dependency_overrides = {}
 
     # Assert
