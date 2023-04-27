@@ -19,7 +19,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await login(fields);
-    console.log(response);
     if (response.error) {
       dispatch(reset());
       dispatch(setError("Invalid username or password."));

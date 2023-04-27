@@ -7,6 +7,7 @@ export default function ClimbCard({ climb }) {
   const date = formatRelative(new Date(climb.datetime), new Date(), {
     addSuffix: true,
   });
+  if (isLoading) return <div>...</div>;
   const munro = munros.find((munro) => munro.id === climb.munro_id);
   return (
     <div className="card w-96 text-[#737a7e]">
