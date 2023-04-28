@@ -16,13 +16,6 @@ const Navbar = () => {
       <Link
         type="button"
         className="btn btn-ghost normal-case text-xl"
-        to="/map"
-      >
-        Map
-      </Link>
-      <Link
-        type="button"
-        className="btn btn-ghost normal-case text-xl"
         to="/munros"
       >
         Munros
