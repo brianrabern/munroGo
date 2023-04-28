@@ -35,3 +35,9 @@ April 23, 2023: installed daisy, remade navbar and added logout functionality, m
 April 24, 2023: created climb cards and refactored climbs component to use climb cards, repeated for reviews, implemented rough sketch for card carousel for both
 
 April 25, 2023: styling of dashboard and integration of climbs and reviews compenents as well as listing rank and munros completed
+
+April 26, 2023: cleaned dash and code, fixed invalid login and signup, fixed review cards, styled climb and review modals
+
+April 27, 2023: added munro dropdown to dash, checkbox with functionality to list of munros, unit tests, reformatted/ cleaned code
+
+April 28, 2023: dashboard styling, dynamic ranking (image and name), updating readME docs, FINISHED WITH PROJECT!!!!!
