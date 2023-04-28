@@ -44,7 +44,7 @@ Thursday, March 30th, 2023
 
 Diganta's Journal
 
-Week 1 - Wireframing 
+Week 1 - Wireframing
 March 20th, 2023
 - completed code of conduct
 - brainstormed ideas for projects, chose idea
@@ -102,11 +102,11 @@ April 4th, 2023
 - parameters were added to the models
 
 April 5th, 2023
-- Redux was installed 
+- Redux was installed
 - Redux conventions were implemented
 - Base login functionality
 
-April 6th, 2023 
+April 6th, 2023
 - Base signup functionality
 - Login page componenets
 - signup page componenets
@@ -116,7 +116,7 @@ April 7th, 2023
 - Munro list page
 
 April 17th, 2023
-- 
+-
 
 yes
 
@@ -124,4 +124,4 @@ yes
 Week 3
 Monday, April 3rd, 2023
 - Refactor and completed end points
-- 
+-

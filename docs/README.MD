@@ -20,7 +20,7 @@ Your challenge, should you choose to accept it, is to conquer Munros in Scotland
 # Intended market
 Munro bagging is a popular pastime in Scotland where walking enthusiasts challenge themselves to climb as many of the peaks as they can - over 6,000 people, called 'compleatists' (or Munroists) have climbed them all so far. We are targeting adventure seekers that wish to plan, review and track Munro climbs.
 
-Funtionality
+# Funtionality
 - Website requires users to sign up to have access to its functionality.
 
 - Users will have access to their dashboard, which displays:
@@ -44,9 +44,27 @@ Funtionality
     - The current weather conditions at the Munro - implemented through the OpenWeather API
 
 
-- Users will be able to add a climb from their dashboard, selecting a Munro from a dropdown menu
+- Users will be able to add a climb from their dashboard, selecting a Munro from a dropdown menu.
 
 - A list of all the Munros, which includes the region, height in feet and meters, and which allows the user to select whether a Munro has been climbed and displays a modal to add a climb. Users can search this list using the search bar - filtering by name, region, and height. Users may also navigate to individual Munro detail pages by clicking the Munro's name on the list.
+
+# Future Functionality
+Looking to the future, possible features that we would like to implement are:
+
+- Real-time user messaging system
+- Including 7 day weather forecast on Munros detail pages
+- Including all the British Hills, the Donalds
+- Ordnance survey data API to create more detailed maps
+- Allow users to publicly post a climb trail that others can follow along
+
+# Technology Stack
+- Programming languages: Python 3, JavaScript ES+, HTML5, CSS
+- Front-End technologies: React, React Hooks, Redux Toolkit, Tailwind, DaisyUI
+- Back-End technologies: MongoDB, FastAPI
+- Development tools: Docker, GitLab
+- API Integrations: Google Maps API, OpenWeather API, Wikipedia API
+- Databases: British and Irish Hills
+
 
 # Project Initialization
 To fully enjoy this application on your local machine, please be sure to follow these steps:

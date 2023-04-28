@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDistance, formatRelative } from "date-fns";
+import { formatRelative } from "date-fns";
 import { useGetMunrosQuery } from "../services/munros";
 
 export default function ReviewCard({ review }) {

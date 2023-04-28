@@ -21,7 +21,6 @@ const Dashboard = () => {
 
   const climbedMunros = getClimbedMunros(data, climbsList);
   const [markers, setMarkers] = useState([]);
-  const [selectedMunro, setSelectedMunro] = useState("");
   const beginnerRank = {
     name: "Beginner",
     src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png",
@@ -158,7 +157,6 @@ const Dashboard = () => {
                 </Link>
                 <div className="flex justify-center items-center gap-6 py-5 z-50">
                   <select
-                    value={selectedMunro}
                     onChange={handleChange}
                     className="select select-accent w-full max-w-xs"
                   >

@@ -15,21 +15,24 @@ test_account_token = AccountToken(
     access_token="0987654321", type="Bearer", account=test_account
 )
 
+
 async def fake_get_token():
     return test_account.dict()
 
+
 class TestClimbsQueries:
     def get_all_by_account(self, account_id: str) -> List[Climb]:
-      climbs = [fake_climbs]
-      return climbs
+        climbs = [fake_climbs]
+        return climbs
 
     def get_all_by_munro(self, munro_id: str) -> List[Climb]:
-       climbs = [fake_climbs]
-       return climbs
+        climbs = [fake_climbs]
+        return climbs
 
     def get_one(self, climb_id: str) -> Climb:
         climb = fake_climbs
         return climb
+
 
 def test_get_climbs_for_account() -> ClimbsList:
 
@@ -42,12 +45,13 @@ def test_get_climbs_for_account() -> ClimbsList:
     # Act
     response = client.get("/api/account/climbs")
 
-    #Clean
+    # Clean
     app.dependency_overrides = {}
 
     # Assert
     assert response.status_code == 200
     assert response.json() == {"climbs": [fake_climbs]}
+
 
 def test_get_all_climbs_for_munro() -> ClimbsList:
 
@@ -60,12 +64,13 @@ def test_get_all_climbs_for_munro() -> ClimbsList:
     # Act
     response = client.get("/api/munros/munro_id/climbs/")
 
-    #Clean
+    # Clean
     app.dependency_overrides = {}
 
     # Assert
     assert response.status_code == 200
     assert response.json() == {"climbs": [fake_climbs]}
+
 
 def test_get_one_climb() -> Climb:
     # Arrange
@@ -77,7 +82,7 @@ def test_get_one_climb() -> Climb:
     # Act
     response = client.get("/api/munros/climbs/climb_id/")
 
-    #Clean
+    # Clean
     app.dependency_overrides = {}
 
     # Assert

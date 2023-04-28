@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetMunroDetailQuery } from "../services/munros";
 import { useGetReviewsForMunroQuery } from "../services/revs";
 import Modal from "./Modal";
@@ -8,20 +8,17 @@ import LoadingBar from "./LoadingBar";
 import NewReview from "./NewReview";
 import NewClimb from "./NewClimb";
 import ReviewCard from "./ReviewCard";
-import { useState } from "react";
 
 const MunroDetail = () => {
   const { munro_id } = useParams();
   const { data, isLoading } = useGetMunroDetailQuery(munro_id);
   const { data: reviews, isLoading: isLoadingReviews } =
     useGetReviewsForMunroQuery(munro_id);
-  const [isOpen, setIsOpen] = useState(false);
 
   if (isLoading || isLoadingReviews) {
     return <LoadingBar increment={20} interval={50} />;
   }
 
-  //map stuff
   let center = {
     lat: Number(data.latitude),
     lng: Number(data.longitude),

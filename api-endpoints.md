@@ -135,59 +135,6 @@
         }
         ```
 
-<!--
-# Journal entries list
-
-    * Endpoint path: /users/{user_id}/journal/
-    * Endpoint method: GET
-    * Query parameters: None
-    * Headers:
-    * Authorization: Bearer token
-    * Request shape (JSON): None
-    * Response shape (JSON): The user's journal entries
-
-        ```json
-        {
-        {“user_id”: [entry1, entry2,...]}
-        }
-        ```
-
-# Journal add entry
-
-    * Endpoint path: /users/{user_id}/journal/
-    * Endpoint method: POST
-    * Query parameters: None
-    * Headers:
-    * Authorization: Bearer token
-    * Request shape (JSON):
-
-        ```json
-        {
-            “title”: "string",
-            “date”: "string",
-            “body”: "string",
-        }
-    ```
-    *Response shape (JSON): None
-
-# Journal entry detail
-
-    * Endpoint path: /users/{user_id}/journal/{entry_id}/
-    * Endpoint method: GET
-    * Query parameters: None
-    * Headers:
-    * Authorization: Bearer token
-    * Request shape (JSON): None
-    * Response shape (JSON):
-
-        ```json
-        {
-            “title”: "string",
-            “date”: "string",
-            “body”: "string",
-        }
-        ``` -->
-
 # Signup modal
 
     * Endpoint path: /token
