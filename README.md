@@ -22,7 +22,9 @@ Your challenge, should you choose to accept it, is to conquer [Munros](https://e
 - Development tools: Docker, Git
 - API Integrations: Google Maps API, OpenWeather API, Wikipedia API, the Database of British and Irish Hills
 
-See the design wireframe [here](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/Wireframe.png)
+## Design
+- [Wireframe](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/Wireframe.png)
+-[API Endpoints](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/api-endpoints.md)
 
 ## Intended market
 
