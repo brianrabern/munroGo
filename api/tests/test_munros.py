@@ -6,6 +6,7 @@ from authenticator import authenticator
 from routers.accounts import AccountToken, AccountOut
 from models.munros import MunrosList, Munro, MunroWithData
 
+
 client = TestClient(app)
 test_account = AccountOut(
     id="1234567890", username="fake", password="password", full_name="fake"
@@ -26,11 +27,11 @@ class TestMunrosQueries:
 
     def get_one(self, munro_id: str) -> Munro:
         munro = fake_munro_data
-
         return Munro(**munro)
 
     def get_weather(self, munro_id: str) -> dict:
-        return {"key": "string"}
+        return {"key":"string"}
+
 
 
 def test_get_one_munro() -> MunroWithData:
@@ -42,12 +43,11 @@ def test_get_one_munro() -> MunroWithData:
 
     # Act
 
-    response = client.get("/api/munros/643f0095ab5591a12a3a8c4b")
+    munro_id = "643f0095ab5591a12a3a8c4b"
+    response = client.get("/api/munros/{munro_id}")
     data = response.json()
     data["summary"] = "string"
     data["images"] = ["string"]
-
-    # Clean
     app.dependency_overrides = {}
 
     # Assert

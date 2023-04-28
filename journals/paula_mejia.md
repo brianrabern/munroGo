@@ -103,3 +103,25 @@ Monday, April 24th, 2023
 Tuesday, April 25th, 2023
 - user dashboard
 - isLoading authentication error
+
+Wednesday, April 26th, 2023
+- sign up automatically logs you in
+- error handling for sign up and login
+- reviewed landing page
+- styled review + climbs form
+- created dashboard/detail specific climb/review cards
+- updated carousels
+
+Thursday, April 27th, 2023
+- unit tests
+- reviewed climbs button from dashboard
+- many aethestic changes to front-end
+- change Munro detail page to dark
+- readme rough draft
+
+Friday, April 28th, 2023
+- updated ReadMe
+- linked docs in ReadMe
+- updated journals
+- cleaned code
+

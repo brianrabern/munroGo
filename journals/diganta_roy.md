@@ -24,7 +24,7 @@ March 24th,
 - consolidated project scope
 
 
-Week 2 
+Week 2 - Back End Development
 
 March 27th, 
 - clarified modal/endpoint questions
@@ -74,7 +74,7 @@ April 6th,
 April 7th, 
 - Munro list page
 
-Week 4 - Final week
+Week 4 - Return from Spring Break
 
 April 17th,
 - Working on Munro detail

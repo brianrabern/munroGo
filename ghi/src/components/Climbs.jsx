@@ -6,11 +6,12 @@ import LoadingBar from "./LoadingBar";
 import ClimbCard from "./ClimbCard";
 
 const Climbs = () => {
-  const { data } = useGetMunrosQuery();
   const { data: myClimbs, isLoading } = useGetClimbsQuery();
   const [deleteClimb] = useDeleteClimbMutation();
   if (isLoading) return <LoadingBar increment={20} interval={50} />;
-  if (myClimbs?.length === 0) return <div>You bum</div>;
+  if (myClimbs?.length === 0) return (
+    <div className="flex justify-center items-center h-screen text-8xl">You bum</div>
+  );
 
   return (
     <>

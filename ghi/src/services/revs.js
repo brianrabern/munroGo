@@ -43,7 +43,7 @@ export const reviewsApi = createApi({
         url: `/api/munros/{munro_id}/reviews/${review_id}/`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error, { id }) => [{ type: "Reviews", id }],
+      invalidatesTags: ({ id }) => [{ type: "Reviews", id }],
     }),
   }),
 });

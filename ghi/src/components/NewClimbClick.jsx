@@ -33,14 +33,11 @@ const NewClimbClick = ({ munro_id }) => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
-    // read image file as array buffer
     reader.readAsArrayBuffer(file);
 
     reader.onload = () => {
-      //convert array buffer to base64 string
       const binaryData = new Uint8Array(reader.result);
       const base64Data = Buffer.from(binaryData).toString("base64");
-      // dispatch action to update store
       dispatch(handleImageUpload(base64Data));
     };
   };

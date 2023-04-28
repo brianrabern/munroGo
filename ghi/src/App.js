@@ -9,7 +9,6 @@ import NewReview from "./components/NewReview";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
-import MainMap from "./components/MainMap";
 
 function App() {
   return (
@@ -78,15 +77,6 @@ function App() {
               <>
                 <Navbar />
                 <Reviews />
-              </>
-            }
-          />
-          <Route
-            path="/map"
-            element={
-              <>
-                <Navbar />
-                <MainMap />
               </>
             }
           />

@@ -1,5 +1,5 @@
 import React from "react";
-import { formatDistance, formatRelative } from "date-fns";
+import { formatRelative } from "date-fns";
 
 export default function ReviewCard({ review }) {
   const date = formatRelative(new Date(review.date), new Date(), {
