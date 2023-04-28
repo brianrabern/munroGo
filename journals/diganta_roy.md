@@ -74,7 +74,7 @@ April 6th,
 April 7th, 
 - Munro list page
 
-Week 4
+Week 4 - Final week
 
 April 17th,
 - Working on Munro detail
@@ -100,4 +100,5 @@ April 27th
 - CSS/Tailwind Tweaks
 
 April 28th
-- Finalized Tweaks, Ranking fixes.
+- Finalized Tweaks, Ranking fixes. 
+- Awesome Team Discussion
