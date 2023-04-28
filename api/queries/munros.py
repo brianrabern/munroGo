@@ -38,7 +38,7 @@ class MunrosQueries(Queries):
         lat = munro.latitude
         lon = munro.longitude
         key = os.getenv("OPEN_WEATHER_API_KEY")
-        url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={key}"
+        url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={key}"  # noqa
         data = requests.get(url)
         weather_data = data.json()
 

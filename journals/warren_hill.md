@@ -63,4 +63,4 @@
 * styled the loading screen
 - made all font sizes and colors consistent
 * added completed munros list to the dashboard
-- 
+-

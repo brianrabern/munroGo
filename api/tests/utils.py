@@ -172,7 +172,7 @@ fake_munro_data = {
     "id": "643f0095ab5591a12a3a8c4b",
     "summary": "string",
     "images": ["string"],
-    "weather": {"key":"string"}
+    "weather": {"key": "string"},
 }
 
 
@@ -268,13 +268,13 @@ fake_munros_list = {
 }
 
 fake_climbs = {
-      "datetime": "2023-04-27T20:58:18.046000+00:00",
-      "duration": "string",
-      "difficulty": 0,
-      "weather": "string",
-      "notes": "string",
-      "image": "string",
-      "account_id": "string",
-      "munro_id": "string",
-      "id": "string"
-    }
+    "datetime": "2023-04-27T20:58:18.046000+00:00",
+    "duration": "string",
+    "difficulty": 0,
+    "weather": "string",
+    "notes": "string",
+    "image": "string",
+    "account_id": "string",
+    "munro_id": "string",
+    "id": "string",
+}

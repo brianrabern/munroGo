@@ -2,10 +2,7 @@ import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetMunrosQuery } from "../services/munros";
 import LoadingBar from "./LoadingBar";
-// import Modal from "./Modal";
 import NewClimbClick from "./NewClimbClick";
-
-import styles from "../index.css";
 import { useGetClimbsQuery } from "../services/climbs";
 
 const Munros = () => {
@@ -70,7 +67,6 @@ const Munros = () => {
   return (
     <div className="flex flex-col">
       {isModalOpen ? (
-        // <div className="modal">
         <div className="fixed top-0 left-0 h-full w-full overflow-y-scroll bg-white z-50 modal-box">
           <NewClimbClick munro_id={selectedMunro} />
           <label
@@ -85,7 +81,6 @@ const Munros = () => {
           </label>
         </div>
       ) : (
-        // </div>
         <></>
       )}
 
@@ -211,8 +206,6 @@ const Munros = () => {
                             className="btn btn-xs btn-square btn-outline"
                           ></button>
                         )}
-
-                        {/* <button className="btn btn-xs btn-square btn-outline"></button> */}
                       </td>
                     </tr>
                   );

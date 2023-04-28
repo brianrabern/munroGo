@@ -26,7 +26,6 @@ class TestMunrosQueries:
 
     def get_one(self, munro_id: str) -> Munro:
         munro = fake_munro_data
-
         return Munro(**munro)
 
     def get_weather(self, munro_id: str) -> dict:
