@@ -39,14 +39,14 @@ Funtionality
     - A map with the marker of the Munro's location, integrated through the Google Maps API
     - The region the Munro is located
     - Its latitude and longitude coordinates
-    - buttons to add a climb or a review for the specific Munro - both of which display a modal when clicked
-    - Publicly left reviews by users
+    - Buttons to add a climb or a review for the specific Munro - both of which display a modal when clicked
+    - Public reviews by users
     - The current weather conditions at the Munro - implemented through the OpenWeather API
 
 
 - Users will be able to add a climb from their dashboard, selecting a Munro from a dropdown menu
 
-- A list of all the Munros, which includes the region, height in feet and meters, and allows the user to click whether a Munro has been climbed and displays a modal to add a climb. Users can search using the search bar - filtering by name, region, and height.
+- A list of all the Munros, which includes the region, height in feet and meters, and which allows the user to select whether a Munro has been climbed and displays a modal to add a climb. Users can search this list using the search bar - filtering by name, region, and height.
 
 # Project Initialization
 To fully enjoy this application on your local machine, please be sure to follow these steps:
@@ -56,7 +56,7 @@ To fully enjoy this application on your local machine, please be sure to follow 
 3. Run docker volume create mongo-data
 3. Run docker compose build
 4. Run docker compose up
-5. Run docker exec -it munro-go-fastapi-1 bash
-6. Go to fastapi-1 container in Docker and run “python seed_db.py” in the container terminal
+5. Run docker exec -it munro-go-fastapi-1 /bin/bash
+6. Run python seed_db.py
 
 Start bagging those Munros!
