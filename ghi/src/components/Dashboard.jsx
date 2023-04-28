@@ -7,7 +7,6 @@ import LoadingBar from "./LoadingBar";
 import MapComp from "./MapComp";
 import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
-import Select from "react-select";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -15,9 +14,46 @@ const Dashboard = () => {
   const { data: account, isLoading: isLoadingAccount } = useGetAccountQuery();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
   const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
+  const climbsList = myClimbs?.map((climb) => climb?.munro_id);
+  const getClimbedMunros = (data, climbsList) => {
+    return data?.filter((munro) => climbsList.includes(munro.id));
+  };
+
+  const climbedMunros = getClimbedMunros(data, climbsList);
   const [markers, setMarkers] = useState([]);
   const [selectedMunro, setSelectedMunro] = useState("");
-
+  const beginnerRank = {
+    name: "Beginner",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png",
+  };
+  const noviceRank = {
+    name: "Novice",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_30000_Steps.png",
+  };
+  const expertRank = {
+    name: "Expert",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_70000_Steps.png",
+  };
+  const legendRank = {
+    name: "Legend",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_100000_Steps.png",
+  };
+  const munroistRank = {
+    name: "Munroist",
+    src: "https://cdn11.bigcommerce.com/s-qc7qegnorm/images/stencil/1280x1280/products/5543/14439/5060761281754__70744.1672746967.png?c=1",
+  };
+  let rank;
+  if (climbedMunros?.length < 1) {
+    rank = beginnerRank;
+  } else if (climbedMunros?.length < 2) {
+    rank = noviceRank;
+  } else if (climbedMunros?.length < 3) {
+    rank = expertRank;
+  } else if (climbedMunros?.length < 4) {
+    rank = legendRank;
+  } else if (climbedMunros?.length < 5) {
+    rank = munroistRank;
+  }
   const center = {
     lat: 57.1,
     lng: -4.1826492694,
@@ -29,11 +65,8 @@ const Dashboard = () => {
   const handleClick = (munro) => {
     window.location.href = `/munros/${munro.id}`;
   };
-  const handleChange = (selectedOption) => {
-    handleMunroSelected(selectedOption);
-  };
-  const handleMunroSelected = (munro) => {
-    window.location.href = `/munros/${munro.value}/add-climb`;
+  const handleChange = (e) => {
+    window.location.href = `/munros/${e.target.value}/add-climb`;
   };
 
   useEffect(() => {
@@ -78,20 +111,6 @@ const Dashboard = () => {
     isLoadingReviews
   )
     return <LoadingBar increment={20} interval={50} />;
-
-  const climbsList = myClimbs.map((climb) => climb.munro_id);
-
-  const munroOptions = data.map((munro) => ({
-    label: munro.hillname,
-    value: munro.id,
-    key: munro.id,
-  }));
-
-  const getClimbedMunros = (data, climbsList) => {
-    return data.filter((munro) => climbsList.includes(munro.id));
-  };
-
-  const climbedMunros = getClimbedMunros(data, climbsList);
 
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
   const todoMunros = 282 - climbedMunros.length;
@@ -138,17 +157,20 @@ const Dashboard = () => {
                   See all
                 </Link>
                 <div className="flex justify-center items-center gap-6 py-5 z-50">
-                  <Select
+                  <select
                     value={selectedMunro}
                     onChange={handleChange}
-                    options={munroOptions}
-                    className="block w-40 text-sm rounded-md dark:text-gray-400"
-                    menuPlacement="auto"
-                    placeholder="Add a climb..."
-                    components={{
-                      DropdownIndicator: () => <span />,
-                    }}
-                  />
+                    className="select select-accent w-full max-w-xs"
+                  >
+                    <option disabled value={""}>
+                      Add a climb...
+                    </option>
+                    {data.map((munro) => (
+                      <option key={munro.id} value={munro.id}>
+                        {munro.hillname}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>
@@ -158,15 +180,16 @@ const Dashboard = () => {
                 <div className="stats bg-base-300">
                   <div className="stat items-center">
                     <div className="stat-value mb-3 text-center">Rank: </div>
-                    <img
-                      src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
-                      style={{ maxHeight: "250px" }}
-                    />
-                    <div className="stat-value py-2 text-center">Beginner</div>
+                    <img src={rank.src} style={{ maxHeight: "250px" }} />
+                    <div className="stat-value py-2 text-center">
+                      {rank.name}
+                    </div>
                     <div className="stat-desc py-2 text-lg text-center">
                       <h3>Total Climbs Completed: {myClimbs.length}</h3>
                       <div className="stat-value">{percentDone}%</div>
-                      <div className="stat-title">Munros bagged</div>
+                      <div className="stat-title">
+                        Munros bagged: {climbedMunros.length}
+                      </div>
                       <div className="stat-desc text-secondary">
                         {todoMunros} remaining
                       </div>
