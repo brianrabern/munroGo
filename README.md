@@ -12,7 +12,7 @@ Designed and created by:
 - Elijah Ramos
 - Diganta Roy
 
-Your challenge, should you choose to accept it, is to conquer [Munros](https://en.wikipedia.org/wiki/Munro) in Scotland, a list of Scottish mountains which are named after Sir Hugh T. Munro, who surveyed and catalogued them in 1891. MunroGo is a comprehensive guide to all of Scotland's 282 Munros. Gotta bag 'em all!
+Your challenge, should you choose to accept it, is to conquer the [Munros](https://en.wikipedia.org/wiki/Munro) in Scotland, a list of Scottish mountains which are named after Sir Hugh T. Munro, who surveyed and catalogued them in 1891. MunroGo is a comprehensive guide to all of Scotland's 282 Munros. Gotta bag 'em all!
 
 ## Technology Stack
 
