@@ -24,7 +24,7 @@ Your challenge, should you choose to accept it, is to conquer [Munros](https://e
 
 ## Design
 - [Wireframe](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/Wireframe.png)
--[API Endpoints](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/api-endpoints.md)
+- [API Endpoints](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/api-endpoints.md)
 
 ## Intended market
 
