@@ -92,7 +92,7 @@ const Dashboard = () => {
   };
 
   const climbedMunros = getClimbedMunros(data, climbsList);
-
+  console.log(climbedMunros);
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
   const todoMunros = 282 - climbedMunros.length;
 
@@ -130,7 +130,7 @@ const Dashboard = () => {
                       >
                         <ClimbCard key={`card-${climb.id}`} climb={climb} />
                       </div>
-                      <div className="divider"></div>
+                      <div key={`div-${climb.id}`} className="divider"></div>
                     </>
                   ))}
                 </div>
@@ -189,7 +189,7 @@ const Dashboard = () => {
                           review={review}
                         />
                       </div>
-                      <div className="divider"></div>
+                      <div key={`div-${review.id}`} className="divider"></div>
                     </>
                   ))}
                 </div>
@@ -271,6 +271,12 @@ const Dashboard = () => {
           </div>
           <div className="flex justify-center items-center gap-6 py-5">
             <Select
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  backgroundColor: "#f5f5f5",
+                }),
+              }}
               value={selectedMunro}
               onChange={handleChange}
               options={munroOptions}
