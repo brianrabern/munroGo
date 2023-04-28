@@ -7,7 +7,7 @@ export default function ReviewCard({ review }) {
   });
 
   return (
-    <div className="card w-96 bg-neutral-50 text-[#737a7e]">
+    <div className="card w-96 bg-base-300">
       <div className="card-body">
         <div className="rating">
           {review.rating >= 1 && (
