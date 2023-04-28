@@ -6,7 +6,6 @@ import LoadingBar from "./LoadingBar";
 import ClimbCard from "./ClimbCard";
 
 const Climbs = () => {
-  const { data } = useGetMunrosQuery();
   const { data: myClimbs, isLoading } = useGetClimbsQuery();
   const [deleteClimb] = useDeleteClimbMutation();
   if (isLoading) return <LoadingBar increment={20} interval={50} />;
