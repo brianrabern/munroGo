@@ -29,7 +29,7 @@ export default function ClimbCard({ climb }) {
           {munro.hillname}
         </h2>
         <p className="text-lg">{date}</p>
-        <p className="flex text-lg gap-2">
+        <div className="flex text-lg gap-2">
           Difficulty:
           <div className="rating">
             {climb.difficulty >= 1 && (
@@ -83,7 +83,7 @@ export default function ClimbCard({ climb }) {
               />
             )}
           </div>
-        </p>
+        </div>
         <p className="text-lg">Duration: {climb.duration}</p>
         <p className="text-lg">Weather: {climb.weather}</p>
         <p className="text-lg">Notes: {climb.notes}</p>

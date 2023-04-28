@@ -15,8 +15,39 @@ const Dashboard = () => {
   const { data: account, isLoading: isLoadingAccount } = useGetAccountQuery();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
   const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
+  const climbsList = myClimbs?.map((climb) => climb?.munro_id);
+  const getClimbedMunros = (data, climbsList) => {
+    return data?.filter((munro) => climbsList.includes(munro.id));
+  };
+
+  const climbedMunros = getClimbedMunros(data, climbsList);
   const [markers, setMarkers] = useState([]);
   const [selectedMunro, setSelectedMunro] = useState("");
+  const beginnerRank = {
+    name: "Beginner",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png",
+  };
+  const noviceRank = {
+    name: "Novice",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_30000_Steps.png",
+  };
+  const expertRank = {
+    name: "Expert",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_70000_Steps.png",
+  };
+  const legendRank = {
+    name: "Legend",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_100000_Steps.png",
+  };
+  let rank = beginnerRank;
+
+  if (climbedMunros?.length > 10) {
+    rank = noviceRank;
+  } else if (climbedMunros?.length > 20) {
+    rank = expertRank;
+  } else if (climbedMunros?.length > 50) {
+    rank = legendRank;
+  }
 
   const center = {
     lat: 57.1,
@@ -79,20 +110,12 @@ const Dashboard = () => {
   )
     return <LoadingBar increment={20} interval={50} />;
 
-  const climbsList = myClimbs.map((climb) => climb.munro_id);
-
   const munroOptions = data.map((munro) => ({
     label: munro.hillname,
     value: munro.id,
     key: munro.id,
   }));
 
-  const getClimbedMunros = (data, climbsList) => {
-    return data.filter((munro) => climbsList.includes(munro.id));
-  };
-
-  const climbedMunros = getClimbedMunros(data, climbsList);
-  console.log(climbedMunros);
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
   const todoMunros = 282 - climbedMunros.length;
 
@@ -158,15 +181,16 @@ const Dashboard = () => {
                 <div className="stats bg-base-300">
                   <div className="stat items-center">
                     <div className="stat-value mb-3 text-center">Rank: </div>
-                    <img
-                      src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
-                      style={{ maxHeight: "250px" }}
-                    />
-                    <div className="stat-value py-2 text-center">Beginner</div>
+                    <img src={rank.src} style={{ maxHeight: "250px" }} />
+                    <div className="stat-value py-2 text-center">
+                      {rank.name}
+                    </div>
                     <div className="stat-desc py-2 text-lg text-center">
                       <h3>Total Climbs Completed: {myClimbs.length}</h3>
                       <div className="stat-value">{percentDone}%</div>
-                      <div className="stat-title">Munros bagged</div>
+                      <div className="stat-title">
+                        Munros bagged: {climbedMunros.length}
+                      </div>
                       <div className="stat-desc text-secondary">
                         {todoMunros} remaining
                       </div>
