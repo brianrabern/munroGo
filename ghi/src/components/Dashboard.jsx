@@ -92,7 +92,7 @@ const Dashboard = () => {
   };
 
   const climbedMunros = getClimbedMunros(data, climbsList);
-
+  console.log(climbedMunros);
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
   const todoMunros = 282 - climbedMunros.length;
 
