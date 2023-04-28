@@ -113,25 +113,22 @@ const Dashboard = () => {
           height={height}
           handleClick={handleClick}
         />
-        <div className="flex flex-col items-center">
-          <div className="flex justify-center items-center gap-6">
+        <div className="flex flex-col">
+          <div className="flex items-stretch h-full justify-center gap-6">
             {/* First Card */}
-            <div className="card w-96 h-full bg-base-300 shadow-xl">
+            <div className="card w-96 bg-base-300 shadow-xl">
               <div className="card-body">
                 <div className="flex justify-center items-center">
                   <div className="stat-value py-2 text-center">My Climbs</div>
                 </div>
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                   {myClimbs.map((climb) => (
-                    <>
-                      <div
-                        key={`climb-${climb.id}`}
-                        className="carousel-item h-full"
-                      >
-                        <ClimbCard key={`card-${climb.id}`} climb={climb} />
+                    <div key={climb.id}>
+                      <div className="carousel-item h-full">
+                        <ClimbCard climb={climb} />
                       </div>
-                      <div key={`div-${climb.id}`} className="divider"></div>
-                    </>
+                      <div className="divider"></div>
+                    </div>
                   ))}
                 </div>
                 <Link
@@ -140,31 +137,38 @@ const Dashboard = () => {
                 >
                   See all
                 </Link>
+                <div className="flex justify-center items-center gap-6 py-5 z-50">
+                  <Select
+                    value={selectedMunro}
+                    onChange={handleChange}
+                    options={munroOptions}
+                    className="block w-40 text-sm rounded-md dark:text-gray-400"
+                    menuPlacement="auto"
+                    placeholder="Add a climb..."
+                    components={{
+                      DropdownIndicator: () => <span />,
+                    }}
+                  />
+                </div>
               </div>
             </div>
             {/* Second Card */}
-            <div className="rounded-box">
-              <div className="card h-full w-96 bg-base-300 shadow-xl">
-                <div className="card-body items-center">
-                  <div className="stats bg-base-300">
-                    <div className="stat items-center">
-                      <div className="stat-value py-2 text-center">
-                        My Stats
-                      </div>
-                      <img
-                        src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
-                        style={{ maxHeight: "250px" }}
-                      />
-                      <div className="stat-value py-2 text-center">
-                        Beginner
-                      </div>
-                      <div className="stat-desc py-2 text-lg text-center">
-                        <h3>Total Climbs Completed: {myClimbs.length}</h3>
-                        <div className="stat-value">{percentDone}%</div>
-                        <div className="stat-title">Munros bagged</div>
-                        <div className="stat-desc text-secondary">
-                          {todoMunros} remaining
-                        </div>
+            <div className="card w-96 bg-base-300 shadow-xl">
+              <div className="card-body items-center">
+                <div className="stats bg-base-300">
+                  <div className="stat items-center">
+                    <div className="stat-value mb-3 text-center">Rank: </div>
+                    <img
+                      src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
+                      style={{ maxHeight: "250px" }}
+                    />
+                    <div className="stat-value py-2 text-center">Beginner</div>
+                    <div className="stat-desc py-2 text-lg text-center">
+                      <h3>Total Climbs Completed: {myClimbs.length}</h3>
+                      <div className="stat-value">{percentDone}%</div>
+                      <div className="stat-title">Munros bagged</div>
+                      <div className="stat-desc text-secondary">
+                        {todoMunros} remaining
                       </div>
                     </div>
                   </div>
@@ -172,27 +176,27 @@ const Dashboard = () => {
               </div>
             </div>
             {/* Third Card */}
-            <div className="card h-full w-96 bg-base-300 shadow-xl">
+            <div className="card w-96 bg-base-300 shadow-xl">
               <div className="card-body">
                 <div className="flex justify-center items-center">
                   <div className="stat-value py-2 text-center">My Reviews</div>
                 </div>
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                   {myReviews.map((review) => (
-                    <>
-                      <div
-                        key={`review-${review.id}`}
-                        className="carousel-item"
-                      >
-                        <ReviewCardDash
-                          key={`card-${review.id}`}
-                          review={review}
-                        />
+                    <div key={review.id}>
+                      <div className="carousel-item">
+                        <ReviewCardDash review={review} />
                       </div>
-                      <div key={`div-${review.id}`} className="divider"></div>
-                    </>
+                      <div className="divider"></div>
+                    </div>
                   ))}
                 </div>
+                <Link
+                  to={{ pathname: "/my-reviews" }}
+                  className="stat-desc text-accent text-center"
+                >
+                  See all
+                </Link>
               </div>
             </div>
           </div>
@@ -227,18 +231,6 @@ const Dashboard = () => {
                   >
                     Feet
                   </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                  >
-                    Longitude
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                  >
-                    Latitude
-                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -257,36 +249,11 @@ const Dashboard = () => {
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                         {munro.feet}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        {munro.longitude}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        {munro.latitude}
-                      </td>
                     </tr>
                   );
                 })}
               </tbody>
             </table>
-          </div>
-          <div className="flex justify-center items-center gap-6 py-5">
-            <Select
-              styles={{
-                control: (provided) => ({
-                  ...provided,
-                  backgroundColor: "#f5f5f5",
-                }),
-              }}
-              value={selectedMunro}
-              onChange={handleChange}
-              options={munroOptions}
-              className="block w-40 text-sm border-gray-200 rounded-md focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
-              menuPlacement="auto"
-              placeholder="Add a climb..."
-              components={{
-                DropdownIndicator: () => <span />,
-              }}
-            />
           </div>
         </div>
       </div>

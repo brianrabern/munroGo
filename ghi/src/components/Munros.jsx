@@ -16,7 +16,6 @@ const Munros = () => {
   const [selectedMunro, setSelectedMunro] = useState(null);
   const navigate = useNavigate();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
-  console.log(isModalOpen);
   if (error) {
     navigate("/");
   }

@@ -38,6 +38,13 @@ export const reviewsApi = createApi({
       },
       invalidatesTags: [{ type: "review", id: "str" }],
     }),
+    deleteReview: builder.mutation({
+      query: (review_id) => ({
+        url: `/api/munros/{munro_id}/reviews/${review_id}/`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: "Reviews", id }],
+    }),
   }),
 });
 
@@ -45,4 +52,5 @@ export const {
   useGetReviewsQuery,
   useGetReviewsForMunroQuery,
   useCreateReviewMutation,
+  useDeleteReviewMutation,
 } = reviewsApi;

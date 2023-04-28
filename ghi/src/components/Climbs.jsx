@@ -14,13 +14,13 @@ const Climbs = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-bold">My Climbs</h1>
-      <div className="max-w-3xl grid grid-cols-2 gap-5 overflow-hidden">
+      <h1 className="text-2xl font-bold text-center py-5">My Climbs</h1>
+      <div className="flex flex-col-3 flex-wrap justify-center gap-3">
         {myClimbs.map((climb) => (
-          <div key={climb.id} className="bg-neutral rounded-box p-4">
-            <ClimbCard key={climb.id} climb={climb} />
+          <div key={climb.id} className="bg-base-300 rounded-box p-4">
+            <ClimbCard climb={climb} />
             <div className="divider"></div>
-            <div>
+            <div className="flex justify-center">
               <button
                 className="btn btn-xs btn-error"
                 onClick={() => deleteClimb(climb.id)}
