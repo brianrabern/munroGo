@@ -46,7 +46,7 @@ Funtionality
 
 - Users will be able to add a climb from their dashboard, selecting a Munro from a dropdown menu
 
-- A list of all the Munros, which includes the region, height in feet and meters, and which allows the user to select whether a Munro has been climbed and displays a modal to add a climb. Users can search this list using the search bar - filtering by name, region, and height.
+- A list of all the Munros, which includes the region, height in feet and meters, and which allows the user to select whether a Munro has been climbed and displays a modal to add a climb. Users can search this list using the search bar - filtering by name, region, and height. Users may also navigate to individual Munro detail pages by clicking the Munro's name on the list.
 
 # Project Initialization
 To fully enjoy this application on your local machine, please be sure to follow these steps:
