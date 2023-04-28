@@ -23,6 +23,7 @@ Your challenge, should you choose to accept it, is to conquer the [Munros](https
 - API Integrations: Google Maps API, OpenWeather API, Wikipedia API, the Database of British and Irish Hills
 
 ## Design
+
 - [Wireframe](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/Wireframe.png)
 - [API Endpoints](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/api-endpoints.md)
 
@@ -69,9 +70,9 @@ To fully enjoy this application on your local machine, please be sure to follow 
 
 1. Clone the repository down to your local machine
 2. CD into the new project directory
-3. Run docker volume create mongo-data3
+3. Run docker volume create mongo-data
 4. Run docker compose build
 5. Run docker compose up
-6. Run docker exec -it munro-go-fastapi-1 /bin/bash
+6. Run docker exec -it munro-go-fastapi-1 /bin/bash (or somehow get into the container for munro-go-fastapi-1)
 7. Run python seed_db.py
 8. Start bagging those Munros!
