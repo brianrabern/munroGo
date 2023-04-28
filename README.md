@@ -2,13 +2,17 @@
 
 ## MunroGo
 
+A mountain-climbing app using FastAPI and React technologies.
+
+Designed and created by:
+
 - Warren Hill
 - Paula Mejia
 - Brian Rabern
 - Elijah Ramos
 - Diganta Roy
 
-Your challenge, should you choose to accept it, is to conquer Munros in Scotland, a list of Scottish mountains which are named after Sir Hugh T Munro, who surveyed and catalogued them in 1891. MunroGo is a comprehensive guide to all of Scotland's 282 Munros. Gotta bag 'em all!
+Your challenge, should you choose to accept it, is to conquer [Munros](https://en.wikipedia.org/wiki/Munro) in Scotland, a list of Scottish mountains which are named after Sir Hugh T. Munro, who surveyed and catalogued them in 1891. MunroGo is a comprehensive guide to all of Scotland's 282 Munros. Gotta bag 'em all!
 
 ## Technology Stack
 
@@ -17,6 +21,8 @@ Your challenge, should you choose to accept it, is to conquer Munros in Scotland
 - Back-End technologies: MongoDB, FastAPI
 - Development tools: Docker, Git
 - API Integrations: Google Maps API, OpenWeather API, Wikipedia API, the Database of British and Irish Hills
+
+See the design wireframe [here](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/Wireframe.png)
 
 ## Intended market
 
@@ -27,7 +33,7 @@ Munro bagging is a popular pastime in Scotland where walking enthusiasts challen
 - Website requires users to sign up to have access to its functionality.
 - Users will have access to their dashboard, which displays:
   - Their privately logged climbs
-  - Their statistics
+  - Their statistics: number of Munros climbed, etc.
   - Their publicly written reviews for Munros
   - A list of climbed Munros by the user
   - A map, integrated through the Google Maps API, which has different colored markers depending on whether users have climbed a Munro or not. Unclimbed Munros will be displayed with a red marker and climbed Munros will be displayed with a green marker. Each marker redirects the detail page for each specific Munro when clicked.
@@ -35,7 +41,7 @@ Munro bagging is a popular pastime in Scotland where walking enthusiasts challen
 - Each Munro has its own detail page which includes:
   - A picture of the Munro
   - Its height
-  - A summary
+  - A summary description
   - A map with the marker of the Munro's location, integrated through the Google Maps API
   - The region the Munro is located
   - Its latitude and longitude coordinates
@@ -61,7 +67,7 @@ To fully enjoy this application on your local machine, please be sure to follow 
 
 1. Clone the repository down to your local machine
 2. CD into the new project directory
-3. Run docker volume create mongo-data3.
+3. Run docker volume create mongo-data3
 4. Run docker compose build
 5. Run docker compose up
 6. Run docker exec -it munro-go-fastapi-1 /bin/bash
