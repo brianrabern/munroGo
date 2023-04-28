@@ -9,7 +9,7 @@ import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
 import { Link } from "react-router-dom";
 
-const Dashboard = () => {
+const Dashboard = () => { 
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
   const { data: account, isLoading: isLoadingAccount } = useGetAccountQuery();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
