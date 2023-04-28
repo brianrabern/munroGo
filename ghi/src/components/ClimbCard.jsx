@@ -26,7 +26,7 @@ export default function ClimbCard({ climb }) {
           />
         </figure>
         <h2 className="card-title font-bold justify-center">
-          {munro.hillname}
+          {munro?.hillname}
         </h2>
         <p className="text-lg">{date}</p>
         <div className="flex text-lg gap-2">

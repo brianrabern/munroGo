@@ -38,16 +38,22 @@ const Dashboard = () => {
     name: "Legend",
     src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_100000_Steps.png",
   };
-  let rank = beginnerRank;
-
-  if (climbedMunros?.length > 10) {
+  const munroistRank = {
+    name: "Munroist",
+    src: "https://cdn11.bigcommerce.com/s-qc7qegnorm/images/stencil/1280x1280/products/5543/14439/5060761281754__70744.1672746967.png?c=1",
+  };
+  let rank;
+  if (climbedMunros?.length < 1) {
+    rank = beginnerRank;
+  } else if (climbedMunros?.length < 2) {
     rank = noviceRank;
-  } else if (climbedMunros?.length > 20) {
+  } else if (climbedMunros?.length < 3) {
     rank = expertRank;
-  } else if (climbedMunros?.length > 50) {
+  } else if (climbedMunros?.length < 4) {
     rank = legendRank;
+  } else if (climbedMunros?.length < 5) {
+    rank = munroistRank;
   }
-
   const center = {
     lat: 57.1,
     lng: -4.1826492694,
@@ -59,11 +65,8 @@ const Dashboard = () => {
   const handleClick = (munro) => {
     window.location.href = `/munros/${munro.id}`;
   };
-  const handleChange = (selectedOption) => {
-    handleMunroSelected(selectedOption);
-  };
-  const handleMunroSelected = (munro) => {
-    window.location.href = `/munros/${munro.value}/add-climb`;
+  const handleChange = (e) => {
+    window.location.href = `/munros/${e.target.value}/add-climb`;
   };
 
   useEffect(() => {
