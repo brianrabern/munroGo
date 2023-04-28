@@ -7,7 +7,6 @@ import LoadingBar from "./LoadingBar";
 import MapComp from "./MapComp";
 import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
-import Select from "react-select";
 import { Link } from "react-router-dom";
 
 const Dashboard = () => {
@@ -110,12 +109,6 @@ const Dashboard = () => {
   )
     return <LoadingBar increment={20} interval={50} />;
 
-  const munroOptions = data.map((munro) => ({
-    label: munro.hillname,
-    value: munro.id,
-    key: munro.id,
-  }));
-
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
   const todoMunros = 282 - climbedMunros.length;
 
@@ -161,17 +154,20 @@ const Dashboard = () => {
                   See all
                 </Link>
                 <div className="flex justify-center items-center gap-6 py-5 z-50">
-                  <Select
+                  <select
                     value={selectedMunro}
                     onChange={handleChange}
-                    options={munroOptions}
-                    className="block w-40 text-sm rounded-md dark:text-gray-400"
-                    menuPlacement="auto"
-                    placeholder="Add a climb..."
-                    components={{
-                      DropdownIndicator: () => <span />,
-                    }}
-                  />
+                    className="select select-accent w-full max-w-xs"
+                  >
+                    <option disabled value={""}>
+                      Add a climb...
+                    </option>
+                    {data.map((munro) => (
+                      <option key={munro.id} value={munro.id}>
+                        {munro.hillname}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>
