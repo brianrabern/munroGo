@@ -9,7 +9,7 @@ import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
 import { Link } from "react-router-dom";
 
-const Dashboard = () => { 
+const Dashboard = () => {
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
   const { data: account, isLoading: isLoadingAccount } = useGetAccountQuery();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
@@ -101,7 +101,7 @@ const Dashboard = () => {
 
       setMarkers(newMarkers);
     }
-  }, [data]);
+  }, [data, myClimbs]);
 
   if (
     isLoadingMunros ||
@@ -109,7 +109,23 @@ const Dashboard = () => {
     isLoadingClimbs ||
     isLoadingReviews
   )
-    return <LoadingBar increment={20} interval={50} />;
+    return (
+      <div className="flex flex-col items-center gap-10 px-20">
+        <h5
+          hidden
+          className="text-2xl text-base-300 font-medium lg:block pt-10 text-center"
+        >
+          ...
+        </h5>
+        <div className="w-full h-96 bg-base-300">
+          <div className="mb-8 flex flex-col items-center">
+            <img src="./LoginMunro.png" width="150" />
+            <LoadingBar increment={20} interval={50} />;
+          </div>
+        </div>
+        <div className="py-20 w-full h-32 bg-base-100"></div>
+      </div>
+    );
 
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
   const todoMunros = 282 - climbedMunros.length;
@@ -178,7 +194,7 @@ const Dashboard = () => {
                 <div className="stats bg-base-300">
                   <div className="stat items-center">
                     <div className="stat-value mb-3 text-center">Rank: </div>
-                    <img src={rank.src} style={{ maxHeight: "250px" }} />
+                    <img src={rank.src} style={{ maxHeight: "250px" }} alt="" />
                     <div className="stat-value py-2 text-center">
                       {rank.name}
                     </div>

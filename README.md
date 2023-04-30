@@ -2,9 +2,7 @@
 
 ## MunroGo
 
-A mountain-climbing app using FastAPI and React technologies.
-
-Designed and created by:
+A mountain-climbing app built using FastAPI and React. Designed and created by:
 
 - Warren Hill
 - Paula Mejia
@@ -17,10 +15,10 @@ Your challenge, should you choose to accept it, is to conquer the [Munros](https
 ## Technology Stack
 
 - Programming languages: Python 3, JavaScript ES+, HTML5, CSS
-- Front-End technologies: React, React Hooks, Redux Toolkit, Tailwind, DaisyUI
-- Back-End technologies: MongoDB, FastAPI
+- Back-End: MongoDB, FastAPI
+- Front-End: React, React Hooks, Redux Toolkit, Tailwind, DaisyUI
 - Development tools: Docker, Git
-- API Integrations: Google Maps API, OpenWeather API, Wikipedia API, the Database of British and Irish Hills
+- APIs: Google Maps API, OpenWeather API, Wikipedia API, the Database of British and Irish Hills
 
 ## Design
 
@@ -34,7 +32,7 @@ Munro bagging is a popular pastime in Scotland where walking enthusiasts challen
 ## Application functionality
 
 - Website requires users to sign up to have access to its functionality.
-- Users will have access to their dashboard, which displays:
+- Users have access to their dashboard, which displays:
   - Their privately logged climbs
   - Their statistics: number of Munros climbed, etc.
   - Their publicly written reviews for Munros
@@ -42,15 +40,13 @@ Munro bagging is a popular pastime in Scotland where walking enthusiasts challen
   - A map, integrated through the Google Maps API, which has different colored markers depending on whether users have climbed a Munro or not. Unclimbed Munros will be displayed with a red marker and climbed Munros will be displayed with a green marker. Each marker redirects the detail page for each specific Munro when clicked.
 - From the dashboard, users can also see a page which includes of all their climbs, and another page which displays all their reviews.
 - Each Munro has its own detail page which includes:
-  - A picture of the Munro
-  - Its height
-  - A summary description
+  - A picture of the Munro from Wikipedia API
+  - Data such as summit height, latitude and longitude coordinates, the region,, etc. from the Database of British and Irish Hills
+  - A summary description from Wikipedia API
+  - The current up-to-date weather conditions at the Munro - implemented through the OpenWeather API
   - A map with the marker of the Munro's location, integrated through the Google Maps API
-  - The region the Munro is located
-  - Its latitude and longitude coordinates
   - Buttons to add a climb or a review for the specific Munro - both of which display a modal when clicked
-  - Public reviews by users
-  - The current weather conditions at the Munro - implemented through the OpenWeather API
+  - Public reviews by other users
 - Users will be able to add a climb from their dashboard, selecting a Munro from a dropdown menu.
 - A list of all the Munros, which includes the region, height in feet and meters, and which allows the user to select whether a Munro has been climbed and displays a modal to add a climb. Users can search this list using the search bar - filtering by name, region, and height. Users may also navigate to individual Munro detail pages by clicking the Munro's name on the list.
 
@@ -59,8 +55,8 @@ Munro bagging is a popular pastime in Scotland where walking enthusiasts challen
 Looking to the future, possible features that we would like to implement are:
 
 - Real-time user messaging system
-- Including 7 day weather forecast on Munros detail pages
-- Including all the British Hills, the Donalds
+- Including 7-day weather forecast on Munros detail pages
+- Including all the British and Irish Hills
 - Ordnance survey data API to create more detailed maps
 - Allow users to publicly post a climb trail that others can follow along
 
@@ -69,10 +65,14 @@ Looking to the future, possible features that we would like to implement are:
 To fully enjoy this application on your local machine, please be sure to follow these steps:
 
 1. Clone the repository down to your local machine
-2. CD into the new project directory
-3. Run docker volume create mongo-data
-4. Run docker compose build
-5. Run docker compose up
-6. Run docker exec -it munro-go-fastapi-1 /bin/bash (or somehow get into the container for munro-go-fastapi-1)
-7. Run python seed_db.py
-8. Start bagging those Munros!
+2. cd into the new project directory
+3. Add a file in the main directory called ".env" and add these variables:
+  SIGNING_KEY=[hexadecimal string of length 32 (run "openssl rand -hex 32")]
+  OPEN_WEATHER_API_KEY=[get from [OpenWeather](https://openweathermap.org/current)]
+  REACT_APP_GOOGLE_MAPS_API_KEY=[get from [GoogleMaps](https://developers.google.com/maps)].
+4. Run docker volume create mongo-data
+5. Run docker compose build
+6. Run docker compose up
+7. Run docker exec -it munro-go-fastapi-1 /bin/bash (or somehow get into the container for munro-go-fastapi-1)
+8. Run python seed_db.py
+9. Start bagging those Munros!
