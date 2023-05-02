@@ -12,7 +12,7 @@ import {
 import { useCreateClimbMutation } from "../services/climbs";
 import { Buffer } from "buffer";
 
-const NewClimbClick = ({ munro_id }) => {
+const NewClimbClick = ({ munro_id, setIsModalOpen }) => {
   const dispatch = useDispatch();
   const [createClimb] = useCreateClimbMutation();
   const newClimb = useSelector((state) => state.newClimb);
@@ -51,6 +51,7 @@ const NewClimbClick = ({ munro_id }) => {
           onSubmit={(e) => {
             e.preventDefault();
             createClimb(climb);
+            setIsModalOpen(false);
             dispatch(reset());
           }}
         >

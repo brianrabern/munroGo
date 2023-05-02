@@ -67,8 +67,11 @@ const Munros = () => {
   return (
     <div className="flex flex-col">
       {isModalOpen ? (
-        <div className="fixed top-0 left-0 h-full w-full overflow-y-scroll bg-white z-50 modal-box">
-          <NewClimbClick munro_id={selectedMunro} />
+        <div className="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 h-full w-full overflow-y-scroll bg-white z-50 modal-box">
+          <NewClimbClick
+            munro_id={selectedMunro}
+            setIsModalOpen={setIsModalOpen}
+          />
           <label
             htmlFor="test"
             className="btn btn-sm btn-circle absolute right-2 top-2"

@@ -13,7 +13,7 @@ import {
 import { useCreateClimbMutation } from "../services/climbs";
 import { Buffer } from "buffer";
 
-const NewClimb = () => {
+const NewClimb = (props) => {
   const dispatch = useDispatch();
   const [createClimb] = useCreateClimbMutation();
   const newClimb = useSelector((state) => state.newClimb);
@@ -53,6 +53,7 @@ const NewClimb = () => {
         onSubmit={(e) => {
           e.preventDefault();
           createClimb(climb);
+          props.setIsNewClimbModalOpen(false);
           dispatch(reset());
         }}
       >

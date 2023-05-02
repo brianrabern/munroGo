@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetMunroDetailQuery } from "../services/munros";
 import { useGetReviewsForMunroQuery } from "../services/revs";
@@ -14,6 +14,8 @@ const MunroDetail = () => {
   const { data, isLoading } = useGetMunroDetailQuery(munro_id);
   const { data: reviews, isLoading: isLoadingReviews } =
     useGetReviewsForMunroQuery(munro_id);
+  const [isNewClimbModalOpen, setIsNewClimbModalOpen] = useState(false);
+  const [isNewReviewModalOpen, setIsNewReviewModalOpen] = useState(false);
 
   if (isLoading || isLoadingReviews) {
     return <LoadingBar increment={20} interval={50} />;
@@ -169,13 +171,27 @@ const MunroDetail = () => {
                 </p>
                 <div className="flex justify-center py-5 gap-6">
                   <div>
-                    <Modal label="Add review" id="Review" warren="hi">
-                      <NewReview />
+                    <Modal
+                      label="Add review"
+                      id="Review"
+                      open={isNewReviewModalOpen}
+                      setOpen={setIsNewReviewModalOpen}
+                    >
+                      <NewReview
+                        setIsNewReviewModalOpen={setIsNewReviewModalOpen}
+                      />
                     </Modal>
                   </div>
                   <div>
-                    <Modal label="Add a Climb" id="Climb">
-                      <NewClimb />
+                    <Modal
+                      label="Add a Climb"
+                      id="Climb"
+                      open={isNewClimbModalOpen}
+                      setOpen={setIsNewClimbModalOpen}
+                    >
+                      <NewClimb
+                        setIsNewClimbModalOpen={setIsNewClimbModalOpen}
+                      />
                     </Modal>
                   </div>
                 </div>
