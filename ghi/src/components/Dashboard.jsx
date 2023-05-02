@@ -2,20 +2,57 @@ import React, { useState, useEffect } from "react";
 import { useGetAccountQuery } from "../services/auth";
 import { useGetMunrosQuery } from "../services/munros";
 import { useGetClimbsQuery } from "../services/climbs";
-import ClimbCard from "./ClimbCard";
-import ReviewCard from "./ReviewCard";
 import { useGetReviewsQuery } from "../services/revs";
 import LoadingBar from "./LoadingBar";
 import MapComp from "./MapComp";
+import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
   const { data: account, isLoading: isLoadingAccount } = useGetAccountQuery();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
   const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
-  const [markers, setMarkers] = useState([]);
+  const climbsList = myClimbs?.map((climb) => climb?.munro_id);
+  const getClimbedMunros = (data, climbsList) => {
+    return data?.filter((munro) => climbsList.includes(munro.id));
+  };
 
+  const climbedMunros = getClimbedMunros(data, climbsList);
+  const [markers, setMarkers] = useState([]);
+  const beginnerRank = {
+    name: "Beginner",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png",
+  };
+  const noviceRank = {
+    name: "Novice",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_30000_Steps.png",
+  };
+  const expertRank = {
+    name: "Expert",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_70000_Steps.png",
+  };
+  const legendRank = {
+    name: "Legend",
+    src: "https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_100000_Steps.png",
+  };
+  const munroistRank = {
+    name: "Munroist",
+    src: "https://cdn11.bigcommerce.com/s-qc7qegnorm/images/stencil/1280x1280/products/5543/14439/5060761281754__70744.1672746967.png?c=1",
+  };
+  let rank;
+  if (climbedMunros?.length < 1) {
+    rank = beginnerRank;
+  } else if (climbedMunros?.length < 2) {
+    rank = noviceRank;
+  } else if (climbedMunros?.length < 3) {
+    rank = expertRank;
+  } else if (climbedMunros?.length < 4) {
+    rank = legendRank;
+  } else if (climbedMunros?.length < 5) {
+    rank = munroistRank;
+  }
   const center = {
     lat: 57.1,
     lng: -4.1826492694,
@@ -26,6 +63,9 @@ const Dashboard = () => {
 
   const handleClick = (munro) => {
     window.location.href = `/munros/${munro.id}`;
+  };
+  const handleChange = (e) => {
+    window.location.href = `/munros/${e.target.value}/add-climb`;
   };
 
   useEffect(() => {
@@ -61,7 +101,7 @@ const Dashboard = () => {
 
       setMarkers(newMarkers);
     }
-  }, [data]);
+  }, [data, myClimbs]);
 
   if (
     isLoadingMunros ||
@@ -69,14 +109,23 @@ const Dashboard = () => {
     isLoadingClimbs ||
     isLoadingReviews
   )
-    return <LoadingBar increment={20} interval={50} />;
-
-  const climbsList = myClimbs.map((climb) => climb.munro_id);
-
-  const getClimbedMunros = (data, climbsList) => {
-    return data.filter((munro) => climbsList.includes(munro.id));
-  };
-  const climbedMunros = getClimbedMunros(data, climbsList);
+    return (
+      <div className="flex flex-col items-center gap-10 px-20">
+        <h5
+          hidden
+          className="text-2xl text-base-300 font-medium lg:block pt-10 text-center"
+        >
+          ...
+        </h5>
+        <div className="w-full h-96 bg-base-300">
+          <div className="mb-8 flex flex-col items-center">
+            <img src="./LoginMunro.png" width="150" />
+            <LoadingBar increment={20} interval={50} />;
+          </div>
+        </div>
+        <div className="py-20 w-full h-32 bg-base-100"></div>
+      </div>
+    );
 
   const percentDone = Math.round((climbedMunros.length / 282) * 100);
   const todoMunros = 282 - climbedMunros.length;
@@ -98,50 +147,65 @@ const Dashboard = () => {
           height={height}
           handleClick={handleClick}
         />
-        <div className="flex flex-col items-center">
-          {/* <div className="grid grid-flow-col auto-cols-max gap-6"> */}
-          <div className="flex justify-center items-center gap-6">
+        <div className="flex flex-col">
+          <div className="flex items-stretch h-full justify-center gap-6">
             {/* First Card */}
-            <div className="card w-96 h-full bg-base-300 shadow-xl">
+            <div className="card w-96 bg-base-300 shadow-xl">
               <div className="card-body">
                 <div className="flex justify-center items-center">
                   <div className="stat-value py-2 text-center">My Climbs</div>
                 </div>
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                   {myClimbs.map((climb) => (
-                    <>
-                      <div key={climb.id} className="carousel-item h-full">
-                        <ClimbCard key={climb.id} climb={climb} />
+                    <div key={climb.id}>
+                      <div className="carousel-item h-full">
+                        <ClimbCard climb={climb} />
                       </div>
                       <div className="divider"></div>
-                    </>
+                    </div>
                   ))}
+                </div>
+                <Link
+                  to={{ pathname: "/my-climbs" }}
+                  className="stat-desc text-accent text-center"
+                >
+                  See all
+                </Link>
+                <div className="flex justify-center items-center gap-6 py-5 z-50">
+                  <select
+                    onChange={handleChange}
+                    className="select select-accent w-full max-w-xs"
+                  >
+                    <option disabled value={""}>
+                      Add a climb...
+                    </option>
+                    {data.map((munro) => (
+                      <option key={munro.id} value={munro.id}>
+                        {munro.hillname}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>
             {/* Second Card */}
-            <div className="rounded-box">
-              <div className="card h-full w-96 bg-base-300 shadow-xl">
-                <div className="card-body items-center">
-                  <div className="stats bg-base-300">
-                    <div className="stat items-center">
-                      <div className="stat-value py-2 text-center">
-                        My Stats
+            <div className="card w-96 bg-base-300 shadow-xl">
+              <div className="card-body items-center">
+                <div className="stats bg-base-300">
+                  <div className="stat items-center">
+                    <div className="stat-value mb-3 text-center">Rank: </div>
+                    <img src={rank.src} style={{ maxHeight: "250px" }} alt="" />
+                    <div className="stat-value py-2 text-center">
+                      {rank.name}
+                    </div>
+                    <div className="stat-desc py-2 text-lg text-center">
+                      <h3>Total Climbs Completed: {myClimbs.length}</h3>
+                      <div className="stat-value">{percentDone}%</div>
+                      <div className="stat-title">
+                        Munros bagged: {climbedMunros.length}
                       </div>
-                      <img
-                        src="https://blog.fitbit.com/wp-content/uploads/2017/07/Badges_Daily_10000_Steps.png"
-                        style={{ maxHeight: "250px" }}
-                      />
-                      <div className="stat-value py-2 text-center">
-                        Beginner
-                      </div>
-                      <div className="stat-desc py-2 text-lg text-center">
-                        <h3>Total Climbs Completed: {myClimbs.length}</h3>
-                        <div className="stat-value">{percentDone}%</div>
-                        <div className="stat-title">Munros bagged</div>
-                        <div className="stat-desc text-secondary">
-                          {todoMunros} remaining
-                        </div>
+                      <div className="stat-desc text-secondary">
+                        {todoMunros} remaining
                       </div>
                     </div>
                   </div>
@@ -149,21 +213,27 @@ const Dashboard = () => {
               </div>
             </div>
             {/* Third Card */}
-            <div className="card h-full w-96 bg-base-300 shadow-xl">
+            <div className="card w-96 bg-base-300 shadow-xl">
               <div className="card-body">
                 <div className="flex justify-center items-center">
                   <div className="stat-value py-2 text-center">My Reviews</div>
                 </div>
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
                   {myReviews.map((review) => (
-                    <>
-                      <div key={review.id} className="carousel-item">
-                        <ReviewCardDash key={review.id} review={review} />
+                    <div key={review.id}>
+                      <div className="carousel-item">
+                        <ReviewCardDash review={review} />
                       </div>
                       <div className="divider"></div>
-                    </>
+                    </div>
                   ))}
                 </div>
+                <Link
+                  to={{ pathname: "/my-reviews" }}
+                  className="stat-desc text-accent text-center"
+                >
+                  See all
+                </Link>
               </div>
             </div>
           </div>
@@ -198,18 +268,6 @@ const Dashboard = () => {
                   >
                     Feet
                   </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                  >
-                    Longitude
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-left text-gray-500 uppercase "
-                  >
-                    Latitude
-                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -227,12 +285,6 @@ const Dashboard = () => {
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                         {munro.feet}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        {munro.longitude}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        {munro.latitude}
                       </td>
                     </tr>
                   );

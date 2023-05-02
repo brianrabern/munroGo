@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Buffer } from "buffer";
 
 const initialState = {
   fields: {

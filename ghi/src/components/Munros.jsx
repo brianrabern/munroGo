@@ -1,19 +1,18 @@
 import { React, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGetMunrosQuery } from "../services/munros";
-
 import LoadingBar from "./LoadingBar";
-
-import styles from "../index.css";
+import NewClimbClick from "./NewClimbClick";
 import { useGetClimbsQuery } from "../services/climbs";
 
 const Munros = () => {
   const { data, error, isLoading } = useGetMunrosQuery();
   const [searchInput, setSearchInput] = useState(" ");
   const [searchFilter, setSearchFilter] = useState("hillname");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMunro, setSelectedMunro] = useState(null);
   const navigate = useNavigate();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
-
   if (error) {
     navigate("/");
   }
@@ -43,6 +42,8 @@ const Munros = () => {
     17: "Skye and Mull",
   };
 
+  const climbsIdList = myClimbs.map((climb) => climb.munro_id);
+
   const handleSearchInput = (e) => {
     setSearchInput(e.target.value);
   };
@@ -65,6 +66,24 @@ const Munros = () => {
 
   return (
     <div className="flex flex-col">
+      {isModalOpen ? (
+        <div className="fixed top-0 left-0 h-full w-full overflow-y-scroll bg-white z-50 modal-box">
+          <NewClimbClick munro_id={selectedMunro} />
+          <label
+            htmlFor="test"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+            onClick={() => {
+              setSelectedMunro(null);
+              setIsModalOpen(!isModalOpen);
+            }}
+          >
+            x
+          </label>
+        </div>
+      ) : (
+        <></>
+      )}
+
       <div className="overflow-x-auto">
         <div className="flex justify-between py-3 pl-2">
           <div className="relative max-w-xs">
@@ -146,13 +165,7 @@ const Munros = () => {
                     scope="col"
                     className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
                   >
-                    Longitude
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase "
-                  >
-                    Latitude
+                    Climbed
                   </th>
                 </tr>
               </thead>
@@ -175,11 +188,24 @@ const Munros = () => {
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                         {munro.feet}
                       </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        {munro.longitude}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
-                        {munro.latitude}
+                      <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap text-center">
+                        {climbsIdList.includes(munro.id) ? (
+                          <input
+                            type="checkbox"
+                            checked
+                            className="checkbox checkbox-md checkbox-success"
+                            disabled
+                          />
+                        ) : (
+                          <button
+                            id={munro.id}
+                            onClick={() => {
+                              setSelectedMunro(munro.id);
+                              setIsModalOpen(!isModalOpen);
+                            }}
+                            className="btn btn-xs btn-square btn-outline"
+                          ></button>
+                        )}
                       </td>
                     </tr>
                   );

@@ -1,5 +1,9 @@
 from fastapi import APIRouter, Depends
-from models.reviews import Review, ReviewParams, ReviewsList, ReviewParamsWithAccountWithId
+from models.reviews import (
+    Review,
+    ReviewParams,
+    ReviewsList,
+)
 from queries.reviews import ReviewsQueries
 from authenticator import authenticator
 
@@ -7,7 +11,11 @@ from authenticator import authenticator
 router = APIRouter()
 
 
-@router.get("/api/munros/{munro_id}/reviews", response_model=ReviewsList, tags=["Reviews"])
+@router.get(
+    "/api/munros/{munro_id}/reviews",
+    response_model=ReviewsList,
+    tags=["Reviews"],
+)
 def get_all_reviews_by_munro(
     munro_id: str,
     reviews: ReviewsQueries = Depends(),
@@ -16,7 +24,9 @@ def get_all_reviews_by_munro(
     return {"reviews": reviews.get_all_by_munro(munro_id)}
 
 
-@router.get("/api/account/reviews/", response_model=ReviewsList, tags=["Reviews"])
+@router.get(
+    "/api/account/reviews/", response_model=ReviewsList, tags=["Reviews"]
+)
 def get_reviews_for_account(
     reviews: ReviewsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -43,7 +53,7 @@ def create_review(
 @router.put(
     "/api/munros/{munro_id}/reviews/{review_id}/",
     response_model=Review,
-    tags=["Reviews"]
+    tags=["Reviews"],
 )
 def update_review(
     content: ReviewParams,
@@ -52,7 +62,6 @@ def update_review(
     reviews: ReviewsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    # munro = munro_id
     return reviews.update_review(review_id, content)
 
 

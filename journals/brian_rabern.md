@@ -1,20 +1,34 @@
 # munrogo journal
 
-## week 1
+## week 1 (March 20)
 
     * made a plan, made some wire frames
 
-## week 2
+## week 2 (March 27)
 
     * finished auth and got goin on FastAPI endpoints
-
-## week 3
-
     * worked on database seeding
+
+## week 3 (April 3)
+
     * worked on 3rd partiy APIs, wiki and weather
-
-## week 4
-
     * refactored munro detail endpoint
-    * thought about rechart API
-    * thought about map API
+    * login auth, set up redux
+
+## break week (April 10)
+
+    * worked on other things
+
+## week 4 (April 17)
+
+    * thought about map APIs
+    * refactored munro detail endpoint
+    * munro detail paged
+    * Refactored map component for Google Map API
+
+## week 5 (April 24)
+
+    * Search function
+    * image base64 encode and decode
+    * Modals for forms
+    * Dashboard

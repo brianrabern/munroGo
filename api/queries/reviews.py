@@ -1,7 +1,5 @@
 from queries.client import Queries
-from queries.client import Queries
-
-from models.reviews import Review, ReviewsList, ReviewParams, ReviewParamsWithAccountWithId
+from models.reviews import Review, ReviewParams
 from bson import ObjectId
 from typing import List
 
@@ -23,7 +21,9 @@ class ReviewsQueries(Queries):
             reviews.append(Review(**review))
         return reviews
 
-    def create_one(self, account_id:str, munro_id:str, review: ReviewParams) -> Review:
+    def create_one(
+        self, account_id: str, munro_id: str, review: ReviewParams
+    ) -> Review:
         review_dict = review.dict()
         review_dict["account_id"] = account_id
         review_dict["munro_id"] = munro_id

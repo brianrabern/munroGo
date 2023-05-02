@@ -1,147 +1,78 @@
-# Module3 Project Gamma
+# Project Documentation
 
-## Getting started
+## MunroGo
 
-You have a project repository, now what? The next section
-lists all of the deliverables that are due at the end of the
-week. Below is some guidance for getting started on the
-tasks for this week.
+A mountain-climbing app built using FastAPI and React. Designed and created by:
 
-## Install Extensions
+- Warren Hill
+- Paula Mejia
+- Brian Rabern
+- Elijah Ramos
+- Diganta Roy
 
-* Prettier: <https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>
-* Black Formatter: <https://marketplace.visualstudio.com/items?itemName=ms-python.black-formatter>
+Your challenge, should you choose to accept it, is to conquer the [Munros](https://en.wikipedia.org/wiki/Munro) in Scotland, a list of Scottish mountains which are named after Sir Hugh T. Munro, who surveyed and catalogued them in 1891. MunroGo is a comprehensive guide to all of Scotland's 282 Munros. Gotta bag 'em all!
 
-## Deliverables
+## Technology Stack
 
-* [ ] Wire-frame diagrams
-* [ ] API documentation
-* [ ] Project is deployed to Render.com/GitLab-pages
-* [ ] GitLab issue board is setup and in use
-* [ ] Journals
+- Programming languages: Python 3, JavaScript ES+, HTML5, CSS
+- Back-End: MongoDB, FastAPI
+- Front-End: React, React Hooks, Redux Toolkit, Tailwind, DaisyUI
+- Development tools: Docker, Git
+- APIs: Google Maps API, OpenWeather API, Wikipedia API, the Database of British and Irish Hills
 
-## Project layout
+## Design
 
-The layout of the project is just like all of the projects
-you did with `docker-compose` in module #2. You will create
-a directory in the root of the repository for each service
-that you add to your project just like those previous
-projects were setup.
+- [Wireframe](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/Wireframe.png)
+- [API Endpoints](https://gitlab.com/elijahram/munro-go/-/blob/main/docs/api-endpoints.md)
 
-### Directories
+## Intended market
 
-Several directories have been added to your project. The
-directories `docs` and `journals` are places for you and
-your team-mates to, respectively, put any documentation
-about your project that you create and to put your
-project-journal entries. See the _README.md_ file in each
-directory for more info.
+Munro bagging is a popular pastime in Scotland where walking enthusiasts challenge themselves to climb as many of the peaks as they can - over 6,000 people, called 'compleatists' (or Munroists) have climbed them all so far. We are targeting adventure seekers that wish to plan, review and track Munro climbs.
 
-The other directories, `ghi` and `sample_service`, are
-sample services, that you can start building off of or use
-as a reference point.
+## Application functionality
 
-Inside of `ghi` is a minimal React app that has an "under
-construction" page. It is setup similarly to all of the
-other React projects that you have worked on.
+- Website requires users to sign up to have access to its functionality.
+- Users have access to their dashboard, which displays:
+  - Their privately logged climbs
+  - Their statistics: number of Munros climbed, etc.
+  - Their publicly written reviews for Munros
+  - A list of climbed Munros by the user
+  - A map, integrated through the Google Maps API, which has different colored markers depending on whether users have climbed a Munro or not. Unclimbed Munros will be displayed with a red marker and climbed Munros will be displayed with a green marker. Each marker redirects the detail page for each specific Munro when clicked.
+- From the dashboard, users can also see a page which includes of all their climbs, and another page which displays all their reviews.
+- Each Munro has its own detail page which includes:
+  - A picture of the Munro from Wikipedia API
+  - Data such as summit height, latitude and longitude coordinates, the region,, etc. from the Database of British and Irish Hills
+  - A summary description from Wikipedia API
+  - The current up-to-date weather conditions at the Munro - implemented through the OpenWeather API
+  - A map with the marker of the Munro's location, integrated through the Google Maps API
+  - Buttons to add a climb or a review for the specific Munro - both of which display a modal when clicked
+  - Public reviews by other users
+- Users will be able to add a climb from their dashboard, selecting a Munro from a dropdown menu.
+- A list of all the Munros, which includes the region, height in feet and meters, and which allows the user to select whether a Munro has been climbed and displays a modal to add a climb. Users can search this list using the search bar - filtering by name, region, and height. Users may also navigate to individual Munro detail pages by clicking the Munro's name on the list.
 
-Inside of `sample_service` is a minimal FastAPI application.
-"Where are all the files?" you might ask? Well, the
-`main.py` file is the whole thing, and go take look inside
-of it... There's not even much in there..., hmm? That is
-FastAPI, we'll learn more about it in the coming days. Can
-you figure out what this little web-application does even
-though you haven't learned about FastAPI yet?
+## Future directions and functionality
 
-Also in `sample_service` is a directory for your migrations.
-If you choose to use PostgreSQL, then you'll want to use
-migrations to control your database. Unlike Django, where
-migrations were automatically created for you, you'll write
-yours by hand using DDL. Don't worry about not knowing what
-DDL means; we have you covered. There's a sample migration
-in there that creates two tables so you can see what they
-look like.
+Looking to the future, possible features that we would like to implement are:
 
-The sample Dockerfile and Dockerfile.dev run your migrations
-for you automatically.
+- Real-time user messaging system
+- Including 7-day weather forecast on Munros detail pages
+- Including all the British and Irish Hills
+- Ordnance survey data API to create more detailed maps
+- Allow users to publicly post a climb trail that others can follow along
 
-### Other files
+## Project Initialization
 
-The following project files have been created as a minimal
-starting point. Please follow the guidance for each one for
-a most successful project.
+To fully enjoy this application on your local machine, please be sure to follow these steps:
 
-* `docker-compose.yaml`: there isn't much in here, just a
-  **really** simple UI and FastAPI service. Add services
-  (like a database) to this file as you did with previous
-  projects in module #2.
-* `.gitlab-ci.yml`: This is your "ci/cd" file where you will
-  configure automated unit tests, code quality checks, and
-  the building and deployment of your production system.
-  Currently, all it does is deploy an "under construction"
-  page to your production UI on GitLab and a sample backend
-  to Render.com. We will learn much more about this file.
-* `.gitignore`: This is a file that prevents unwanted files
-  from getting added to your repository, files like
-  `pyc` files, `__pycache__`, etc. We've set it up so that
-  it has a good default configuration for Python projects.
-
-## How to complete the initial deploy
-
-There will be further guidance on completing the initial
-deployment, but it just consists of these steps:
-
-### Setup GitLab repo/project
-
-* make sure this project is in a group. If it isn't, stop
-  now and move it to a GitLab group
-* remove the fork relationship: In GitLab go to:
-  
-  Settings -> General -> Advanced -> Remove fork relationship
-
-* add these GitLab CI/CD variables:
-  * PUBLIC_URL : this is your gitlab pages URL
-  * SAMPLE_SERVICE_API_HOST: enter "blank" for now
-
-#### Your GitLab pages URL
-
-You can't find this in GitLab until after you've done a deploy
-but you can figure it out yourself from your GitLab project URL.
-
-If this is your project URL
-
-https://gitlab.com/GROUP_NAME/PROJECT_NAME
-
-then your GitLab pages URL will be
-
-https://GROUP_NAME.gitlab.io/PROJECT_NAME
-
-### Create render.com account and application
-
-* create account on render.com
-* one person create a group and invite all other members
-* create a new "Web Service"
-  * authenticate with GitLab and choose your project
-  * Enter fields:
-    * Name: name of your service
-    * Root Directory: the directory of your service in your git repo.
-      For this example use "sample_service".
-    * Environment: Docker
-    * Plan Type: Free
-  * click the "Create Web Service" button to create it
-  * the build will succeed and it will look like the server is running,
-    most likely, in 6-10 minutes, it will fail.
-  * click "Manual Deploy" -> "Deploy latest commit" and the service
-    should deploy successfully.
-
-### Update GitLab CI/CD variables
-
-Copy the service URL for your new render.com service and then paste
-that into the value for the SAMPLE_SERVICE_API_HOST CI/CD variable
-in GitLab.
-
-### Deploy it
-
-Merge a change into main to kick off the initial deploy. Once the build pipeline
-finishes you should be able to see an "under construction" page on your GitLab
-pages site.
+1. Clone the repository down to your local machine
+2. cd into the new project directory
+3. Add a file in the main directory called ".env" and add these variables:
+  SIGNING_KEY=[hexadecimal string of length 32 (run "openssl rand -hex 32")]
+  OPEN_WEATHER_API_KEY=[get from [OpenWeather](https://openweathermap.org/current)]
+  REACT_APP_GOOGLE_MAPS_API_KEY=[get from [GoogleMaps](https://developers.google.com/maps)].
+4. Run docker volume create mongo-data
+5. Run docker compose build
+6. Run docker compose up
+7. Run docker exec -it munro-go-fastapi-1 /bin/bash (or somehow get into the container for munro-go-fastapi-1)
+8. Run python seed_db.py
+9. Start bagging those Munros!

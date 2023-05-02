@@ -63,4 +63,8 @@
 * styled the loading screen
 - made all font sizes and colors consistent
 * added completed munros list to the dashboard
-- 
+- finished stying dashboard
+* added select munro component
+- removed main map component
+- added rank/badge logic
+- added delete reviews/climbs

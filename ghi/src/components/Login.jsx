@@ -19,7 +19,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await login(fields);
-    console.log(response);
     if (response.error) {
       dispatch(reset());
       dispatch(setError("Invalid username or password."));
@@ -43,10 +42,7 @@ const Login = () => {
       <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
         <div className="text-white">
           <div className="mb-8 flex flex-col items-center">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Mountains-By-The-Icon-Z-3322972.svg/600px-Mountains-By-The-Icon-Z-3322972.svg.png?20201122172855; SameSite=None; Secure"
-              width="150"
-            />
+            <img src="./LoginMunro.png" width="150" />
             <h1 className="mb-2 text-2xl text-neutral-900">MunroGo</h1>
             <span className="text-neutral-900">Enter Login Details</span>
           </div>

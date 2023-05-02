@@ -29,7 +29,18 @@ export const climbsApi = createApi({
       },
       invalidatesTags: [{ type: "climbs", id: "LIST" }],
     }),
+    deleteClimb: builder.mutation({
+      query: (climb_id) => ({
+        url: `/api/climbs/${climb_id}/`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: "climbs", id }],
+    }),
   }),
 });
 
-export const { useGetClimbsQuery, useCreateClimbMutation } = climbsApi;
+export const {
+  useGetClimbsQuery,
+  useDeleteClimbMutation,
+  useCreateClimbMutation,
+} = climbsApi;

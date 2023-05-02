@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Munros from "./components/Munros";
@@ -10,8 +9,6 @@ import NewReview from "./components/NewReview";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
-import MainMap from "./components/MainMap";
-import Landing from "./components/Landing";
 
 function App() {
   return (
@@ -81,15 +78,6 @@ function App() {
               <>
                 <Navbar />
                 <Reviews />
-              </>
-            }
-          />
-          <Route
-            path="/map"
-            element={
-              <>
-                <Navbar />
-                <MainMap />
               </>
             }
           />
