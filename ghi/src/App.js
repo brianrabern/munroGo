@@ -9,6 +9,7 @@ import NewReview from "./components/NewReview";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
+import Landing from "./components/Landing";
 
 function App() {
   return (
