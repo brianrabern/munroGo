@@ -23,7 +23,7 @@ const Reviews = () => {
                 className="btn btn-xs btn-error"
                 onClick={() => deleteReview(review.id)}
               >
-                Remove Climb
+                Remove Review
               </button>
             </div>
           </div>

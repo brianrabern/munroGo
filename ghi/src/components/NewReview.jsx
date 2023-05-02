@@ -9,7 +9,7 @@ import {
 import { useCreateReviewMutation } from "../services/revs";
 import { useGetAccountQuery } from "../services/auth";
 
-const NewReview = () => {
+const NewReview = (props) => {
   const dispatch = useDispatch();
   const [createReview] = useCreateReviewMutation();
   const newReview = useSelector((state) => state.newReview);
@@ -36,6 +36,7 @@ const NewReview = () => {
         onSubmit={(e) => {
           e.preventDefault();
           createReview(review);
+          props.setIsNewReviewModalOpen(false);
           dispatch(reset());
         }}
       >
@@ -109,7 +110,7 @@ const NewReview = () => {
           </label>
         </div>
         <div className="flex flex-col items-center">
-          <button type="submit" className="btn btn-success ">
+          <button type="submit" className="btn btn-success">
             Submit
           </button>
         </div>

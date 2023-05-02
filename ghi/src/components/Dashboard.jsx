@@ -50,7 +50,7 @@ const Dashboard = () => {
     rank = expertRank;
   } else if (climbedMunros?.length < 4) {
     rank = legendRank;
-  } else if (climbedMunros?.length < 5) {
+  } else {
     rank = munroistRank;
   }
   const center = {

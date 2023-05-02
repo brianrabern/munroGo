@@ -1,8 +1,4 @@
-import { useState } from "react";
-
 function Modal(props) {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
       <label htmlFor={props.id} className="btn">
@@ -13,8 +9,8 @@ function Modal(props) {
         type="checkbox"
         id={props.id}
         className="modal-toggle"
-        checked={isOpen}
-        onChange={() => setIsOpen(!isOpen)}
+        checked={props.open}
+        onChange={() => props.setOpen(!props.open)}
       />
 
       <div className="modal">
