@@ -54,6 +54,7 @@ const NewClimb = (props) => {
           e.preventDefault();
           createClimb(climb);
           console.log(props)
+          console.log(props);
           props.setIsNewClimbModalOpen(false);
           dispatch(reset());
         }}
