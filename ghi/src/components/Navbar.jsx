@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className="navbar flex justify-between bg-neutral-900">
       <div className="gap-1">
-        <img className="w-12" src="/MunroGo.png" alt="Mountains" />
+        <img className="w-12" src="./MunroGo.png" alt="Mountains" />
         <div className="normal-case text-xl">MunroGo</div>
       </div>
       <div className="flex items-center">
