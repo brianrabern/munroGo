@@ -9,10 +9,12 @@ import NewReview from "./components/NewReview";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
+import { useState } from "react";
 
 function App() {
    const domain = /https:\/\/[^/]+/;
    const basename = process.env.PUBLIC_URL.replace(domain, "");
+   const [isNewClimbModalOpen, setIsNewClimbModalOpen] = useState(false)
   return (
     <BrowserRouter basename={basename}>
       <Routes>
@@ -50,7 +52,7 @@ function App() {
           element={
             <>
               <Navbar />
-              <NewClimb />
+              <NewClimb setIsNewClimbModalOpen={setIsNewClimbModalOpen} />
             </>
           }
         />
