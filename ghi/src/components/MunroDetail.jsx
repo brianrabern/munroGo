@@ -202,7 +202,7 @@ const MunroDetail = () => {
       </div>
 
       <div className="grid place-items-center px-[40px] py-7 gap-7 md:grid-cols-2 lg:grid-cols-3  bg-gray-500">
-        {reviews.map((review) => (
+        {reviews?.map((review) => (
           <div key={review.id}>
             <ReviewCard key={review.id} review={review} />
           </div>

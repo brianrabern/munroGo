@@ -15,6 +15,7 @@ const Dashboard = () => {
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
   const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
   const climbsList = myClimbs?.map((climb) => climb?.munro_id);
+  console.log(climbsList)
   const navigate = useNavigate();
   const getClimbedMunros = (data, climbsList) => {
     return data?.filter((munro) => climbsList?.includes(munro.id));
@@ -73,7 +74,7 @@ const Dashboard = () => {
     if (data) {
       const climbsList = myClimbs?.map((climb) => climb.munro_id);
       const newMarkers = data?.map((munro) => {
-        if (climbsList.includes(munro.id)) {
+        if (climbsList && climbsList.includes(munro.id)) {
           return {
             id: munro.id,
             position: {
