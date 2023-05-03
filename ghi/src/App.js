@@ -11,78 +11,78 @@ import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
 
 function App() {
+   const domain = /https:\/\/[^/]+/;
+   const basename = process.env.PUBLIC_URL.replace(domain, "");
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/dashboard"
-            element={
-              <>
-                <Navbar />
-                <Dashboard />
-              </>
-            }
-          />
-          <Route
-            path="/munros"
-            element={
-              <>
-                <Navbar />
-                <Munros />
-              </>
-            }
-          />
-          <Route
-            path="/munros/:munro_id"
-            element={
-              <>
-                <Navbar />
-                <MunroDetail />
-              </>
-            }
-          />
-          <Route
-            path="/munros/:munro_id/add-climb"
-            element={
-              <>
-                <Navbar />
-                <NewClimb />
-              </>
-            }
-          />
-          <Route
-            path="/munros/:munro_id/add-review/"
-            element={
-              <>
-                <Navbar />
-                <NewReview />
-              </>
-            }
-          />
-          <Route
-            path="/my-climbs"
-            element={
-              <>
-                <Navbar />
-                <Climbs />
-              </>
-            }
-          />
-          <Route
-            path="/my-reviews"
-            element={
-              <>
-                <Navbar />
-                <Reviews />
-              </>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter basename={basename}>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <Navbar />
+              <Dashboard />
+            </>
+          }
+        />
+        <Route
+          path="/munros"
+          element={
+            <>
+              <Navbar />
+              <Munros />
+            </>
+          }
+        />
+        <Route
+          path="/munros/:munro_id"
+          element={
+            <>
+              <Navbar />
+              <MunroDetail />
+            </>
+          }
+        />
+        <Route
+          path="/munros/:munro_id/add-climb"
+          element={
+            <>
+              <Navbar />
+              <NewClimb />
+            </>
+          }
+        />
+        <Route
+          path="/munros/:munro_id/add-review/"
+          element={
+            <>
+              <Navbar />
+              <NewReview />
+            </>
+          }
+        />
+        <Route
+          path="/my-climbs"
+          element={
+            <>
+              <Navbar />
+              <Climbs />
+            </>
+          }
+        />
+        <Route
+          path="/my-reviews"
+          element={
+            <>
+              <Navbar />
+              <Reviews />
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
