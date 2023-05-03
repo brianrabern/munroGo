@@ -17,7 +17,7 @@ const Dashboard = () => {
   const climbsList = myClimbs?.map((climb) => climb?.munro_id);
   const navigate = useNavigate();
   const getClimbedMunros = (data, climbsList) => {
-    return data?.filter((munro) => climbsList.includes(munro.id));
+    return data?.filter((munro) => climbsList?.includes(munro.id));
   };
 
   const climbedMunros = getClimbedMunros(data, climbsList);
