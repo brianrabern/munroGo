@@ -64,7 +64,7 @@ const Signup = () => {
       <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
         <div className="text-white">
           <div className="mb-8 flex flex-col items-center">
-            <img src="./LoginMunro.png" width="150" />
+            <img src="./LoginMunro.png" width="150" alt="" />
             <h1 className="mb-2 text-2xl text-neutral-900">MunroGo</h1>
             <span className="text-neutral-900">Enter Signup Details</span>
           </div>

@@ -119,7 +119,7 @@ const Dashboard = () => {
         </h5>
         <div className="w-full h-96 bg-base-300">
           <div className="mb-8 flex flex-col items-center">
-            <img src="./LoginMunro.png" width="150" />
+            <img src="./LoginMunro.png" width="150" alt="" />
             <LoadingBar increment={20} interval={50} />;
           </div>
         </div>
