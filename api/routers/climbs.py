@@ -6,7 +6,7 @@ from authenticator import authenticator
 router = APIRouter()
 
 
-@router.get("/api/account/climbs/", response_model=ClimbsList, tags=["Climbs"])
+@router.get("/api/account/climbs", response_model=ClimbsList, tags=["Climbs"])
 def get_climbs_for_account(
     climbs: ClimbsQueries = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -17,7 +17,7 @@ def get_climbs_for_account(
 
 
 @router.get(
-    "/api/munros/{munro_id}/climbs/",
+    "/api/munros/{munro_id}/climbs",
     response_model=ClimbsList,
     tags=["Climbs"],
 )
@@ -32,7 +32,7 @@ def get_all_climbs_for_munro(
 
 
 @router.post(
-    "/api/munros/{munro_id}/climbs/", response_model=Climb, tags=["Climbs"]
+    "/api/munros/{munro_id}/climbs", response_model=Climb, tags=["Climbs"]
 )
 def create_climb(
     content: ClimbParams,
@@ -46,7 +46,7 @@ def create_climb(
 
 
 @router.get(
-    "/api/munros/climbs/{climb_id}/", response_model=Climb, tags=["Climbs"]
+    "/api/munros/climbs/{climb_id}", response_model=Climb, tags=["Climbs"]
 )
 def get_one_climb(
     climb_id: str,
@@ -56,7 +56,7 @@ def get_one_climb(
     return climbs.get_one(climb_id)
 
 
-@router.delete("/api/climbs/{climb_id}/", response_model=bool, tags=["Climbs"])
+@router.delete("/api/climbs/{climb_id}", response_model=bool, tags=["Climbs"])
 def delete_one_climb(
     climb_id: str,
     climbs: ClimbsQueries = Depends(),

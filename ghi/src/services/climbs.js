@@ -9,7 +9,7 @@ export const climbsApi = createApi({
 
   endpoints: (builder) => ({
     getClimbs: builder.query({
-      query: () => `/api/account/climbs/`,
+      query: () => `/api/account/climbs`,
       transformResponse: (response) => response.climbs,
       providesTags: (result) => {
         const tags = [{ type: "climbs", id: "LIST" }];
@@ -31,7 +31,7 @@ export const climbsApi = createApi({
     }),
     deleteClimb: builder.mutation({
       query: (climb_id) => ({
-        url: `/api/climbs/${climb_id}/`,
+        url: `/api/climbs/${climb_id}`,
         method: "DELETE",
       }),
       invalidatesTags: (result, error, { id }) => [{ type: "climbs", id }],

@@ -7,7 +7,7 @@ import LoadingBar from "./LoadingBar";
 import MapComp from "./MapComp";
 import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
@@ -15,6 +15,7 @@ const Dashboard = () => {
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
   const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
   const climbsList = myClimbs?.map((climb) => climb?.munro_id);
+  const navigate = useNavigate();
   const getClimbedMunros = (data, climbsList) => {
     return data?.filter((munro) => climbsList.includes(munro.id));
   };
@@ -62,10 +63,10 @@ const Dashboard = () => {
   const height = "600px";
 
   const handleClick = (munro) => {
-    window.location.href = `/munros/${munro.id}`;
+    navigate(`/munros/${munro.id}`);
   };
   const handleChange = (e) => {
-    window.location.href = `/munros/${e.target.value}/add-climb`;
+    navigate(`/munros/${e.target.value}/add-climb`);
   };
 
   useEffect(() => {
