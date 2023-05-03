@@ -17,10 +17,9 @@ COPY models models
 COPY tests tests
 
 RUN python -m pip install -r requirements.txt
-RUN python seed_db.py
 
 # !! PORT env var needs to match with exposed port in caprover dashboard
-CMD uvicorn main:app --host 0.0.0.0 --port 80
+CMD python seed_db.py && uvicorn main:app --host 0.0.0.0 --port 80
 
 
 # If you're using a relational database and want migrations
