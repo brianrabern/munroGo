@@ -71,8 +71,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (data) {
-      const climbsList = myClimbs.map((climb) => climb.munro_id);
-      const newMarkers = data.map((munro) => {
+      const climbsList = myClimbs?.map((climb) => climb.munro_id);
+      const newMarkers = data?.map((munro) => {
         if (climbsList.includes(munro.id)) {
           return {
             id: munro.id,
@@ -157,7 +157,7 @@ const Dashboard = () => {
                   <div className="stat-value py-2 text-center">My Climbs</div>
                 </div>
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                  {myClimbs.map((climb) => (
+                  {myClimbs?.map((climb) => (
                     <div key={climb.id}>
                       <div className="carousel-item h-full">
                         <ClimbCard climb={climb} />
@@ -180,7 +180,7 @@ const Dashboard = () => {
                     <option disabled value={""}>
                       Add a climb...
                     </option>
-                    {data.map((munro) => (
+                    {data?.map((munro) => (
                       <option key={munro.id} value={munro.id}>
                         {munro.hillname}
                       </option>
@@ -220,7 +220,7 @@ const Dashboard = () => {
                   <div className="stat-value py-2 text-center">My Reviews</div>
                 </div>
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                  {myReviews.map((review) => (
+                  {myReviews?.map((review) => (
                     <div key={review.id}>
                       <div className="carousel-item">
                         <ReviewCardDash review={review} />
@@ -272,7 +272,7 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {climbedMunros.map((munro) => {
+                {climbedMunros?.map((munro) => {
                   return (
                     <tr key={munro.id}>
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
