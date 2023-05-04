@@ -9,7 +9,10 @@ import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { handleOpenCloseModal } from "../features/modal/modalSlice";
+import {
+  handleOpenCloseModal,
+  handleMunroIdChange,
+} from "../features/modal/modalSlice";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -70,6 +73,7 @@ const Dashboard = () => {
   };
   const handleChange = (e) => {
     dispatch(handleOpenCloseModal("isNewClimbOpen"));
+    dispatch(handleMunroIdChange(e.target.value));
   };
 
   useEffect(() => {

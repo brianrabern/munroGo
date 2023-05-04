@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   handleDateChange,
@@ -10,21 +9,25 @@ import {
   handleImageUpload,
   reset,
 } from "../../features/climbs/newClimbSlice";
+import { useGetMunrosQuery } from "../../services/munros";
 import { useCreateClimbMutation } from "../../services/climbs";
-import { Buffer } from "buffer";
 import { handleOpenCloseModal } from "../../features/modal/modalSlice";
 import Modal from "../Modal";
+import { Buffer } from "buffer";
 
 const NewClimb = () => {
   const isNewClimbOpen = useSelector((state) => state.modal.isNewClimbOpen);
+  const munroId = useSelector((state) => state.modal.munroId);
   const dispatch = useDispatch();
   const [createClimb] = useCreateClimbMutation();
   const newClimb = useSelector((state) => state.newClimb);
   const fields = newClimb.fields;
-  const { munro_id } = useParams();
+  const { data: munros, isLoading } = useGetMunrosQuery();
+
+  if (isLoading) return <div>Loading...</div>;
 
   let climb = {
-    munro_id: munro_id,
+    munro_id: munroId,
     body: {
       datetime: fields.datetime,
       duration: fields.duration,
@@ -46,17 +49,27 @@ const NewClimb = () => {
       dispatch(handleImageUpload(base64Data));
     };
   };
+  function getMunroName(munros, munroId) {
+    for (let i = 0; i < munros?.length; i++) {
+      if (munros[i].id === munroId) {
+        return munros[i].hillname;
+      }
+    }
+    return null;
+  }
 
   return (
     <>
       <Modal
         open={isNewClimbOpen}
         handleClose={() => dispatch(handleOpenCloseModal("isNewClimbOpen"))}
-        label="Add a Climb"
+        label="Add a climb"
         id="Climb"
       >
         {" "}
-        <h4 className="text-center pb-5">Add climb</h4>
+        <h4 className="text-center pb-5">
+          Add climb of {getMunroName(munros, munroId)}{" "}
+        </h4>
         <form
           className="flex flex-col items-center gap-2"
           onSubmit={(e) => {

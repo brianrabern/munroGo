@@ -5,11 +5,10 @@ import Munros from "./components/Munros";
 import Climbs from "./components/Climbs";
 import MunroDetail from "./components/MunroDetail";
 import NewClimb from "./components/modals/NewClimb";
-import NewReview from "./components/NewReview";
+import NewRev from "./components/modals/NewRev";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
-import { useState } from "react";
 
 function App() {
   const domain = /https:\/\/[^/]+/;
@@ -47,15 +46,6 @@ function App() {
           }
         />
         <Route
-          path="/munros/:munro_id/add-review/"
-          element={
-            <>
-              <Navbar />
-              <NewReview />
-            </>
-          }
-        />
-        <Route
           path="/my-climbs"
           element={
             <>
@@ -75,6 +65,7 @@ function App() {
         />
       </Routes>
       <NewClimb />
+      <NewRev />
     </BrowserRouter>
   );
 }
