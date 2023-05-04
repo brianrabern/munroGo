@@ -6,30 +6,51 @@ import {
   handlePasswordConfirmationChange,
   handleNameChange,
   reset,
-  error,
+  setError,
 } from "../features/auth/signupSlice";
-import { useSignupMutation } from "../services/auth";
+import { useSignupMutation, useLoginMutation } from "../services/auth";
 import ErrorNotification from "./ErrorNotification";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const [signup] = useSignupMutation();
-  const navigate = useNavigate(); // Add useNavigate hook
+  const [login] = useLoginMutation();
+  const navigate = useNavigate();
 
   const { errorMessage, fields } = useSelector((state) => state.signup);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (fields.password !== fields.passwordConfirmation) {
-      dispatch(error("Password does not match confirmation"));
+      dispatch(reset(fields.passwordConfirmation));
+      dispatch(setError("Password does not match confirmation"));
+      return;
+    }
+    if (
+      fields.username === "" ||
+      fields.full_name === "" ||
+      fields.password === "" ||
+      fields.passwordConfirmation === ""
+    ) {
+      dispatch(reset());
+      dispatch(setError("Fill in all fields."));
       return;
     }
     const { username, password, full_name } = fields;
     let body = { username, password, full_name, rank: "Beginner" };
-    await signup(body);
-    dispatch(reset());
-    navigate("/");
+    const response = await signup(body);
+    if (response.error) {
+      dispatch(reset());
+      dispatch(setError("Fill in all fields."));
+    } else {
+      await login({ username, password });
+      navigate("/dashboard");
+    }
+  };
+
+  const handleClick = () => {
+    dispatch(setError(null));
   };
 
   return (
@@ -43,20 +64,14 @@ const Signup = () => {
       <div className="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
         <div className="text-white">
           <div className="mb-8 flex flex-col items-center">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Mountains-By-The-Icon-Z-3322972.svg/600px-Mountains-By-The-Icon-Z-3322972.svg.png?20201122172855; SameSite=None; Secure"
-              width="150"
-            />
+            <img src="./LoginMunro.png" width="150" alt="" />
             <h1 className="mb-2 text-2xl text-neutral-900">MunroGo</h1>
             <span className="text-neutral-900">Enter Signup Details</span>
           </div>
           <form className="flex flex-col items-center" onSubmit={handleSubmit}>
-            {errorMessage && (
-              <ErrorNotification>{errorMessage}</ErrorNotification>
-            )}
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center text-neutral-800 placeholder-neutral-600"
                 type={`text`}
                 id="Signup__username"
                 value={fields.username}
@@ -86,7 +101,7 @@ const Signup = () => {
             </div>
             <div className="mb-3">
               <input
-                className="rounded-3xl bg-moss-green px-6 py-2 text-center placeholder-neutral-600"
+                className="rounded-3xl bg-moss-green px-6 py-2 text-center text-neutral-800 placeholder-neutral-600"
                 type={`password`}
                 id="Signup__password__confirmation"
                 value={fields.passwordConfirmation}
@@ -105,11 +120,21 @@ const Signup = () => {
               </button>
             </div>
           </form>
-          <div style={{ display: "flex", marginTop: "1rem", gap: "5px" }}>
-            <div className="text-neutral-900">Already Have An Account?</div>
+          <div className="flex justify-center py-6">
+            <div className="text-neutral-900 px-2">
+              Already Have An Account?
+            </div>
             <Link to={{ pathname: "/" }} className="text-moss-green">
               Login
             </Link>
+          </div>
+          <div className="py-5">
+            {errorMessage && (
+              <ErrorNotification
+                message={errorMessage}
+                handleClick={handleClick}
+              />
+            )}
           </div>
         </div>
       </div>

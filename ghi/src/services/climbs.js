@@ -9,7 +9,7 @@ export const climbsApi = createApi({
 
   endpoints: (builder) => ({
     getClimbs: builder.query({
-      query: () => `/api/account/climbs/`,
+      query: () => `/api/account/climbs`,
       transformResponse: (response) => response.climbs,
       providesTags: (result) => {
         const tags = [{ type: "climbs", id: "LIST" }];
@@ -20,9 +20,6 @@ export const climbsApi = createApi({
 
     createClimb: builder.mutation({
       query: ({ munro_id, body }) => {
-        // const image = body.image;
-        // const binaryImage = Buffer.from(image, "base64");
-        // const modifiedBody = { ...body, image: binaryImage };
         return {
           url: `/api/munros/${munro_id}/climbs`,
           method: "POST",
@@ -32,7 +29,18 @@ export const climbsApi = createApi({
       },
       invalidatesTags: [{ type: "climbs", id: "LIST" }],
     }),
+    deleteClimb: builder.mutation({
+      query: (climb_id) => ({
+        url: `/api/climbs/${climb_id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: (result, error, { id }) => [{ type: "climbs", id }],
+    }),
   }),
 });
 
-export const { useGetClimbsQuery, useCreateClimbMutation } = climbsApi;
+export const {
+  useGetClimbsQuery,
+  useDeleteClimbMutation,
+  useCreateClimbMutation,
+} = climbsApi;

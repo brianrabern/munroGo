@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends
 from models.munros import MunrosList, MunroWithData
 from queries.munros import MunrosQueries
-from queries.accounts import AccountQueries
 from authenticator import authenticator
 import wikipedia
 

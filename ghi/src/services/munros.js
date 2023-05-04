@@ -18,7 +18,7 @@ export const munrosApi = createApi({
     }),
 
     getMunroDetail: builder.query({
-      query: (munro_id) => `/api/munros/${munro_id}/`,
+      query: (munro_id) => `/api/munros/${munro_id}`,
     }),
   }),
 });

@@ -38,17 +38,8 @@ class MunrosQueries(Queries):
         lat = munro.latitude
         lon = munro.longitude
         key = os.getenv("OPEN_WEATHER_API_KEY")
-        url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={key}"
+        url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={key}"  # noqa
         data = requests.get(url)
         weather_data = data.json()
 
         return weather_data
-
-    # def create_review(self, munro_id: str, review: dict) -> Munro:
-    #     munro = self.collection.find_one({"_id": ObjectId(munro_id)})
-    #     # munro["reviews"].append(review)
-    #     self.collection.update_one(
-    #         {"_id": ObjectId(munro_id)}, {"$push": {"reviews": review}}
-    #     )
-    #     munro["id"] = str(munro["_id"])
-    #     return Munro(**munro)

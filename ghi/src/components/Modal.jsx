@@ -1,30 +1,28 @@
-import { useState } from "react";
-
 function Modal(props) {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
-      <label htmlFor="my-modal" className="btn">
-        open modal
+      <label htmlFor={props.id} className="btn">
+        {props.label}
       </label>
 
       <input
         type="checkbox"
-        id="my-modal"
+        id={props.id}
         className="modal-toggle"
-        checked={isOpen}
-        onChange={() => setIsOpen(!isOpen)}
+        checked={props.open}
+        onChange={() => props.setOpen(!props.open)}
       />
 
       <div className="modal">
-        <div className="modal-box">
-          {props.children} {/* The child components go here */}
-          <div className="modal-action">
-            <label htmlFor="my-modal" className="btn">
-              Close
-            </label>
-          </div>
+        <div className="modal-box relative">
+          {props.children}
+
+          <label
+            htmlFor={props.id}
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            x
+          </label>
         </div>
       </div>
     </>

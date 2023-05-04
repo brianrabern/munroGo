@@ -1,11 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Buffer } from "buffer";
 
 const initialState = {
   fields: {
     datetime: "",
     duration: "",
-    difficulty: "",
+    difficulty: 1,
     weather: "",
     notes: "",
     image: "",
@@ -32,42 +31,6 @@ export const newClimbSlice = createSlice({
     handleNotesChange: (state, action) => {
       state.fields.notes = action.payload;
     },
-
-    // handleImageUpload: (state, action) => {
-    //   const reader = new FileReader();
-    //   const file = action.payload;
-
-    //   // read image file as array buffer
-    //   reader.readAsArrayBuffer(file);
-
-    //   reader.onload = () => {
-    //     // convert array buffer to binary data
-    //     const binaryData = new Uint8Array(reader.result);
-    //     console.log(binaryData);
-    //     // update state with binaryData
-    //     state.fields.image = binaryData;
-    //   };
-    // },
-
-    // handleImageUpload: (state, action) => {
-    //   const file = action.payload;
-    //   const reader = new FileReader();
-
-    //   reader.onload = () => {
-    //     const binaryData = new Uint8Array(reader.result);
-    //     state.fields.image = binaryData;
-    //   };
-
-    //   reader.onerror = () => {
-    //     state.errorMessage = "Error loading image";
-    //   };
-
-    //   if (file) {
-    //     reader.readAsArrayBuffer(file);
-    //   } else {
-    //     state.fields.image = null;
-    //   }
-    // },
 
     handleImageUpload: (state, action) => {
       state.fields.image = action.payload;
