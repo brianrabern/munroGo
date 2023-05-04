@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isNewClimbOpen: false,
   isNewReviewOpen: false,
+  munroId: null,
 };
 
 const modalSlice = createSlice({
@@ -13,9 +14,12 @@ const modalSlice = createSlice({
       const prevState = state[action.payload];
       state[action.payload] = !prevState;
     },
+    handleMunroIdChange: (state, action) => {
+      state.munroId = action.payload;
+    },
   },
 });
 
-export const { handleUsernameChange } = modalSlice.actions;
+export const { handleOpenCloseModal, handleMunroIdChange } = modalSlice.actions;
 
 export default modalSlice.reducer;

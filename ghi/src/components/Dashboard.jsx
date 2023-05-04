@@ -8,14 +8,16 @@ import MapComp from "./MapComp";
 import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { handleOpenCloseModal } from "../features/modal/modalSlice";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
   const { data: account, isLoading: isLoadingAccount } = useGetAccountQuery();
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
   const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
   const climbsList = myClimbs?.map((climb) => climb?.munro_id);
-  console.log(climbsList)
   const navigate = useNavigate();
   const getClimbedMunros = (data, climbsList) => {
     return data?.filter((munro) => climbsList?.includes(munro.id));
@@ -67,7 +69,7 @@ const Dashboard = () => {
     navigate(`/munros/${munro.id}`);
   };
   const handleChange = (e) => {
-    navigate(`/munros/${e.target.value}/add-climb`);
+    dispatch(handleOpenCloseModal("isNewClimbOpen"));
   };
 
   useEffect(() => {

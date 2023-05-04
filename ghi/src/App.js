@@ -4,7 +4,7 @@ import Signup from "./components/Signup";
 import Munros from "./components/Munros";
 import Climbs from "./components/Climbs";
 import MunroDetail from "./components/MunroDetail";
-import NewClimb from "./components/NewClimb";
+import NewClimb from "./components/modals/NewClimb";
 import NewReview from "./components/NewReview";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
@@ -12,9 +12,8 @@ import Navbar from "./components/Navbar";
 import { useState } from "react";
 
 function App() {
-   const domain = /https:\/\/[^/]+/;
-   const basename = process.env.PUBLIC_URL.replace(domain, "");
-   const [isNewClimbModalOpen, setIsNewClimbModalOpen] = useState(false)
+  const domain = /https:\/\/[^/]+/;
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
   return (
     <BrowserRouter basename={basename}>
       <Routes>
@@ -48,15 +47,6 @@ function App() {
           }
         />
         <Route
-          path="/munros/:munro_id/add-climb"
-          element={
-            <>
-              <Navbar />
-              <NewClimb setIsNewClimbModalOpen={setIsNewClimbModalOpen} />
-            </>
-          }
-        />
-        <Route
           path="/munros/:munro_id/add-review/"
           element={
             <>
@@ -84,6 +74,7 @@ function App() {
           }
         />
       </Routes>
+      <NewClimb />
     </BrowserRouter>
   );
 }

@@ -6,10 +6,13 @@ import Modal from "./Modal";
 import MapComp from "./MapComp";
 import LoadingBar from "./LoadingBar";
 import NewReview from "./NewReview";
-import NewClimb from "./NewClimb";
+// import NewClimb from "./NewClimb";
 import ReviewCard from "./ReviewCard";
+import { useDispatch } from "react-redux";
+import { handleOpenCloseModal } from "../features/modal/modalSlice";
 
 const MunroDetail = () => {
+  const dispatch = useDispatch();
   const { munro_id } = useParams();
   const { data, isLoading } = useGetMunroDetailQuery(munro_id);
   const { data: reviews, isLoading: isLoadingReviews } =
@@ -183,16 +186,13 @@ const MunroDetail = () => {
                     </Modal>
                   </div>
                   <div>
-                    <Modal
-                      label="Add a Climb"
-                      id="Climb"
-                      open={isNewClimbModalOpen}
-                      setOpen={setIsNewClimbModalOpen}
+                    <button
+                      onClick={() =>
+                        dispatch(handleOpenCloseModal("isNewClimbOpen"))
+                      }
                     >
-                      <NewClimb
-                        setIsNewClimbModalOpen={setIsNewClimbModalOpen}
-                      />
-                    </Modal>
+                      Add Climb
+                    </button>
                   </div>
                 </div>
               </div>
