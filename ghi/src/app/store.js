@@ -4,6 +4,7 @@ import loginReducer from "../features/auth/loginSlice";
 import signupReducer from "../features/auth/signupSlice";
 import newClimbReducer from "../features/climbs/newClimbSlice";
 import newReviewReducer from "../features/reviews/newReviewSlice";
+import modalReducer from "../features/modal/modalSlice";
 import { authApi } from "../services/auth";
 import { munrosApi } from "../services/munros";
 import { climbsApi } from "../services/climbs";
@@ -15,6 +16,7 @@ export const store = configureStore({
     signup: signupReducer,
     newClimb: newClimbReducer,
     newReview: newReviewReducer,
+    modal: modalReducer,
 
     [authApi.reducerPath]: authApi.reducer,
     [munrosApi.reducerPath]: munrosApi.reducer,
