@@ -14,7 +14,7 @@ import { useState } from "react";
 function App() {
    const domain = /https:\/\/[^/]+/;
    const basename = process.env.PUBLIC_URL.replace(domain, "");
-   const [isNewClimbModalOpen, setIsNewClimbModalOpen] = useState(false)
+   const [setIsNewClimbModalOpen] = useState(false)
   return (
     <BrowserRouter basename={basename}>
       <Routes>
