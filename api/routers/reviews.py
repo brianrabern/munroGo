@@ -25,7 +25,7 @@ def get_all_reviews_by_munro(
 
 
 @router.get(
-    "/api/account/reviews/", response_model=ReviewsList, tags=["Reviews"]
+    "/api/account/reviews", response_model=ReviewsList, tags=["Reviews"]
 )
 def get_reviews_for_account(
     reviews: ReviewsQueries = Depends(),
@@ -37,7 +37,7 @@ def get_reviews_for_account(
 
 
 @router.post(
-    "/api/munros/{munro_id}/reviews/", response_model=Review, tags=["Reviews"]
+    "/api/munros/{munro_id}/reviews", response_model=Review, tags=["Reviews"]
 )
 def create_review(
     content: ReviewParams,
@@ -51,7 +51,7 @@ def create_review(
 
 
 @router.put(
-    "/api/munros/{munro_id}/reviews/{review_id}/",
+    "/api/munros/{munro_id}/reviews/{review_id}",
     response_model=Review,
     tags=["Reviews"],
 )
@@ -66,7 +66,7 @@ def update_review(
 
 
 @router.delete(
-    "/api/munros/{munro_id}/reviews/{review_id}/",
+    "/api/munros/{munro_id}/reviews/{review_id}",
     response_model=bool,
     tags=["Reviews"],
 )

@@ -16,10 +16,10 @@ const MapComp = ({ center, zoom, markers, width, height, handleClick }) => {
   const [map, setMap] = useState(null);
 
   const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
+    new window.google.maps.LatLngBounds(center);
 
     setMap(map);
-  }, []);
+  }, []); // eslint-disable-line
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
@@ -30,6 +30,7 @@ const MapComp = ({ center, zoom, markers, width, height, handleClick }) => {
       markers.forEach((marker) => {
         const { id, position, title, icon } = marker;
         const newMarker = new window.google.maps.Marker({
+          id,
           position,
           map,
           title,
@@ -41,7 +42,7 @@ const MapComp = ({ center, zoom, markers, width, height, handleClick }) => {
         });
       });
     }
-  }, [map, markers]);
+  }, [map, markers]); // eslint-disable-line
 
   return isLoaded ? (
     <GoogleMap

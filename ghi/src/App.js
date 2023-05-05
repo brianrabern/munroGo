@@ -9,82 +9,84 @@ import NewReview from "./components/NewReview";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
+import { useState } from "react";
 import Landing from "./components/Landing";
 
 function App() {
+   const domain = /https:\/\/[^/]+/;
+   const basename = process.env.PUBLIC_URL.replace(domain, "");
+   const [setIsNewClimbModalOpen] = useState(false)
   return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
+    <BrowserRouter basename={basename}>
+      <Routes>
+        <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/dashboard"
-            element={
-              <>
-                <Navbar />
-                <Dashboard />
-              </>
-            }
-          />
-          <Route
-            path="/munros"
-            element={
-              <>
-                <Navbar />
-                <Munros />
-              </>
-            }
-          />
-          <Route
-            path="/munros/:munro_id"
-            element={
-              <>
-                <Navbar />
-                <MunroDetail />
-              </>
-            }
-          />
-          <Route
-            path="/munros/:munro_id/add-climb"
-            element={
-              <>
-                <Navbar />
-                <NewClimb />
-              </>
-            }
-          />
-          <Route
-            path="/munros/:munro_id/add-review/"
-            element={
-              <>
-                <Navbar />
-                <NewReview />
-              </>
-            }
-          />
-          <Route
-            path="/my-climbs"
-            element={
-              <>
-                <Navbar />
-                <Climbs />
-              </>
-            }
-          />
-          <Route
-            path="/my-reviews"
-            element={
-              <>
-                <Navbar />
-                <Reviews />
-              </>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </>
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              <Navbar />
+              <Dashboard />
+            </>
+          }
+        />
+        <Route
+          path="/munros"
+          element={
+            <>
+              <Navbar />
+              <Munros />
+            </>
+          }
+        />
+        <Route
+          path="/munros/:munro_id"
+          element={
+            <>
+              <Navbar />
+              <MunroDetail />
+            </>
+          }
+        />
+        <Route
+          path="/munros/:munro_id/add-climb"
+          element={
+            <>
+              <Navbar />
+              <NewClimb setIsNewClimbModalOpen={setIsNewClimbModalOpen} />
+            </>
+          }
+        />
+        <Route
+          path="/munros/:munro_id/add-review/"
+          element={
+            <>
+              <Navbar />
+              <NewReview />
+            </>
+          }
+        />
+        <Route
+          path="/my-climbs"
+          element={
+            <>
+              <Navbar />
+              <Climbs />
+            </>
+          }
+        />
+        <Route
+          path="/my-reviews"
+          element={
+            <>
+              <Navbar />
+              <Reviews />
+            </>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

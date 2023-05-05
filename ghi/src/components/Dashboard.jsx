@@ -7,7 +7,7 @@ import LoadingBar from "./LoadingBar";
 import MapComp from "./MapComp";
 import ClimbCard from "./ClimbCard";
 import ReviewCardDash from "./ReviewCardDash";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const { data, isLoading: isLoadingMunros } = useGetMunrosQuery();
@@ -15,8 +15,10 @@ const Dashboard = () => {
   const { data: myClimbs, isLoading: isLoadingClimbs } = useGetClimbsQuery();
   const { data: myReviews, isLoading: isLoadingReviews } = useGetReviewsQuery();
   const climbsList = myClimbs?.map((climb) => climb?.munro_id);
+  console.log(climbsList)
+  const navigate = useNavigate();
   const getClimbedMunros = (data, climbsList) => {
-    return data?.filter((munro) => climbsList.includes(munro.id));
+    return data?.filter((munro) => climbsList?.includes(munro.id));
   };
 
   const climbedMunros = getClimbedMunros(data, climbsList);
@@ -50,7 +52,7 @@ const Dashboard = () => {
     rank = expertRank;
   } else if (climbedMunros?.length < 4) {
     rank = legendRank;
-  } else if (climbedMunros?.length < 5) {
+  } else {
     rank = munroistRank;
   }
   const center = {
@@ -62,17 +64,17 @@ const Dashboard = () => {
   const height = "600px";
 
   const handleClick = (munro) => {
-    window.location.href = `/munros/${munro.id}`;
+    navigate(`/munros/${munro.id}`);
   };
   const handleChange = (e) => {
-    window.location.href = `/munros/${e.target.value}/add-climb`;
+    navigate(`/munros/${e.target.value}/add-climb`);
   };
 
   useEffect(() => {
     if (data) {
-      const climbsList = myClimbs.map((climb) => climb.munro_id);
-      const newMarkers = data.map((munro) => {
-        if (climbsList.includes(munro.id)) {
+      const climbsList = myClimbs?.map((climb) => climb.munro_id);
+      const newMarkers = data?.map((munro) => {
+        if (climbsList && climbsList.includes(munro.id)) {
           return {
             id: munro.id,
             position: {
@@ -119,7 +121,7 @@ const Dashboard = () => {
         </h5>
         <div className="w-full h-96 bg-base-300">
           <div className="mb-8 flex flex-col items-center">
-            <img src="./LoginMunro.png" width="150" />
+            <img src="./LoginMunro.png" width="150" alt="" />
             <LoadingBar increment={20} interval={50} />;
           </div>
         </div>
@@ -156,7 +158,7 @@ const Dashboard = () => {
                   <div className="stat-value py-2 text-center">My Climbs</div>
                 </div>
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                  {myClimbs.map((climb) => (
+                  {myClimbs?.map((climb) => (
                     <div key={climb.id}>
                       <div className="carousel-item h-full">
                         <ClimbCard climb={climb} />
@@ -179,7 +181,7 @@ const Dashboard = () => {
                     <option disabled value={""}>
                       Add a climb...
                     </option>
-                    {data.map((munro) => (
+                    {data?.map((munro) => (
                       <option key={munro.id} value={munro.id}>
                         {munro.hillname}
                       </option>
@@ -219,7 +221,7 @@ const Dashboard = () => {
                   <div className="stat-value py-2 text-center">My Reviews</div>
                 </div>
                 <div className="h-96 carousel carousel-vertical max-w-md p-4 space-x-4 bg-base-300 rounded-box">
-                  {myReviews.map((review) => (
+                  {myReviews?.map((review) => (
                     <div key={review.id}>
                       <div className="carousel-item">
                         <ReviewCardDash review={review} />
@@ -271,7 +273,7 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {climbedMunros.map((munro) => {
+                {climbedMunros?.map((munro) => {
                   return (
                     <tr key={munro.id}>
                       <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">

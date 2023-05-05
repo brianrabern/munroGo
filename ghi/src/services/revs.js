@@ -8,7 +8,7 @@ export const reviewsApi = createApi({
   }),
   endpoints: (builder) => ({
     getReviews: builder.query({
-      query: () => `/api/account/reviews/`,
+      query: () => `/api/account/reviews`,
       transformResponse: (response) => response.reviews,
       providesTags: (result) => {
         const tags = [{ type: "Reviews", id: "LIST" }];
@@ -30,17 +30,17 @@ export const reviewsApi = createApi({
     createReview: builder.mutation({
       query: ({ munro_id, body }) => {
         return {
-          url: `/api/munros/${munro_id}/reviews/`,
+          url: `/api/munros/${munro_id}/reviews`,
           method: "POST",
           munro_id: munro_id,
           body: body,
         };
       },
-      invalidatesTags: [{ type: "review", id: "str" }],
+      invalidatesTags: [{ type: "Reviews", id: "LIST" }],
     }),
     deleteReview: builder.mutation({
       query: (review_id) => ({
-        url: `/api/munros/{munro_id}/reviews/${review_id}/`,
+        url: `/api/munros/{munro_id}/reviews/${review_id}`,
         method: "DELETE",
       }),
       invalidatesTags: ({ id }) => [{ type: "Reviews", id }],
