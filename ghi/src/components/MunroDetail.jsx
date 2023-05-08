@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetMunroDetailQuery } from "../services/munros";
 import { useGetReviewsForMunroQuery } from "../services/revs";
-import Modal from "./Modal";
 import MapComp from "./MapComp";
 import LoadingBar from "./LoadingBar";
-import NewReview from "./NewReview";
-import NewClimb from "./NewClimb";
 import ReviewCard from "./ReviewCard";
+import { useDispatch } from "react-redux";
+import {
+  handleOpenCloseModal,
+  handleMunroIdChange,
+} from "../features/modal/modalSlice";
 
 const MunroDetail = () => {
+  const dispatch = useDispatch();
   const { munro_id } = useParams();
   const { data, isLoading } = useGetMunroDetailQuery(munro_id);
   const { data: reviews, isLoading: isLoadingReviews } =
     useGetReviewsForMunroQuery(munro_id);
-  const [isNewClimbModalOpen, setIsNewClimbModalOpen] = useState(false);
-  const [isNewReviewModalOpen, setIsNewReviewModalOpen] = useState(false);
 
   if (isLoading || isLoadingReviews) {
     return <LoadingBar increment={20} interval={50} />;
@@ -171,28 +172,26 @@ const MunroDetail = () => {
                 </p>
                 <div className="flex justify-center py-5 gap-6">
                   <div>
-                    <Modal
-                      label="Add review"
-                      id="Review"
-                      open={isNewReviewModalOpen}
-                      setOpen={setIsNewReviewModalOpen}
+                    <button
+                      className="btn btn-active btn-ghost"
+                      onClick={() => {
+                        dispatch(handleOpenCloseModal("isNewClimbOpen"));
+                        dispatch(handleMunroIdChange(munro_id));
+                      }}
                     >
-                      <NewReview
-                        setIsNewReviewModalOpen={setIsNewReviewModalOpen}
-                      />
-                    </Modal>
+                      Add Climb
+                    </button>
                   </div>
                   <div>
-                    <Modal
-                      label="Add a Climb"
-                      id="Climb"
-                      open={isNewClimbModalOpen}
-                      setOpen={setIsNewClimbModalOpen}
+                    <button
+                      className="btn btn-active btn-ghost"
+                      onClick={() => {
+                        dispatch(handleOpenCloseModal("isNewReviewOpen"));
+                        dispatch(handleMunroIdChange(munro_id));
+                      }}
                     >
-                      <NewClimb
-                        setIsNewClimbModalOpen={setIsNewClimbModalOpen}
-                      />
-                    </Modal>
+                      Add Review
+                    </button>
                   </div>
                 </div>
               </div>

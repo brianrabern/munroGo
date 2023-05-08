@@ -24,6 +24,13 @@ const Navbar = () => {
         >
           Munros
         </Link>
+        <Link
+          type="button"
+          className="btn btn-ghost normal-case text-xl"
+          to="/about"
+        >
+          About
+        </Link>
       </div>
 
       <Logout />
