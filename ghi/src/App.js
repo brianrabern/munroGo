@@ -9,6 +9,7 @@ import NewRev from "./components/modals/NewRev";
 import Reviews from "./components/Reviews";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
+import About from "./components/About";
 
 function App() {
   const domain = /https:\/\/[^/]+/;
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter basename={basename}>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/about" element={<About />} />
         <Route path="/signup" element={<Signup />} />
         <Route
           path="/dashboard"
