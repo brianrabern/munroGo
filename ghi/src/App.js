@@ -12,8 +12,9 @@ import Navbar from "./components/Navbar";
 import About from "./components/About";
 
 function App() {
-  const domain = /https:\/\/[^/]+/;
-  const basename = process.env.PUBLIC_URL.replace(domain, "");
+   const domain = /https:\/\/[^/]+/;
+   const basename = process.env.PUBLIC_URL.replace(domain, "");
+   const [setIsNewClimbModalOpen] = useState(false)
   return (
     <BrowserRouter basename={basename}>
       <Routes>
