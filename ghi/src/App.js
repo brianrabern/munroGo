@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
 import { useState } from "react";
 import Landing from "./components/Landing";
+import './Landing.css';
 
 function App() {
    const domain = /https:\/\/[^/]+/;
@@ -20,7 +21,7 @@ function App() {
     <BrowserRouter basename={basename}>
       <Routes>
         <Route path="/" element={<Landing />} />
-          <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route
           path="/dashboard"
