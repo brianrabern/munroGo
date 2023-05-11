@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AiFillGithub, AiFillGitlab, AiFillLinkedin } from "react-icons/ai";
+import { AiFillGitlab, AiFillLinkedin } from "react-icons/ai";
 import {
   SiPython,
   SiJavascript,
