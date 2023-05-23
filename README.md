@@ -1,5 +1,8 @@
 # Project Documentation
 
+# Deployed Application
+[MunroGo](https://elijahram.gitlab.io/munro-go/)
+
 ## MunroGo
 
 A mountain-climbing app built using FastAPI and React. Designed and created by:
@@ -41,7 +44,7 @@ Munro bagging is a popular pastime in Scotland where walking enthusiasts challen
 - From the dashboard, users can also see a page which includes of all their climbs, and another page which displays all their reviews.
 - Each Munro has its own detail page which includes:
   - A picture of the Munro from Wikipedia API
-  - Data such as summit height, latitude and longitude coordinates, the region,, etc. from the Database of British and Irish Hills
+  - Data such as summit height, latitude and longitude coordinates, the region, etc. from the Database of British and Irish Hills
   - A summary description from Wikipedia API
   - The current up-to-date weather conditions at the Munro - implemented through the OpenWeather API
   - A map with the marker of the Munro's location, integrated through the Google Maps API
