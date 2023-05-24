@@ -1,6 +1,6 @@
 # Project Documentation
 
-# Deployed Application
+## Deployed Application
 [MunroGo](https://elijahram.gitlab.io/munro-go/)
 
 ## MunroGo
