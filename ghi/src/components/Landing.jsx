@@ -4,7 +4,9 @@ import ImageSlider from "./ImageSlider";
 import { SliderData } from "./SliderData.jsx";
 
 function Landing() {
-
+  return(
+    
+  )
 }
 
-export Landing
+export default Landing
